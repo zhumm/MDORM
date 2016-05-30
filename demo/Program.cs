@@ -19,17 +19,17 @@ namespace demo
             var readLine = string.Empty;
             do
             {
-                //for (int i = 1; i <= 10; i++)
-                //{
+                for (int i = 1; i <= 10; i++)
+                {
                     Console.Write("获取数据：");
-                    Console.WriteLine("第{0}次{1}", 1, GetAll());
-                //    Console.Write("按条件获取数据：");
-                //    Console.WriteLine("第{0}次{1}", i, GetList());
-                //    Console.Write("分页获取数据：");
-                //    Console.WriteLine("第{0}次{1}", i, GetPage());
-                //    Console.Write("按条件分页获取数据：");
-                //    Console.WriteLine("第{0}次{1}", i, GetPageBy());
-                //}
+                    Console.WriteLine("第{0}次{1}", i, GetAll());
+                    Console.Write("按条件获取数据：");
+                    Console.WriteLine("第{0}次{1}", i, GetList());
+                    Console.Write("分页获取数据：");
+                    Console.WriteLine("第{0}次{1}", i, GetPage());
+                    Console.Write("按条件分页获取数据：");
+                    Console.WriteLine("第{0}次{1}", i, GetPageBy());
+                }
                 LogHelper.WriteLog("测试日志写入");
                 //Console.Write(InsertBatch());
                 //Console.WriteLine("结果：{0}", usingSqlInsert());
