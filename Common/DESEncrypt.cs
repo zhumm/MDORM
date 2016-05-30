@@ -12,7 +12,7 @@ namespace Common
         /// <summary>
         /// 默认密钥
         /// </summary>
-        private static string defaultKey = "MDORM.DBUtility";
+        private static string defaultKey = "be@MDORM";
 
         /// <summary>
         /// DES（使用默认的密钥）解密方法
@@ -88,7 +88,7 @@ namespace Common
         {
             if (string.IsNullOrEmpty(pToEncrypt))
                 return null;
-            pToEncrypt = pToEncrypt.ToLower();
+            //pToEncrypt = pToEncrypt.ToLower();
             DESCryptoServiceProvider des = new DESCryptoServiceProvider();
             byte[] inputByteArray = Encoding.UTF8.GetBytes(pToEncrypt);
             des.Key = Encoding.ASCII.GetBytes(sKey);

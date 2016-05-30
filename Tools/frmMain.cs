@@ -30,9 +30,26 @@ namespace Tools
             {
                 string tempMingWen = txtMingWen.Text.Trim();
                 string tempResult = DESEncrypt.Encrypt(tempMingWen);
-                txtResult.Text = tempResult;
+                txtMiWeng.Text = tempResult;
                 Clipboard.SetDataObject(tempResult);
                 MessageBox.Show("字符串加密成功并复制到系统剪切板", "提示");
+            }
+        }
+
+        private void btnJiemi_Click(object sender, EventArgs e)
+        {
+            if (txtMiWeng.Text.Length <= 0)
+            {
+                MessageBox.Show("请输入要解密字符串", "提示");
+                txtMiWeng.Focus();
+                return;
+            }
+            else
+            {
+                string tempMiWeng = txtMiWeng.Text.Trim();
+                string tempResult = DESEncrypt.Decrypt(tempMiWeng);
+                txtMingWen.Text = tempResult;
+                MessageBox.Show("字符串解密成功", "提示");
             }
         }
     }
