@@ -175,16 +175,16 @@ namespace demo
             return string.Format("按主键更新一条记录。耗时：{0}毫秒", sw.ElapsedMilliseconds);
         }
 
-        public static string UpdateBatch()
-        {
-            //Stopwatch sw = new Stopwatch();
-            //sw.Start();
-            //Person p = new Person();
-            //p.Id = 300;
-            //p.FirstName = "updated";
-            //PersonRepository.Value.UpdateBatch()
-            //sw.Stop();
-            //return string.Format("按主键更新一条记录。耗时：{0}毫秒", sw.ElapsedMilliseconds);
-        }
+        //public static string UpdateBatch()
+        //{
+        //    //Stopwatch sw = new Stopwatch();
+        //    //sw.Start();
+        //    //Person p = new Person();
+        //    //p.Id = 300;
+        //    //p.FirstName = "updated";
+        //    //PersonRepository.Value.UpdateBatch()
+        //    //sw.Stop();
+        //    //return string.Format("按主键更新一条记录。耗时：{0}毫秒", sw.ElapsedMilliseconds);
+        //}
     }
 }
