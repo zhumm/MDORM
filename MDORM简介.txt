@@ -15,7 +15,7 @@ MDORM在Dapper的基础上封装了节本CRUD操作（Get, Insert, Update, Delete）支持对数据
 表操作目前封装的方法：
 
 /// <summary>
-/// 通过ID获取记录
+/// 通过ID获取单条记录
 /// </summary>
 /// <param name="primaryId">动态类型的ID</param>
 /// <returns>单个实体</returns>
@@ -28,17 +28,17 @@ T GetById(object primaryId);
 List<T> GetAll();
 
 /// <summary>
-/// 获取记录条数
+/// 获取满足条件的记录条数
 /// </summary>
 /// <param name="predicate">查找条件</param>
 /// <returns>满足条件的数据条数</returns>
 int Count(object predicate);
 
 /// <summary>
-/// 获取数据列表
+/// 获取满足条件的数据列表
 /// </summary>
 /// <param name="predicate">查询条件</param>
-/// <param name="sort">排序</param>
+/// <param name="sort">排序列表</param>
 /// <param name="buffered">是否缓存</param>
 /// <returns>满足条件的数据列表</returns>
 List<T> GetList(object predicate = null, IList<ISort> sort = null, bool buffered = false);
@@ -56,52 +56,52 @@ List<T> GetList(object predicate = null, IList<ISort> sort = null, bool buffered
 List<T> GetPage(int pageIndex, int pageSize, out int allRowsCount, object predicate = null, IList<ISort> sort = null, bool buffered = true);
 
 /// <summary>
-/// 插入一条数据
+/// 插入一条数据并返回该记录ID
 /// </summary>
 /// <param name="entity">数据实体</param>
-/// <returns></returns>
+/// <returns>该记录ID</returns>
 dynamic Insert(T entity);
 
 /// <summary>
 /// 使用事务批量插入
 /// </summary>
-/// <param name="entityList"></param>
-/// <returns></returns>
-void InsertBatch(IEnumerable<T> entityList);
+/// <param name="entityList">实体列表</param>
+/// <returns>是否成功</returns>
+bool InsertBatch(IEnumerable<T> entityList);
 
 /// <summary>
-/// 更新
+/// 更新一条数据
 /// </summary>
-/// <param name="entity"></param>
-/// <returns></returns>
+/// <param name="entity">一个实体（主键必须有，其他的按需要更新）</param>
+/// <returns>是否成功</returns>
 bool Update(T entity);
 
 /// <summary>
 /// 使用事务批量更新
 /// </summary>
-/// <param name="entityList"></param>
-/// <returns></returns>
+/// <param name="entityList">要更新的实体列表</param>
+/// <returns>是否成功</returns>
 bool UpdateBatch(IEnumerable<T> entityList);
 
 /// <summary>
-/// 删除
+/// 删除满足条件的数据
 /// </summary>
-/// <param name="primaryId">动态类型ID</param>
-/// <returns></returns>
+/// <param name="predicate">条件</param>
+/// <returns>是否成功</returns>
 bool Delete(object predicate);
 
 /// <summary>
-/// 使用事务批量删除
+/// 使用事务删除满足条件的数据
 /// </summary>
-/// <param name="predicate"></param>
-/// <returns></returns>
+/// <param name="predicate">条件</param>
+/// <returns>是否成功</returns>
 bool DeleteList(object predicate);
 
 /// <summary>
 /// 使用事务批量删除
 /// </summary>
-/// <param name="ids"></param>
-/// <returns></returns>
+/// <param name="ids">ID列表</param>
+/// <returns>是否成功</returns>
 bool DeleteBatch(IEnumerable<object> ids);
 
 

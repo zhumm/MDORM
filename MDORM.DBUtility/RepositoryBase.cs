@@ -19,10 +19,10 @@ namespace MDORM.DBUtility
         public RepositoryBase() { }
 
         /// <summary>
-        /// 通过ID获取记录
+        /// 通过ID获取单条记录
         /// </summary>
-        /// <param name="primaryId">动态类型ID</param>
-        /// <returns>单条满足条件的记录</returns>
+        /// <param name="primaryId">动态类型的ID</param>
+        /// <returns>单个实体</returns>
         public T GetById(object primaryId)
         {
             using (var DbCon = SqlConnectionFactory.CreateSqlCon())
@@ -63,9 +63,9 @@ namespace MDORM.DBUtility
         }
 
         /// <summary>
-        /// 获取全部数据
+        /// 获取全部记录
         /// </summary>
-        /// <returns></returns>
+        /// <returns>全部记录</returns>
         public List<T> GetAll()
         {
             using (var DbCon = SqlConnectionFactory.CreateSqlCon())
@@ -112,10 +112,10 @@ namespace MDORM.DBUtility
         }
 
         /// <summary>
-        /// 满足条件的数据条数
+        /// 获取满足条件的记录条数
         /// </summary>
-        /// <param name="predicate">查询条件</param>
-        /// <returns>满足条件的记录数</returns>
+        /// <param name="predicate">查找条件</param>
+        /// <returns>满足条件的数据条数</returns>
         public int Count(object predicate)
         {
             using (var DbCon = SqlConnectionFactory.CreateSqlCon())
@@ -156,12 +156,12 @@ namespace MDORM.DBUtility
         }
 
         /// <summary>
-        /// 获取满足条件的记录
+        /// 获取满足条件的数据列表
         /// </summary>
         /// <param name="predicate">查询条件</param>
-        /// <param name="sort">排序</param>
+        /// <param name="sort">排序列表</param>
         /// <param name="buffered">是否缓存</param>
-        /// <returns></returns>
+        /// <returns>满足条件的数据列表</returns>
         public List<T> GetList(object predicate = null, IList<ISort> sort = null, bool buffered = false)
         {
             using (var DbCon = SqlConnectionFactory.CreateSqlCon())
@@ -208,7 +208,7 @@ namespace MDORM.DBUtility
         }
 
         /// <summary>
-        /// 分页获取
+        /// 分页获取数据
         /// </summary>
         /// <param name="pageIndex">页索引</param>
         /// <param name="pageSize">页大小</param>
@@ -216,7 +216,7 @@ namespace MDORM.DBUtility
         /// <param name="predicate">查询条件</param>
         /// <param name="sort">排序</param>
         /// <param name="buffered">是否缓存</param>
-        /// <returns></returns>
+        /// <returns>当前页数据</returns>
         public List<T> GetPage(int pageIndex, int pageSize, out int allRowsCount, object predicate = null, IList<ISort> sort = null, bool buffered = true)
         {
             using (var DbCon = SqlConnectionFactory.CreateSqlCon())
@@ -265,10 +265,10 @@ namespace MDORM.DBUtility
         }
 
         /// <summary>
-        /// 添加一条数据
+        /// 插入一条数据并返回该记录ID
         /// </summary>
         /// <param name="entity">数据实体</param>
-        /// <returns></returns>
+        /// <returns>该记录ID</returns>
         public dynamic Insert(T entity)
         {
             using (var DbCon = SqlConnectionFactory.CreateSqlCon())
@@ -309,10 +309,10 @@ namespace MDORM.DBUtility
         }
 
         /// <summary>
-        /// 使用事务批量添加数据
+        /// 使用事务批量插入
         /// </summary>
-        /// <param name="entityList">要添加的数据</param>
-        /// <returns></returns>
+        /// <param name="entityList">实体列表</param>
+        /// <returns>是否成功</returns>
         public bool InsertBatch(IEnumerable<T> entityList)
         {
             if (entityList == null || entityList.Count() <= 0)
@@ -368,10 +368,10 @@ namespace MDORM.DBUtility
         }
 
         /// <summary>
-        /// 更新数据
+        /// 更新一条数据
         /// </summary>
-        /// <param name="entity">要更新的记录</param>
-        /// <returns></returns>
+        /// <param name="entity">一个实体（主键必须有，其他的按需要更新）</param>
+        /// <returns>是否成功</returns>
         public bool Update(T entity)
         {
             using (var DbCon = SqlConnectionFactory.CreateSqlCon())
@@ -410,10 +410,10 @@ namespace MDORM.DBUtility
         }
 
         /// <summary>
-        /// 使用事务批量更新数据
+        /// 使用事务批量更新
         /// </summary>
-        /// <param name="entityList">数据列表</param>
-        /// <returns></returns>
+        /// <param name="entityList">要更新的实体列表</param>
+        /// <returns>是否成功</returns>
         public bool UpdateBatch(IEnumerable<T> entityList)
         {
             if (entityList == null || entityList.Count() <= 0)
@@ -480,11 +480,10 @@ namespace MDORM.DBUtility
         }
 
         /// <summary>
-        /// 删除一条数据
+        /// 删除满足条件的数据
         /// </summary>
-        /// <param name="primaryId"></param>
-        /// <param name="transaction"></param>
-        /// <returns></returns>
+        /// <param name="predicate">条件</param>
+        /// <returns>是否成功</returns>
         public bool Delete(object predicate)
         {
             using (var DbCon = SqlConnectionFactory.CreateSqlCon())
@@ -523,10 +522,10 @@ namespace MDORM.DBUtility
         }
 
         /// <summary>
-        /// 使用事务按条件批量删除数据
+        /// 使用事务删除满足条件的数据
         /// </summary>
         /// <param name="predicate">条件</param>
-        /// <returns></returns>
+        /// <returns>是否成功</returns>
         public bool DeleteList(object predicate)
         {
             using (var DbCon = SqlConnectionFactory.CreateSqlCon())
@@ -574,10 +573,10 @@ namespace MDORM.DBUtility
         }
 
         /// <summary>
-        /// 使用事务按条件批量删除
+        /// 使用事务批量删除
         /// </summary>
-        /// <param name="ids"></param>
-        /// <returns></returns>
+        /// <param name="ids">ID列表</param>
+        /// <returns>是否成功</returns>
         [Obsolete("这个方法由于效率相对较低尽量不要使用，请使用方法：DeleteList替代")]
         public bool DeleteBatch(IEnumerable<object> ids)
         {

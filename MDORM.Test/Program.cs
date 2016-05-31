@@ -31,7 +31,7 @@ namespace MDORM.Test
                 //    Console.WriteLine("第{0}次{1}", i, GetPageBy());
                 //}
                 //Console.Write(GetById());
-                Console.Write(Update());
+                Console.Write(Insert());
                 //Console.Write(InsertBatch());
                 //Console.Write(Delete());
                 //Console.Write(DeleteList());
@@ -82,9 +82,9 @@ namespace MDORM.Test
             model.FirstName = "SingleInsertFirst";
             model.LastName = "SingleInsertFirst";
             model.Sex = 1;
-            PersonRepository.Value.Insert(model);
+            var result = PersonRepository.Value.Insert(model);
             sw.Stop();
-            return string.Format("插入单条记录，耗时：{0}毫秒", sw.ElapsedMilliseconds);
+            return string.Format("插入单条记录{0}，耗时：{1}毫秒",result, sw.ElapsedMilliseconds);
         }
 
         private static string InsertBatch()
