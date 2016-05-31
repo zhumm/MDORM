@@ -31,7 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeSmith Template", "CodeS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "项目说明", "项目说明", "{C6D1A0C1-BDBD-481C-A0BC-EAFA21CEDE2B}"
 	ProjectSection(SolutionItems) = preProject
-		C:\Users\明明\Desktop\Help\MDORM说明.chm = C:\Users\明明\Desktop\Help\MDORM说明.chm
+		MDORM说明.chm = MDORM说明.chm
 	EndProjectSection
 EndProject
 Global
