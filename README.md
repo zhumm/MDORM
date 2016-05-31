@@ -1,5 +1,4 @@
-# VSProject
-托管在GitHub上的VS项目
+# MDORM
 
 Mini Dapper ORM（迷你DapperORM）。一款基于Dapper ORM扩展的迷你型ORM，有助于提高开发效率。
 
