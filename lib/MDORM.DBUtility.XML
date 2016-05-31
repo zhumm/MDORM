@@ -1,0 +1,852 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MDORM.DBUtility</name>
+    </assembly>
+    <members>
+        <member name="T:MDORM.DBUtility.DBType">
+            <summary>
+            数据库类型
+            </summary>
+        </member>
+        <member name="F:MDORM.DBUtility.DBType.SqlServer">
+            <summary>
+            MSSQLServer
+            </summary>
+        </member>
+        <member name="F:MDORM.DBUtility.DBType.MySql">
+            <summary>
+            MySql
+            </summary>
+        </member>
+        <member name="F:MDORM.DBUtility.DBType.SQLite">
+            <summary>
+            SQLite
+            </summary>
+        </member>
+        <member name="F:MDORM.DBUtility.DBType.Oracle">
+            <summary>
+            Oracle
+            </summary>
+        </member>
+        <member name="F:MDORM.DBUtility.DBType.SqlCe">
+            <summary>
+            SqlCe
+            </summary>
+        </member>
+        <member name="T:MDORM.DBUtility.DBHelper">
+            <summary>
+            数据库操作帮助类
+            </summary>
+        </member>
+        <member name="M:MDORM.DBUtility.DBHelper.TryOpen(System.Data.IDbConnection)">
+            <summary>
+            尝试打开链接
+            </summary>
+            <param name="DbCon">数据库连接</param>
+        </member>
+        <member name="M:MDORM.DBUtility.DBHelper.WriteLog(System.Type,System.Exception)">
+            <summary>
+            写异常日志
+            </summary>
+            <param name="t">发生异常的源类型</param>
+            <param name="ex">异常</param>
+        </member>
+        <member name="M:MDORM.DBUtility.DBHelper.ExecuteSql(System.String,System.Object)">
+            <summary>
+            执行SQL语句，返回受影响的行数
+            </summary>
+            <param name="sql">需要执行的sql语句</param>
+            <param name="param">参数</param>
+            <returns>受影响的行数</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.DBHelper.ExecuteSql``1(System.String,System.Object)">
+            <summary>
+            执行SQL，返回第一行第一个元素的值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql"></param>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.DBHelper.ExecuteSql``1(System.String,System.Object,System.Int32@)">
+            <summary>
+            执行SQL，返回数据实体
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql"></param>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.DBHelper.ExecuteSP(System.String,System.Object)">
+            <summary>
+            执行无返回结果集的存储过程  
+            </summary>
+            <param name="proName"></param>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.DBHelper.ExecuteSP``1(System.String,System.Object,System.Int32@)">
+            <summary>
+            执行存储过程,并返回结果集
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="proName"></param>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MDORM.DBUtility.DESEncrypt">
+            <summary>
+            DES加密/解密类。
+            </summary>
+        </member>
+        <member name="F:MDORM.DBUtility.DESEncrypt.defaultKey">
+            <summary>
+            默认密钥
+            </summary>
+        </member>
+        <member name="M:MDORM.DBUtility.DESEncrypt.Decrypt(System.String)">
+            <summary>
+            DES（使用默认的密钥）解密方法
+            </summary>
+            <param name="decryptStr">要解密的字符串</param>
+            <returns></returns>
+            创建人：朱明明
+            创建时间：2011-12-8 16:22
+        </member>
+        <member name="M:MDORM.DBUtility.DESEncrypt.Encrypt(System.String)">
+            <summary>
+            DES(利用默认的密钥)加密方法
+            </summary>
+            <param name="encryptStr">要加密的字符串</param>
+            <returns></returns>
+            创建人：朱明明
+            创建时间：2011-12-8 16:22
+        </member>
+        <member name="M:MDORM.DBUtility.DESEncrypt.Decrypt(System.String,System.String)">
+            <summary>
+            解密方法
+            </summary>
+            <param name="pToDecrypt">待解密的字符</param>
+            <param name="sKey">密钥</param>
+            <returns>
+            解密后的字符
+            </returns>
+        </member>
+        <member name="M:MDORM.DBUtility.DESEncrypt.Encrypt(System.String,System.String)">
+            <summary>
+            加密方法
+            </summary>
+            <param name="pToEncrypt">待加密字符</param>
+            <param name="sKey">密钥</param>
+            <returns>
+            加密后的字符
+            </returns>
+        </member>
+        <member name="T:MDORM.DBUtility.IDataViewRepository`1">
+            <summary>
+            数据视图仓库接口
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataViewRepository`1.GetAll">
+            <summary>
+            获取全部记录
+            </summary>
+            <returns>全部记录</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataViewRepository`1.Count(System.Object)">
+            <summary>
+            获取记录条数
+            </summary>
+            <param name="predicate">查找条件</param>
+            <returns>满足条件的数据条数</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataViewRepository`1.GetList(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Boolean)">
+            <summary>
+            获取数据列表
+            </summary>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序</param>
+            <param name="buffered">是否缓存</param>
+            <returns>满足条件的数据列表</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataViewRepository`1.GetPage(System.Int32,System.Int32,System.Int32@,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Boolean)">
+            <summary>
+            分页获取数据
+            </summary>
+            <param name="pageIndex">页索引</param>
+            <param name="pageSize">页大小</param>
+            <param name="allRowsCount">全部记录数</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序</param>
+            <param name="buffered">是否缓存</param>
+            <returns>当前页数据</returns>
+        </member>
+        <member name="T:MDORM.DBUtility.IDBHelper">
+            <summary>
+            提供对数据库的基本操作，连接字符串需要在数据库配置。
+            </summary>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.GetPagingSql(System.Int32,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            生成分页SQL语句
+            </summary>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <param name="selectSql"></param>
+            <param name="sqlCount"></param>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.BeginTractionand">
+            <summary>
+            开始一个事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.BeginTractionand(System.String)">
+            <summary>
+            开始一个事务
+            </summary>
+            <param name="connKey">数据库连接字符key</param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.RollbackTractionand(System.Data.Common.DbTransaction)">
+            <summary>
+            回滚事务
+            </summary>
+            <param name="dbTransaction">要回滚的事务</param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.CommitTractionand(System.Data.Common.DbTransaction)">
+            <summary>
+            结束并确认事务
+            </summary>
+            <param name="dbTransaction">要结束的事务</param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteDataSet(System.String,System.Data.CommandType)">
+            <summary>
+            执行sql语句,ExecuteDataSet 返回DataSet
+            </summary>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteDataSet(System.String,System.String,System.Data.CommandType)">
+            <summary>
+            执行sql语句,ExecuteDataSet 返回DataSet
+            </summary>
+            <param name="connKey">数据库连接字符key</param>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteDataSet(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+            <summary>
+            执行sql语句,ExecuteDataSet 返回DataSet
+            </summary>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+            <param name="parameterValues">参数</param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteDataSet(System.String,System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+            <summary>
+            执行sql语句,ExecuteDataSet 返回DataSet
+            </summary>
+            <param name="connKey">数据库连接字符key</param>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+            <param name="parameterValues">参数</param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteNonQuery(System.String,System.Data.CommandType)">
+            <summary>
+            执行sql语句,返回影响的行数
+            </summary>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteNonQuery(System.String,System.String,System.Data.CommandType)">
+            <summary>
+            执行sql语句,返回影响的行数
+            </summary>
+            <param name="connKey">数据库连接字符key</param>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteNonQuery(System.Data.Common.DbTransaction,System.String,System.Data.CommandType)">
+            <summary>
+            执行sql语句,返回影响的行数
+            </summary>
+            <param name="trans">事务对象</param>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteNonQuery(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+            <summary>
+            执行sql语句,返回影响的行数
+            </summary>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+            <param name="parameterValues">参数</param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteNonQuery(System.String,System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+            <summary>
+            执行sql语句,返回影响的行数
+            </summary>
+            <param name="connKey">数据库连接字符key</param>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+            <param name="parameterValues">参数</param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteNonQuery(System.Data.Common.DbTransaction,System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+            <summary>
+            执行sql语句,返回影响的行数
+            </summary>
+            <param name="trans">事务对象</param>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+            <param name="parameterValues">参数</param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteReader(System.String,System.Data.CommandType)">
+            <summary>
+            执行sql语句,ExecuteReader 返回IDataReader
+            </summary>   
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteReader(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+            <summary>
+            执行sql语句,ExecuteReader 返回IDataReader
+            </summary> 
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+            <param name="parameterValues">参数</param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteReader(System.String,System.String,System.Data.CommandType)">
+            <summary>
+            执行sql语句,ExecuteReader 返回IDataReader
+            </summary>
+            <param name="connKey">数据库连接字符key</param>        
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteReader(System.String,System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+            <summary>
+            执行sql语句,ExecuteReader 返回IDataReader
+            </summary>
+            <param name="connKey">数据库连接字符key</param>        
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+            <param name="parameterValues">参数</param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteScalar(System.String,System.Data.CommandType)">
+            <summary>
+            执行sql语句,ExecuteScalar 返回第一行第一列的值
+            </summary>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteScalar(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+            <summary>
+            执行sql语句,ExecuteScalar 返回第一行第一列的值
+            </summary>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+            <param name="parameterValues">参数</param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteScalar(System.Data.Common.DbTransaction,System.String,System.Data.CommandType)">
+            <summary>
+            执行sql语句,ExecuteScalar 返回第一行第一列的值
+            </summary>
+            <param name="trans">事务</param>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteScalar(System.String,System.String,System.Data.CommandType)">
+            <summary>
+            执行sql语句,ExecuteScalar 返回第一行第一列的值
+            </summary>
+            <param name="connKey">数据库连接字符key</param>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteScalar(System.String,System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+            <summary>
+            执行sql语句,ExecuteScalar 返回第一行第一列的值
+            </summary>
+            <param name="connKey">数据库连接字符key</param>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+            <param name="parameterValues">参数</param>
+        </member>
+        <member name="M:MDORM.DBUtility.IDBHelper.ExecuteScalar(System.Data.Common.DbTransaction,System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+            <summary>
+            执行sql语句,ExecuteScalar 返回第一行第一列的值
+            </summary>
+            <param name="trans">事务</param>
+            <param name="commandText">sql语句</param>
+            <param name="commandType"></param>
+            <param name="parameterValues">参数</param>
+            <returns></returns>
+        </member>
+        <member name="T:MDORM.DBUtility.PageArgs">
+            <summary>
+            分页参数类
+            </summary>
+            创建人：朱明明
+            创建时间：2014-4-9 10:16:11
+        </member>
+        <member name="P:MDORM.DBUtility.PageArgs.PageIndex">
+            <summary>
+            获取或设置当前页索引,第一页索引为 1
+            </summary>
+            <value>
+            The index of the page.
+            </value>
+        </member>
+        <member name="P:MDORM.DBUtility.PageArgs.PageSize">
+            <summary>
+            获取或设置页大小
+            </summary>
+            <value>
+            The size of the page.
+            </value>
+        </member>
+        <member name="P:MDORM.DBUtility.PageArgs.TotalRecord">
+            <summary>
+            获取总记录数
+            </summary>
+        </member>
+        <member name="P:MDORM.DBUtility.PageArgs.PageCount">
+            <summary>
+            获取记录总页数
+            </summary>
+        </member>
+        <member name="T:MDORM.DBUtility.PubConstant">
+            <summary>
+            公共常量
+            </summary>
+        </member>
+        <member name="M:MDORM.DBUtility.PubConstant.GetCustomConStr(System.String)">
+            <summary>
+            得到config里配置项的数据库连接字符串。
+            </summary>
+            <param name="configName">配置名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.PubConstant.GetConfig(System.String)">
+            <summary>
+            获取Config配置的值
+            </summary>
+            <param name="key">The key.</param>
+            <returns></returns>
+            创建人：朱明明
+            创建时间：2014-6-16 9:37
+        </member>
+        <member name="P:MDORM.DBUtility.PubConstant.DbType">
+            <summary>
+            获取数据库类型
+            </summary>
+        </member>
+        <member name="P:MDORM.DBUtility.PubConstant.ConnectionString">
+            <summary>
+            获取默认连接字符串
+            </summary>
+        </member>
+        <member name="T:MDORM.DBUtility.ViewRepositoryBase`1">
+            <summary>
+            数据视图仓库实现基类
+            </summary>
+        </member>
+        <member name="M:MDORM.DBUtility.ViewRepositoryBase`1.#ctor">
+            <summary>
+            默认构造函数
+            </summary>
+        </member>
+        <member name="M:MDORM.DBUtility.ViewRepositoryBase`1.GetAll">
+            <summary>
+            获取全部数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.ViewRepositoryBase`1.Count(System.Object)">
+            <summary>
+            满足条件的数据条数
+            </summary>
+            <param name="predicate">查询条件</param>
+            <returns>满足条件的记录数</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.ViewRepositoryBase`1.GetList(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Boolean)">
+            <summary>
+            获取满足条件的记录
+            </summary>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序</param>
+            <param name="buffered">是否缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.ViewRepositoryBase`1.GetPage(System.Int32,System.Int32,System.Int32@,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Boolean)">
+            <summary>
+            分页获取
+            </summary>
+            <param name="pageIndex">页索引</param>
+            <param name="pageSize">页大小</param>
+            <param name="allRowsCount">全部记录数</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序</param>
+            <param name="buffered">是否缓存</param>
+            <returns></returns>
+        </member>
+        <member name="T:MDORM.DBUtility.RepositoryBase`1">
+            <summary>
+            数据仓库实现基类
+            </summary>
+        </member>
+        <member name="T:MDORM.DBUtility.IDataRepository`1">
+            <summary>
+            数据仓库接口
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataRepository`1.GetById(System.Object)">
+            <summary>
+            通过ID获取单条记录
+            </summary>
+            <param name="primaryId">动态类型的ID</param>
+            <returns>单个实体</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataRepository`1.GetAll">
+            <summary>
+            获取全部记录
+            </summary>
+            <returns>全部记录</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataRepository`1.Count(System.Object)">
+            <summary>
+            获取满足条件的记录条数
+            </summary>
+            <param name="predicate">查找条件</param>
+            <returns>满足条件的数据条数</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataRepository`1.GetList(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Boolean)">
+            <summary>
+            获取满足条件的数据列表
+            </summary>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="buffered">是否缓存</param>
+            <returns>满足条件的数据列表</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataRepository`1.GetPage(System.Int32,System.Int32,System.Int32@,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Boolean)">
+            <summary>
+            分页获取数据
+            </summary>
+            <param name="pageIndex">页索引</param>
+            <param name="pageSize">页大小</param>
+            <param name="allRowsCount">全部记录数</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序</param>
+            <param name="buffered">是否缓存</param>
+            <returns>当前页数据</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataRepository`1.Insert(`0)">
+            <summary>
+            插入一条数据并返回该记录ID
+            </summary>
+            <param name="entity">数据实体</param>
+            <returns>该记录ID</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataRepository`1.InsertBatch(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            使用事务批量插入
+            </summary>
+            <param name="entityList">实体列表</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataRepository`1.Update(`0)">
+            <summary>
+            更新一条数据
+            </summary>
+            <param name="entity">一个实体（主键必须有，其他的按需要更新）</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataRepository`1.UpdateBatch(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            使用事务批量更新
+            </summary>
+            <param name="entityList">要更新的实体列表</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataRepository`1.Delete(System.Object)">
+            <summary>
+            删除满足条件的数据
+            </summary>
+            <param name="predicate">条件</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataRepository`1.DeleteList(System.Object)">
+            <summary>
+            使用事务删除满足条件的数据
+            </summary>
+            <param name="predicate">条件</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.IDataRepository`1.DeleteBatch(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            使用事务批量删除
+            </summary>
+            <param name="ids">ID列表</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.RepositoryBase`1.#ctor">
+            <summary>
+            默认构造函数
+            </summary>
+        </member>
+        <member name="M:MDORM.DBUtility.RepositoryBase`1.GetById(System.Object)">
+            <summary>
+            通过ID获取单条记录
+            </summary>
+            <param name="primaryId">动态类型的ID</param>
+            <returns>单个实体</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.RepositoryBase`1.GetAll">
+            <summary>
+            获取全部记录
+            </summary>
+            <returns>全部记录</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.RepositoryBase`1.Count(System.Object)">
+            <summary>
+            获取满足条件的记录条数
+            </summary>
+            <param name="predicate">查找条件</param>
+            <returns>满足条件的数据条数</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.RepositoryBase`1.GetList(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Boolean)">
+            <summary>
+            获取满足条件的数据列表
+            </summary>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="buffered">是否缓存</param>
+            <returns>满足条件的数据列表</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.RepositoryBase`1.GetPage(System.Int32,System.Int32,System.Int32@,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Boolean)">
+            <summary>
+            分页获取数据
+            </summary>
+            <param name="pageIndex">页索引</param>
+            <param name="pageSize">页大小</param>
+            <param name="allRowsCount">全部记录数</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序</param>
+            <param name="buffered">是否缓存</param>
+            <returns>当前页数据</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.RepositoryBase`1.Insert(`0)">
+            <summary>
+            插入一条数据并返回该记录ID
+            </summary>
+            <param name="entity">数据实体</param>
+            <returns>该记录ID</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.RepositoryBase`1.InsertBatch(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            使用事务批量插入
+            </summary>
+            <param name="entityList">实体列表</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.RepositoryBase`1.Update(`0)">
+            <summary>
+            更新一条数据
+            </summary>
+            <param name="entity">一个实体（主键必须有，其他的按需要更新）</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.RepositoryBase`1.UpdateBatch(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            使用事务批量更新
+            </summary>
+            <param name="entityList">要更新的实体列表</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.RepositoryBase`1.Delete(System.Object)">
+            <summary>
+            删除满足条件的数据
+            </summary>
+            <param name="predicate">条件</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.RepositoryBase`1.DeleteList(System.Object)">
+            <summary>
+            使用事务删除满足条件的数据
+            </summary>
+            <param name="predicate">条件</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.RepositoryBase`1.DeleteBatch(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            使用事务批量删除
+            </summary>
+            <param name="ids">ID列表</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="T:MDORM.DBUtility.SqlConnectionFactory">
+            <summary>
+            数据库连接工厂
+            </summary>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlConnectionFactory.CreateSqlConnection">
+            <summary>
+            根据配置创建数据库连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlConnectionFactory.CreateSqlCon">
+            <summary>
+            工厂模式 根据配置创建数据库连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlHelper.GetConnection(System.String)">
+            <summary>
+            Get Sql Connection
+            </summary>
+            <param name="connectionString">connection string</param>
+            <returns>Database Connection</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlHelper.Exists(System.String,System.String,System.Data.CommandType,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            是否存在该记录
+            </summary>
+            <param name="connectionString">连接字符串</param>
+            <param name="strSql">SQL语句</param>
+            <param name="cmdType">CommandType枚举</param>
+            <param name="cmdParms">SQL参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlHelper.GetSingle(System.String,System.String,System.Data.CommandType,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            执行查询，并返回查询所返回的结果集中第一行的第一列。忽略其他列或行。
+            </summary>
+            <param name="connectionString">连接字符串</param>
+            <param name="SQLString">计算查询结果语句</param>
+            <param name="cmdType">CommandType类型</param>
+            <param name="cmdParms">SQL参数</param>
+            <returns>
+            查询结果（object）
+            </returns>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlHelper.ExecuteNonQuery(System.String,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            执行插入,修改,删除操作语句
+            </summary>
+            <param name="connectionString"></param>
+            <param name="cmdType"></param>
+            <param name="cmdText"></param>
+            <param name="commandParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlHelper.ExecuteNonQuery(System.Data.SqlClient.SqlCommand,System.Boolean)">
+            <summary>
+            ExecuteNonQuery
+            </summary>
+            <param name="cmd">SqlCommand</param>
+            <param name="keep">open connection</param>
+            <returns>int</returns>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlHelper.ExecuteNonQueryTrans(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlCommand,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            事务处理
+            </summary>
+            <param name="conn"></param>
+            <param name="cmd"></param>
+            <param name="cmdType"></param>
+            <param name="cmdText"></param>
+            <param name="commandParameters"></param>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlHelper.ExecuteReader(System.String,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            返回SqlDataReader
+            </summary>
+            <param name="connectionString"></param>
+            <param name="cmdType"></param>
+            <param name="cmdText"></param>
+            <param name="commandParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlHelper.ExecuteDataSet(System.String,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            返回DataSet
+            </summary>
+            <param name="connectionString"></param>
+            <param name="cmdType"></param>
+            <param name="cmdText"></param>
+            <param name="commandParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlHelper.ExecuteDataTable(System.String,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            返回DataTable
+            </summary>
+            <param name="connectionString"></param>
+            <param name="cmdType"></param>
+            <param name="cmdText"></param>
+            <param name="commandParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlHelper.ExecuteDataSet_NoTimeLimit(System.String,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            返回DataSet
+            </summary>
+            <param name="connectionString"></param>
+            <param name="cmdType"></param>
+            <param name="cmdText"></param>
+            <param name="commandParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlHelper.ExecuteScalar(System.String,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            返回第一行第一列数据:洪拾金
+            </summary>
+            <param name="connectionString"></param>
+            <param name="cmdType"></param>
+            <param name="cmdText"></param>
+            <param name="commandParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlHelper.ExecuteScalarWithTransaction(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlCommand,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            返回第一行第一列数据:洪拾金
+            </summary>
+            <param name="connectionString"></param>
+            <param name="cmdType"></param>
+            <param name="cmdText"></param>
+            <param name="commandParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlHelper.ExecuteDataTable(System.Int32@,System.Int32,System.Int32,System.String,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            返回DataTable的分页
+            </summary>
+            <param name="pageCount">共有多少页</param>
+            <param name="pageSize">每页显示的记录条数</param>
+            <param name="pagePrve">当前显示第几页</param>
+            <param name="connectionString"></param>
+            <param name="cmdType"></param>
+            <param name="cmdText"></param>
+            <param name="commandParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DBUtility.SqlHelper.PrepareCommand(System.Data.SqlClient.SqlCommand,System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            预处理Command
+            </summary>
+            <param name="cmd">要处理的Command对象</param>
+            <param name="conn">连接字符串</param>
+            <param name="trans">数据库事务对象</param>
+            <param name="cmdType">CommandType枚举</param>
+            <param name="cmdText">SQL语句</param>
+            <param name="cmdParms">SQL参数列表</param>
+        </member>
+    </members>
+</doc>

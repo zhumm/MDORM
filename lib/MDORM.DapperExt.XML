@@ -1,0 +1,377 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MDORM.DapperExt</name>
+    </assembly>
+    <members>
+        <member name="T:MDORM.DapperExt.Helper.LogHelper">
+            <summary>
+            配置文件操作类
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Helper.LogHelper.GetConfig(System.String)">
+            <summary>
+            获取Config配置的值
+            </summary>
+            <param name="key">The key.</param>
+            <returns></returns>
+            创建人：朱明明
+            创建时间：2014-6-16 9:37
+        </member>
+        <member name="P:MDORM.DapperExt.Helper.LogHelper.SqlLog">
+            <summary>
+            获取是否记录操作sql
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.SetMappingAssemblies(System.Collections.Generic.IList{System.Reflection.Assembly})">
+            <summary>
+            Add other assemblies that Dapper Extensions will search if a mapping is not found in the same assembly of the POCO.
+            </summary>
+            <param name="assemblies"></param>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.Configure(MDORM.DapperExt.IDapperExtConfiguration)">
+            <summary>
+            Configure DapperExt extension methods.
+            </summary>
+            <param name="defaultMapper"></param>
+            <param name="mappingAssemblies"></param>
+            <param name="sqlDialect"></param>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.Configure(System.Type,System.Collections.Generic.IList{System.Reflection.Assembly},MDORM.DapperExt.Sql.ISqlDialect)">
+            <summary>
+            Configure DapperExt extension methods.
+            </summary>
+            <param name="defaultMapper"></param>
+            <param name="mappingAssemblies"></param>
+            <param name="sqlDialect"></param>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.Get``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            Executes a query for the specified id, returning the data typed as per T
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.Insert``1(System.Data.IDbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            Executes an insert query for the specified entity.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.Insert``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            Executes an insert query for the specified entity, returning the primary key.  
+            If the entity has a single key, just the value is returned.  
+            If the entity has a composite key, an IDictionary&lt;string, object&gt; is returned with the key values.
+            The key value for the entity will also be updated if the KeyType is a Guid or Identity.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.Update``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            Executes an update query for the specified entity.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.Delete``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            Executes a delete query for the specified entity.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.Delete``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            Executes a delete query using the specified predicate.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.GetList``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            Executes a select query using the specified predicate, returning an IEnumerable data typed as per T.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.GetPage``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            Executes a select query using the specified predicate, returning an IEnumerable data typed as per T.
+            Data returned is dependent upon the specified page and resultsPerPage.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.GetSet``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            Executes a select query using the specified predicate, returning an IEnumerable data typed as per T.
+            Data returned is dependent upon the specified firstResult and maxResults.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.Count``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            Executes a query using the specified predicate, returning an integer that represents the number of rows that match the query.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.GetMultiple(System.Data.IDbConnection,MDORM.DapperExt.GetMultiplePredicate,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            Executes a select query for multiple objects, returning IMultipleResultReader for each predicate.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.GetMap``1">
+            <summary>
+            Gets the appropriate mapper for the specified type T. 
+            If the mapper for the type is not yet created, a new mapper is generated from the mapper type specifed by DefaultMapper.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.ClearCache">
+            <summary>
+            Clears the ClassMappers for each type.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExt.GetNextGuid">
+            <summary>
+            Generates a COMB Guid which solves the fragmented index issue.
+            See: http://davybrion.com/blog/2009/05/using-the-guidcomb-identifier-strategy
+            </summary>
+        </member>
+        <!-- 对于成员“P:MDORM.DapperExt.DapperExt.DefaultMapper”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“P:MDORM.DapperExt.DapperExt.SqlDialect”忽略有格式错误的 XML 注释 -->
+        <member name="P:MDORM.DapperExt.DapperExt.InstanceFactory">
+            <summary>
+            Get or sets the Dapper Extensions Implementation Factory.
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.DapperExt.Instance">
+            <summary>
+            Gets the Dapper Extensions Implementation
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.Mapper.AutoClassMapper`1">
+            <summary>
+            Automatically maps an entity to a table using a combination of reflection and naming conventions for keys.
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.Mapper.ClassMapper`1">
+            <summary>
+            Maps an entity to a table through a collection of property maps.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Mapper.ClassMapper`1.Map(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            Fluently, maps an entity property to a column
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Mapper.ClassMapper`1.Map(System.Reflection.PropertyInfo)">
+            <summary>
+            Fluently, maps an entity property to a column
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.ClassMapper`1.SchemaName">
+            <summary>
+            Gets or sets the schema to use when referring to the corresponding table name in the database.
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.ClassMapper`1.TableName">
+            <summary>
+            Gets or sets the table to use in the database.
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.ClassMapper`1.Properties">
+            <summary>
+            A collection of properties that will map to columns in the database table.
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.Mapper.PluralizedAutoClassMapper`1">
+            <summary>
+            Automatically maps an entity to a table using a combination of reflection and naming conventions for keys. 
+            Identical to AutoClassMapper, but attempts to pluralize table names automatically.
+            Example: Person entity maps to People table
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.Mapper.IPropertyMap">
+            <summary>
+            Maps an entity property to its corresponding column in the database.
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.Mapper.PropertyMap">
+            <summary>
+            Maps an entity property to its corresponding column in the database.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Mapper.PropertyMap.Column(System.String)">
+            <summary>
+            Fluently sets the column name for the property.
+            </summary>
+            <param name="columnName">The column name as it exists in the database.</param>
+        </member>
+        <member name="M:MDORM.DapperExt.Mapper.PropertyMap.Key(MDORM.DapperExt.Mapper.KeyType)">
+            <summary>
+            Fluently sets the key type of the property.
+            </summary>
+            <param name="columnName">The column name as it exists in the database.</param>
+        </member>
+        <member name="M:MDORM.DapperExt.Mapper.PropertyMap.Ignore">
+            <summary>
+            Fluently sets the ignore status of the property.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Mapper.PropertyMap.ReadOnly">
+            <summary>
+            Fluently sets the read-only status of the property.
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.PropertyMap.Name">
+            <summary>
+            Gets the name of the property by using the specified propertyInfo.
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.PropertyMap.ColumnName">
+            <summary>
+            Gets the column name for the current property.
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.PropertyMap.KeyType">
+            <summary>
+            Gets the key type for the current property.
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.PropertyMap.Ignored">
+            <summary>
+            Gets the ignore status of the current property. If ignored, the current property will not be included in queries.
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.PropertyMap.IsReadOnly">
+            <summary>
+            Gets the read-only status of the current property. If read-only, the current property will not be included in INSERT and UPDATE queries.
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.PropertyMap.PropertyInfo">
+            <summary>
+            Gets the property info for the current property.
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.Mapper.KeyType">
+            <summary>
+            Used by ClassMapper to determine which entity property represents the key.
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Mapper.KeyType.NotAKey">
+            <summary>
+            The property is not a key and is not automatically managed.
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Mapper.KeyType.Identity">
+            <summary>
+            The property is an integery-based identity generated from the database.
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Mapper.KeyType.Guid">
+            <summary>
+            The property is a Guid identity which is automatically managed.
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Mapper.KeyType.Assigned">
+            <summary>
+            The property is a key that is not automatically managed.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Predicates.Field``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},MDORM.DapperExt.Operator,System.Object,System.Boolean)">
+            <summary>
+            Factory method that creates a new IFieldPredicate predicate: [FieldName] [Operator] [Value]. 
+            Example: WHERE FirstName = 'Foo'
+            </summary>
+            <typeparam name="T">The type of the entity.</typeparam>
+            <param name="expression">An expression that returns the left operand [FieldName].</param>
+            <param name="op">The comparison operator.</param>
+            <param name="value">The value for the predicate.</param>
+            <param name="not">Effectively inverts the comparison operator. Example: WHERE FirstName &lt;&gt; 'Foo'.</param>
+            <returns>An instance of IFieldPredicate.</returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Predicates.Property``2(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},MDORM.DapperExt.Operator,System.Linq.Expressions.Expression{System.Func{``1,System.Object}},System.Boolean)">
+            <summary>
+            Factory method that creates a new IPropertyPredicate predicate: [FieldName1] [Operator] [FieldName2]
+            Example: WHERE FirstName = LastName
+            </summary>
+            <typeparam name="T">The type of the entity for the left operand.</typeparam>
+            <typeparam name="T2">The type of the entity for the right operand.</typeparam>
+            <param name="expression">An expression that returns the left operand [FieldName1].</param>
+            <param name="op">The comparison operator.</param>
+            <param name="expression2">An expression that returns the right operand [FieldName2].</param>
+            <param name="not">Effectively inverts the comparison operator. Example: WHERE FirstName &lt;&gt; LastName </param>
+            <returns>An instance of IPropertyPredicate.</returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Predicates.Group(MDORM.DapperExt.GroupOperator,MDORM.DapperExt.IPredicate[])">
+            <summary>
+            Factory method that creates a new IPredicateGroup predicate.
+            Predicate groups can be joined together with other predicate groups.
+            </summary>
+            <param name="op">The grouping operator to use when joining the predicates (AND / OR).</param>
+            <param name="predicate">A list of predicates to group.</param>
+            <returns>An instance of IPredicateGroup.</returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Predicates.Exists``1(MDORM.DapperExt.IPredicate,System.Boolean)">
+            <summary>
+            Factory method that creates a new IExistsPredicate predicate.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Predicates.Between``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},MDORM.DapperExt.BetweenValues,System.Boolean)">
+            <summary>
+            Factory method that creates a new IBetweenPredicate predicate. 
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Predicates.Sort``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean)">
+            <summary>
+            Factory method that creates a new Sort which controls how the results will be sorted.
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.Operator">
+            <summary>
+            Comparison operator for predicates.
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Operator.Eq">
+            <summary>
+            Equal to
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Operator.Gt">
+            <summary>
+            Greater than
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Operator.Ge">
+            <summary>
+            Greater than or equal to
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Operator.Lt">
+            <summary>
+            Less than
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Operator.Le">
+            <summary>
+            Less than or equal to
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Operator.Like">
+            <summary>
+            Like (You can use % in the value to do wilcard searching)
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.PredicateGroup">
+            <summary>
+            Groups IPredicates together using the specified group operator.
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.GroupOperator">
+            <summary>
+            Operator to use when joining predicates in a PredicateGroup.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.ReflectionHelper.GetObjectValues(System.Object)">
+            <summary>
+            修改的方法。自动去除掉那些值为空的属性
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.Update(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            原始更新方法。不能根据实体动态更新（更新全部列）
+            </summary>
+            <param name="classMap"></param>
+            <param name="predicate"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
