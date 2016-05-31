@@ -61,21 +61,21 @@ namespace MDORM.DBUtility
         /// <summary>
         /// 使用事务批量插入
         /// </summary>
-        /// <param name="entityList"></param>
+        /// <param name="entityList">实体列表</param>
         /// <returns></returns>
-        void InsertBatch(IEnumerable<T> entityList);
+        bool InsertBatch(IEnumerable<T> entityList);
 
         /// <summary>
         /// 更新
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="entity">一个实体（主键必须有，其他的按需要更新）</param>
         /// <returns></returns>
         bool Update(T entity);
 
         /// <summary>
         /// 使用事务批量更新
         /// </summary>
-        /// <param name="entityList"></param>
+        /// <param name="entityList">要更新的实体列表</param>
         /// <returns></returns>
         bool UpdateBatch(IEnumerable<T> entityList);
 

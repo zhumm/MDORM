@@ -313,11 +313,11 @@ namespace MDORM.DBUtility
         /// </summary>
         /// <param name="entityList">要添加的数据</param>
         /// <returns></returns>
-        public void InsertBatch(IEnumerable<T> entityList)
+        public bool InsertBatch(IEnumerable<T> entityList)
         {
             if (entityList == null || entityList.Count() <= 0)
             {
-                return;
+                return false;
             }
             using (var DbCon = SqlConnectionFactory.CreateSqlCon())
             {
@@ -327,31 +327,37 @@ namespace MDORM.DBUtility
                 {
                     DbCon.Insert<T>(entityList, trans);
                     trans.Commit();
+                    return true;
                 }
                 catch (System.Data.SqlClient.SqlException ex)
                 {
                     trans.Rollback();
                     DBHelper.WriteLog(typeof(RepositoryBase<T>), ex);
+                    return false;
                 }
                 catch (MySql.Data.MySqlClient.MySqlException ex)
                 {
                     trans.Rollback();
                     DBHelper.WriteLog(typeof(RepositoryBase<T>), ex);
+                    return false;
                 }
                 catch (System.Data.SqlServerCe.SqlCeException ex)
                 {
                     trans.Rollback();
                     DBHelper.WriteLog(typeof(RepositoryBase<T>), ex);
+                    return false;
                 }
                 catch (System.Data.SQLite.SQLiteException ex)
                 {
                     trans.Rollback();
                     DBHelper.WriteLog(typeof(RepositoryBase<T>), ex);
+                    return false;
                 }
                 catch (Exception ex)
                 {
                     trans.Rollback();
                     DBHelper.WriteLog(typeof(RepositoryBase<T>), ex);
+                    return false;
                 }
                 finally
                 {
