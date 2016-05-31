@@ -29,6 +29,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "使用说明", "使用说�
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeSmith Template", "CodeSmith Template", "{0847B739-57E0-4A4C-A1C2-52E1D3307E58}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "项目说明", "项目说明", "{C6D1A0C1-BDBD-481C-A0BC-EAFA21CEDE2B}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\明明\Desktop\Help\MDORM说明.chm = C:\Users\明明\Desktop\Help\MDORM说明.chm
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
