@@ -10,10 +10,139 @@ DapperÃ»ÇÖÈëĞÔ£¬ÏëÓÃ¾ÍÓÃ£¬²»ÏëÓÃ¾Í²»ÓÃ¡£ÎŞXMLÎŞÊôĞÔ¡£´úÂëÒÔÇ°ÔõÃ´Ğ´ÏÖÔÚ»¹ÔõÃ´Ğ´¡
 
 DapperµÄÓï·¨ÊÇÕâÑùµÄ¡£Óï·¨Ê®·Ö¼òµ¥¡£²¢ÇÒÎŞĞëÇ¨¾ÍÊı¾İ¿âµÄÉè¼Æ¡£
 
-MDORMÔÚDapperµÄ»ù´¡ÉÏ·â×°ÁËCRUD²Ù×÷£¨(Get, Insert, Update, Delete)£©£¬¶Ô¸ü¸ß¼¶µÄ²éÑ¯³¡¾°£¬¸ÃÀà¿â»¹Ìá¹©ÁËÒ»Ì×Î½´ÊÏµÍ³¡£ËüµÄÄ¿±êÊÇ±£³ÖPOCOsµÄ´¿¾»£¬²»ĞèÒª¶îÍâµÄattributesºÍÀàµÄ¼Ì³Ğ¡£Ê¹µÃÒ»Ğ©¼òµ¥µÄÊı¾İ¿â²Ù×÷¿ÉÒÔ²»ÓÃ×Ô¼ºĞ´sqlÓï¾ä¡£Ê¹ÓÃÆğÀ´¸ü·½Ãæ£¬Ìá¸ß¿ª·¢Ğ§ÂÊ
+MDORMÔÚDapperµÄ»ù´¡ÉÏ·â×°ÁË½Ú±¾CRUD²Ù×÷£¨Get, Insert, Update, Delete£©Ö§³Ö¶ÔÊı¾İ¿â¶ÔÏó±í¡¢ÊÓÍ¼¡¢´æ´¢¹ı³Ì³£ÓÃ²Ù×÷£¬¶Ô¸ü¸ß¼¶µÄ²éÑ¯³¡¾°£¬¸ÃÀà¿â»¹Ìá¹©ÁËÒ»Ì×Î½´ÊÏµÍ³¡£ËüµÄÄ¿±êÊÇ±£³ÖPOCOsµÄ´¿¾»£¬²»ĞèÒª¶îÍâµÄattributesºÍÀàµÄ¼Ì³Ğ¡£Ê¹µÃÒ»Ğ©¼òµ¥µÄÊı¾İ¿â²Ù×÷¿ÉÒÔ²»ÓÃ×Ô¼ºĞ´sqlÓï¾ä¡£Ê¹ÓÃÆğÀ´¸ü·½Ãæ£¬´ó´óÌá¸ß¿ª·¢Ğ§ÂÊ¡£
 
-ÏêÏ¸Ê¾Àı¼û·½°¸ÖĞµÄMDORM.TestÏîÄ¿
+±í²Ù×÷Ä¿Ç°·â×°µÄ·½·¨£º
+
+/// <summary>
+/// Í¨¹ıID»ñÈ¡¼ÇÂ¼
+/// </summary>
+/// <param name="primaryId">¶¯Ì¬ÀàĞÍµÄID</param>
+/// <returns>µ¥¸öÊµÌå</returns>
+T GetById(object primaryId);
+
+/// <summary>
+/// »ñÈ¡È«²¿¼ÇÂ¼
+/// </summary>
+/// <returns>È«²¿¼ÇÂ¼</returns>
+List<T> GetAll();
+
+/// <summary>
+/// »ñÈ¡¼ÇÂ¼ÌõÊı
+/// </summary>
+/// <param name="predicate">²éÕÒÌõ¼ş</param>
+/// <returns>Âú×ãÌõ¼şµÄÊı¾İÌõÊı</returns>
+int Count(object predicate);
+
+/// <summary>
+/// »ñÈ¡Êı¾İÁĞ±í
+/// </summary>
+/// <param name="predicate">²éÑ¯Ìõ¼ş</param>
+/// <param name="sort">ÅÅĞò</param>
+/// <param name="buffered">ÊÇ·ñ»º´æ</param>
+/// <returns>Âú×ãÌõ¼şµÄÊı¾İÁĞ±í</returns>
+List<T> GetList(object predicate = null, IList<ISort> sort = null, bool buffered = false);
+
+/// <summary>
+/// ·ÖÒ³»ñÈ¡Êı¾İ
+/// </summary>
+/// <param name="pageIndex">Ò³Ë÷Òı</param>
+/// <param name="pageSize">Ò³´óĞ¡</param>
+/// <param name="allRowsCount">È«²¿¼ÇÂ¼Êı</param>
+/// <param name="predicate">²éÑ¯Ìõ¼ş</param>
+/// <param name="sort">ÅÅĞò</param>
+/// <param name="buffered">ÊÇ·ñ»º´æ</param>
+/// <returns>µ±Ç°Ò³Êı¾İ</returns>
+List<T> GetPage(int pageIndex, int pageSize, out int allRowsCount, object predicate = null, IList<ISort> sort = null, bool buffered = true);
+
+/// <summary>
+/// ²åÈëÒ»ÌõÊı¾İ
+/// </summary>
+/// <param name="entity">Êı¾İÊµÌå</param>
+/// <returns></returns>
+dynamic Insert(T entity);
+
+/// <summary>
+/// Ê¹ÓÃÊÂÎñÅúÁ¿²åÈë
+/// </summary>
+/// <param name="entityList"></param>
+/// <returns></returns>
+void InsertBatch(IEnumerable<T> entityList);
+
+/// <summary>
+/// ¸üĞÂ
+/// </summary>
+/// <param name="entity"></param>
+/// <returns></returns>
+bool Update(T entity);
+
+/// <summary>
+/// Ê¹ÓÃÊÂÎñÅúÁ¿¸üĞÂ
+/// </summary>
+/// <param name="entityList"></param>
+/// <returns></returns>
+bool UpdateBatch(IEnumerable<T> entityList);
+
+/// <summary>
+/// É¾³ı
+/// </summary>
+/// <param name="primaryId">¶¯Ì¬ÀàĞÍID</param>
+/// <returns></returns>
+bool Delete(object predicate);
+
+/// <summary>
+/// Ê¹ÓÃÊÂÎñÅúÁ¿É¾³ı
+/// </summary>
+/// <param name="predicate"></param>
+/// <returns></returns>
+bool DeleteList(object predicate);
+
+/// <summary>
+/// Ê¹ÓÃÊÂÎñÅúÁ¿É¾³ı
+/// </summary>
+/// <param name="ids"></param>
+/// <returns></returns>
+bool DeleteBatch(IEnumerable<object> ids);
+
+
+ÊÓÍ¼²Ù×÷Ä¿Ç°·â×°µÄ·½·¨£º
+
+/// <summary>
+/// »ñÈ¡È«²¿¼ÇÂ¼
+/// </summary>
+/// <returns>È«²¿¼ÇÂ¼</returns>
+List<T> GetAll();
+
+/// <summary>
+/// »ñÈ¡¼ÇÂ¼ÌõÊı
+/// </summary>
+/// <param name="predicate">²éÕÒÌõ¼ş</param>
+/// <returns>Âú×ãÌõ¼şµÄÊı¾İÌõÊı</returns>
+int Count(object predicate);
+
+/// <summary>
+/// »ñÈ¡Êı¾İÁĞ±í
+/// </summary>
+/// <param name="predicate">²éÑ¯Ìõ¼ş</param>
+/// <param name="sort">ÅÅĞò</param>
+/// <param name="buffered">ÊÇ·ñ»º´æ</param>
+/// <returns>Âú×ãÌõ¼şµÄÊı¾İÁĞ±í</returns>
+List<T> GetList(object predicate = null, IList<ISort> sort = null, bool buffered = false);
+
+/// <summary>
+/// ·ÖÒ³»ñÈ¡Êı¾İ
+/// </summary>
+/// <param name="pageIndex">Ò³Ë÷Òı</param>
+/// <param name="pageSize">Ò³´óĞ¡</param>
+/// <param name="allRowsCount">È«²¿¼ÇÂ¼Êı</param>
+/// <param name="predicate">²éÑ¯Ìõ¼ş</param>
+/// <param name="sort">ÅÅĞò</param>
+/// <param name="buffered">ÊÇ·ñ»º´æ</param>
+/// <returns>µ±Ç°Ò³Êı¾İ</returns>
+List<T> GetPage(int pageIndex, int pageSize, out int allRowsCount, object predicate = null, IList<ISort> sort = null, bool buffered = true);
+
+´æ´¢¹ı³Ì²Ù×÷°´ĞèÒªµ÷ÓÃMDORM.DBUtitilyÖĞÖĞµÄDBHelper·½·¨¡£ ÏêÏ¸Ê¾Àı¼û·½°¸ÖĞµÄMDORM.TestÏîÄ¿
 
 ×÷Õß£ºÖìÃ÷Ã÷£¨Berton£©
 ÓÊÏä£ºzhumingming1040@163.com¡¢zhumingming1040@hotmail.com
-QQ£º937553351
+Q Q£º937553351
