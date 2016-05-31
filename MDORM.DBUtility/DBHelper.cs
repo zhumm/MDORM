@@ -18,8 +18,7 @@ namespace MDORM.DBUtility
         /// <summary>
         /// 尝试打开链接
         /// </summary>
-        /// <param name="DbCon"></param>
-        /// <returns></returns>
+        /// <param name="DbCon">数据库连接</param>
         public static void TryOpen(IDbConnection DbCon)
         {
             if (DbCon.State == ConnectionState.Closed)
