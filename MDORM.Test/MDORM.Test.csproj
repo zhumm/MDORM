@@ -7,8 +7,8 @@
     <ProjectGuid>{6B238865-A480-40A5-9693-6D9ABF328A0B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>demo</RootNamespace>
-    <AssemblyName>demo</AssemblyName>
+    <RootNamespace>MDORM.Test</RootNamespace>
+    <AssemblyName>MDORM.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -10,7 +10,7 @@ using MDORM.DapperExt;
 using MDORM.Common;
 using MDORM.Entity;
 
-namespace demo
+namespace MDORM.Test
 {
     class Program
     {

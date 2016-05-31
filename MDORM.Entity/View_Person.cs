@@ -1,27 +1,32 @@
 ﻿
 ///=========================================================================
 /// 版    权： Coypright 2012 - 2016 @ zhumingming(Berton)
-/// 文件名称： Person.cs
+/// 文件名称： View_Person.cs
 /// 模版作者： zhumingming(berton) 最后修改于 2016-5-27 16:10:10
 /// 作者邮箱： zhumingming1040@163.com,937553351@qq.com
-/// 描    述： 表[Person]的 Entity 层代码
+/// 描    述： 表[View_Person] 数据库实体代码
 /// 创 建 人： zhumingming(Berton) (CodeSmith V6.5.0 自动生成的代码 模板V4.0)
 /// 创建时间： 2016/5/31 9:20:12
 ///=========================================================================
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Text;
+using MDORM.Common;
 using MDORM.DapperExt.Mapper;
 
 namespace MDORM.Entity
 {
     /// <summary>
- 	/// Person 实体类,包括:属性，重写的ToString方法
+ 	/// View_Person 实体类,包括:属性，重写的ToString方法
  	/// </summary>
     /// 创建人：zhumingming(Berton)
     /// 创建时间：2016/5/31 9:20:12
 	[Serializable]
-	public class Person
+	public class View_Person
 	{
         #region 成员变量
         private int? _id;
@@ -116,21 +121,20 @@ namespace MDORM.Entity
 	}
     
     /// <summary>
-    /// Person 映射类
+    /// View_Person 映射类
     /// </summary>
     /// 创建人：朱明明
     /// 创建时间：2016/5/23 15:03:02
 
     [Serializable]
-    public class PersonMapper : ClassMapper<Person>
+    public class View_PersonMapper : ClassMapper<View_Person>
     {
         /// <summary>
- 	    /// Person Mapper构造函数（可自定义Mapper）
+ 	    /// View_Person Mapper构造函数（可自定义Mapper）
  	    /// </summary>
-        public PersonMapper()
+        public View_PersonMapper()
         {
-            base.Table("Person");
-            Map(f => f.Id).Key(KeyType.Identity);           
+            base.Table("View_Person");   
             AutoMap();
         }
     }
