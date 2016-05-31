@@ -1,0 +1,30 @@
+重要
+
+1.在配置中需要加入以下配置：
+<!--数据库类型 可以是mssql、mysql、sqlce、sqlite-->
+<add key="DBType" value="mssql"/>
+<!--数据库连接字符串，使用工具中的加密工具对连接字符串进行加密-->
+<add key="ConnectionString" value="hkLEfkmEuyG54vqe0GIvtEUNrx+IM/LkHdcp/rBljnhwSyFPfVLaHsXZDirSvCtt1ATX+EuKDFw="/>
+<!--数据连接是否加密 为true时ConnectionString节点配置的须是连接字符串密文。相反的要是明文-->
+<add key="ConStringEncrypt" value="true"/>
+<!--发生异常时是否记录日志（基于log4net）响应配置在log4net.config中-->
+<add key="WriteLog" value="true"/>
+
+2.将MDORM.Test中的log4net.config复制到项目根目录下。右键属性。复制到输出目录 -> 始终复制
+
+1、完全模式
+
+直接将源码复制到项目中并添加引用。可以忽略【重要】部分
+
+2、最小模式
+
+编译源代码。将根目录下lib文件夹复制到项目中。
+
+MDORM.Entity、MDORM.BusinessRepository为必须的。可以直接把这些项目复制到新项目中去。
+
+MDORM.Entity添加lib中的MDORM.DapperExt.dll
+
+MDORM.BusinessRepository添加lib中的MDORM.DapperExt.dll和MDORM.DBUtility.dll
+
+主项目添加MDORM.Entity和MDORM.BusinessRepository项目引用并添加lib下的MDORM.DBUtility.dll、MDORM.DapperExt.dll
+
