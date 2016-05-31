@@ -27,7 +27,7 @@ namespace MDORM.Common
                     }
                     else
                     {
-                        _writeLog = false;
+                        _writeLog = true;
                     }
                     return _writeLog.Value;
                 }

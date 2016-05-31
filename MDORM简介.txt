@@ -10,7 +10,9 @@ DapperÃ»ÇÖÈëÐÔ£¬ÏëÓÃ¾ÍÓÃ£¬²»ÏëÓÃ¾Í²»ÓÃ¡£ÎÞXMLÎÞÊôÐÔ¡£´úÂëÒÔÇ°ÔõÃ´Ð´ÏÖÔÚ»¹ÔõÃ´Ð´¡
 
 DapperµÄÓï·¨ÊÇÕâÑùµÄ¡£Óï·¨Ê®·Ö¼òµ¥¡£²¢ÇÒÎÞÐëÇ¨¾ÍÊý¾Ý¿âµÄÉè¼Æ¡£
 
-MDORMÔÚDapperµÄ»ù´¡ÉÏ·â×°ÁË½Ú±¾CRUD²Ù×÷£¨Get, Insert, Update, Delete£©Ö§³Ö¶ÔÊý¾Ý¿â¶ÔÏó±í¡¢ÊÓÍ¼¡¢´æ´¢¹ý³Ì³£ÓÃ²Ù×÷£¬¶Ô¸ü¸ß¼¶µÄ²éÑ¯³¡¾°£¬¸ÃÀà¿â»¹Ìá¹©ÁËÒ»Ì×Î½´ÊÏµÍ³¡£ËüµÄÄ¿±êÊÇ±£³ÖPOCOsµÄ´¿¾»£¬²»ÐèÒª¶îÍâµÄattributesºÍÀàµÄ¼Ì³Ð¡£Ê¹µÃÒ»Ð©¼òµ¥µÄÊý¾Ý¿â²Ù×÷¿ÉÒÔ²»ÓÃ×Ô¼ºÐ´sqlÓï¾ä¡£Ê¹ÓÃÆðÀ´¸ü·½Ãæ£¬´ó´óÌá¸ß¿ª·¢Ð§ÂÊ¡£
+MDORMÔÚDapperµÄ»ù´¡ÉÏ·â×°ÁË½Ú±¾CRUD²Ù×÷£¨Get, Insert, Update, Delete£©Ö§³Ö¶ÔÊý¾Ý¿â¶ÔÏó±í¡¢ÊÓÍ¼¡¢´æ´¢¹ý³Ì³£ÓÃ²Ù×÷¡£
+¶Ô¸ü¸ß¼¶µÄ²éÑ¯³¡¾°£¬¸ÃÀà¿â»¹Ìá¹©ÁËÒ»Ì×Î½´ÊÏµÍ³¡£ËüµÄÄ¿±êÊÇ±£³ÖPOCOsµÄ´¿¾»£¬²»ÐèÒª¶îÍâµÄattributesºÍÀàµÄ¼Ì³Ð¡£Ê¹µÃÒ»Ð©¼òµ¥µÄÊý¾Ý¿â²Ù×÷¿ÉÒÔ²»ÓÃ×Ô¼ºÐ´sqlÓï¾ä¡£Ê¹ÓÃÆðÀ´¸ü·½Ãæ£¬´ó´óÌá¸ß¿ª·¢Ð§ÂÊ¡£
+²ÉÓÃµ±ÏÂÁ÷ÐÐµÄlog4net¼ÇÂ¼ÈÕÖ¾¡£ÊÇ·ñ¼ÇÂ¼¿É¶¯Ì¬ÅäÖÃ¡£
 
 ±í²Ù×÷Ä¿Ç°·â×°µÄ·½·¨£º
 
