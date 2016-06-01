@@ -12,6 +12,8 @@
 
 2.将MDORM.Test中的log4net.config复制到项目根目录下。右键属性。复制到输出目录 -> 始终复制
 
+3.数据库连接字符串加密，解密工具在根目录中的tool文件夹中。
+
 1、完全模式
 
 直接将源码复制到项目中并添加引用。可以忽略【重要】部分
@@ -27,4 +29,29 @@ MDORM.Entity添加lib中的MDORM.DapperExt.dll
 MDORM.BusinessRepository添加lib中的MDORM.DapperExt.dll和MDORM.DBUtility.dll
 
 主项目添加MDORM.Entity和MDORM.BusinessRepository项目引用并添加lib下的MDORM.DBUtility.dll、MDORM.DapperExt.dll
+
+3.使用Release
+使用说明：
+1.解压rar。在解决方案中新建MDORM.Entity、MDORM.BusinessRepository和主项目
+
+2.MDORM.Entity添加 【lib\MDORM.Entity要添加的dll】 文件夹中 的MDORM.DapperExt.dll
+
+3.MDORM.BusinessRepository添加【lib\MDORM.BusinessRepository要添加的dll】 文件夹中的MDORM.DapperExt.dll和MDORM.DBUtility.dll
+
+4.主项目添加MDORM.Entity和MDORM.BusinessRepository项目引用并添加 【lib\主项目要添加的dll】文件夹下的MDORM.DBUtility.dll、MDORM.DapperExt.dll的项目引用
+
+5.主项目中的配置文件 appSettings 节点中加入以下配置
+    <!--数据库类型 可以是mssql、mysql、sqlce、sqlite-->
+    <add key="DBType" value="mssql"/>
+    <!--数据库连接字符串，使用工具中的加密工具对连接字符串进行加密-->
+    <add key="ConnectionString" value="hkLEfkmEuyG54vqe0GIvtEUNrx+IM/LkHdcp/rBljnhwSyFPfVLaHsXZDirSvCtt1ATX+EuKDFw="/>
+    <!--数据连接是否加密 为true时ConnectionString节点配置的须是连接字符串密文。相反的要是明文-->
+    <add key="ConStringEncrypt" value="true"/>
+    <!--发生异常时是否记录日志，默认开启（基于log4net）响应配置在log4net.config中-->
+    <add key="WriteLog" value="true"/>
+其中当ConStringEncrpt值为true时，表示要对连接字符串加密。使用 【tool\MDORM.Tools.exe】 运行字符串加密工具。在加密前的内容中填入明文的连接字符串。点击“加密并复制到系统剪切板” 把加密后的内容替换掉ConnectionString中的内容
+
+6.复制 【lib\配置文件】 文件夹中的log4net.config到主项目根目录。右键属性。复制到输出目录->始终复制。
+
+7.重新生成项目就可以使用。
 

@@ -46,10 +46,6 @@
     <Compile Include="View_Person.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MDORM.Common\MDORM.Common.csproj">
-      <Project>{7288f3b1-6d92-449b-8994-6af9f385c462}</Project>
-      <Name>MDORM.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MDORM.DapperExt\MDORM.DapperExt.csproj">
       <Project>{5f539a86-8f2b-4fe7-93d6-42459d6f6bcd}</Project>
       <Name>MDORM.DapperExt</Name>
