@@ -59,7 +59,7 @@ namespace MDORM.BusinessRepository
         /// <summary>
         /// 分页获取,默认按照时间降序排序
         /// </summary>
-        /// <param name="pageIndex">页索引</param>
+        /// <param name="pageIndex">页索引页索引（从0开始）</param>
         /// <param name="pageSize">页大小</param>
         /// <param name="allRowsCount">全部记录数</param>
         /// <param name="predicate">查询条件</param>
@@ -69,6 +69,7 @@ namespace MDORM.BusinessRepository
         {
             if (sort == null || sort.Count <= 0)
             {
+                sort = new List<ISort>();
                 sort.Add(Predicates.Sort<Person>(p => p.CrteatDate, true));
             }
             return base.GetPage(pageIndex, pageSize, out allRowsCount, predicate, sort);
