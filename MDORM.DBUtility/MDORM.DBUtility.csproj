@@ -36,6 +36,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Oracle.DataAccess, Version=2.112.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Oracle.DataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -89,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\MySql.Data.dll" />
+    <Content Include="lib\Oracle.DataAccess.dll" />
     <Content Include="lib\System.Data.SQLite.dll" />
     <Content Include="lib\System.Data.SQLite.Linq.dll" />
     <Content Include="lib\System.Data.SqlServerCe.dll" />

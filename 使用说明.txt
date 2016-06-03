@@ -1,7 +1,7 @@
 重要
 
 1.在配置中需要加入以下配置：
-<!--数据库类型 可以是mssql、mysql、sqlce、sqlite-->
+<!--数据库类型 可以是mssql、mysql、sqlce、sqlite、oracle-->
 <add key="DBType" value="mssql"/>
 <!--数据库连接字符串，使用工具中的加密工具对连接字符串进行加密-->
 <add key="ConnectionString" value="hkLEfkmEuyG54vqe0GIvtEUNrx+IM/LkHdcp/rBljnhwSyFPfVLaHsXZDirSvCtt1ATX+EuKDFw="/>

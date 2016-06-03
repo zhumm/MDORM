@@ -53,7 +53,7 @@ namespace MDORM.DBUtility
                     connection = new MySql.Data.MySqlClient.MySqlConnection(_conStr);
                     break;
                 case DBType.Oracle:
-                    //connection = new System.Data.OracleConnection(_conStr);
+                    connection = new Oracle.DataAccess.Client.OracleConnection(_conStr);
                     break;
                 case DBType.SqlCe:
                     connection = new System.Data.SqlServerCe.SqlCeConnection(_conStr);

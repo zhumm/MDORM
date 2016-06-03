@@ -6,38 +6,172 @@ using MDORM.DapperExt.Mapper;
 
 namespace MDORM.DapperExt.Sql
 {
+    /// <summary>
+    /// SQL生成接口
+    /// </summary>
     public interface ISqlGenerator
     {
+        /// <summary>
+        /// 获取配置
+        /// </summary>
+        /// <value>
+        /// 配置
+        /// </value>
         IDapperExtConfiguration Configuration { get; }
-        
+
+        /// <summary>
+        /// 生成SELECTSQL语句
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序列表</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
         string Select(IClassMapper classMap, IPredicate predicate, IList<ISort> sort, IDictionary<string, object> parameters);
+
+        /// <summary>
+        /// 生成SelectPagedSQL语句
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序</param>
+        /// <param name="page">页索引</param>
+        /// <param name="resultsPerPage">页大小</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>
+        /// </returns>
         string SelectPaged(IClassMapper classMap, IPredicate predicate, IList<ISort> sort, int page, int resultsPerPage, IDictionary<string, object> parameters);
+
+        /// <summary>
+        /// 生成SelectSet的SQL
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序条件</param>
+        /// <param name="firstResult">第一个结果索引</param>
+        /// <param name="maxResults">最大结果</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>
+        /// </returns>
         string SelectSet(IClassMapper classMap, IPredicate predicate, IList<ISort> sort, int firstResult, int maxResults, IDictionary<string, object> parameters);
+
+        /// <summary>
+        /// 生成Count的SQL語句
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
         string Count(IClassMapper classMap, IPredicate predicate, IDictionary<string, object> parameters);
 
+        /// <summary>
+        /// 生成插入语句
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <returns></returns>
         string Insert(IClassMapper classMap);
-        // 原始更新方法。不能根据实体动态更新（更新全部列）
+
+        /// <summary>
+        /// 原始更新方法。不能根据实体动态更新（更新全部列）
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
         string Update(IClassMapper classMap, IPredicate predicate, IDictionary<string, object> parameters);
+
+        /// <summary>
+        /// Deletes the specified class map.
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
         string Delete(IClassMapper classMap, IPredicate predicate, IDictionary<string, object> parameters);
 
+        /// <summary>
+        /// Identities the SQL.
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <returns>
+        /// </returns>
         string IdentitySql(IClassMapper classMap);
+
+        /// <summary>
+        /// 获得表名称
+        /// </summary>
+        /// <param name="map">类映射</param>
+        /// <returns></returns>
         string GetTableName(IClassMapper map);
+
+        /// <summary>
+        /// 获取列的名称
+        /// </summary>
+        /// <param name="map">类映射</param>
+        /// <param name="property">属性.</param>
+        /// <param name="includeAlias">if set to <c>true</c> [include alias].</param>
+        /// <returns></returns>
         string GetColumnName(IClassMapper map, IPropertyMap property, bool includeAlias);
+
+        /// <summary>
+        /// 获取列的名称
+        /// </summary>
+        /// <param name="map">类映射</param>
+        /// <param name="propertyName">属性的名称</param>
+        /// <param name="includeAlias">if set to <c>true</c> [include alias].</param>
+        /// <returns></returns>
         string GetColumnName(IClassMapper map, string propertyName, bool includeAlias);
+
+        /// <summary>
+        /// Supportses the multiple statements.
+        /// </summary>
+        /// <returns>
+        /// </returns>
         bool SupportsMultipleStatements();
-        // 添加的新方法。支持动态更新实体对象
+
+        /// <summary>
+        /// 添加的新方法。支持动态更新实体对象
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="updatedColumns">要更新的列</param>
+        /// <param name="predicate">条件</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
         string Update(IClassMapper classMap, IEnumerable<KeyValuePair<string, object>> updatedColumns, IPredicate predicate, Dictionary<string, object> parameters);
     }
 
+
+    /// <summary>
+    /// 具体的SQL生成类
+    /// </summary>
     public class SqlGeneratorImpl : ISqlGenerator
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SqlGeneratorImpl"/> class.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
         public SqlGeneratorImpl(IDapperExtConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// 获取配置
+        /// </summary>
+        /// <value>
+        /// 配置
+        /// </value>
         public IDapperExtConfiguration Configuration { get; private set; }
 
+        /// <summary>
+        /// 生成SELECTSQL语句
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序列表</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Parameters</exception>
         public virtual string Select(IClassMapper classMap, IPredicate predicate, IList<ISort> sort, IDictionary<string, object> parameters)
         {
             if (parameters == null)
@@ -63,6 +197,21 @@ namespace MDORM.DapperExt.Sql
             return sql.ToString();
         }
 
+        /// <summary>
+        /// 生成SelectPagedSQL语句
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序</param>
+        /// <param name="page">页索引</param>
+        /// <param name="resultsPerPage">页大小</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Sort;Sort cannot be null or empty.
+        /// or
+        /// Parameters
+        /// </exception>
         public virtual string SelectPaged(IClassMapper classMap, IPredicate predicate, IList<ISort> sort, int page, int resultsPerPage, IDictionary<string, object> parameters)
         {
             if (sort == null || !sort.Any())
@@ -91,6 +240,21 @@ namespace MDORM.DapperExt.Sql
             return sql;
         }
 
+        /// <summary>
+        /// 生成SelectSet的SQL
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序条件</param>
+        /// <param name="firstResult">第一个结果索引</param>
+        /// <param name="maxResults">最大结果</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Sort;Sort cannot be null or empty.
+        /// or
+        /// Parameters
+        /// </exception>
         public virtual string SelectSet(IClassMapper classMap, IPredicate predicate, IList<ISort> sort, int firstResult, int maxResults, IDictionary<string, object> parameters)
         {
             if (sort == null || !sort.Any())
@@ -119,7 +283,14 @@ namespace MDORM.DapperExt.Sql
             return sql;
         }
 
-
+        /// <summary>
+        /// 生成Count的SQL語句
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Parameters</exception>
         public virtual string Count(IClassMapper classMap, IPredicate predicate, IDictionary<string, object> parameters)
         {
             if (parameters == null)
@@ -139,7 +310,13 @@ namespace MDORM.DapperExt.Sql
 
             return sql.ToString();
         }
-        
+
+        /// <summary>
+        /// Insert方法。不能根据实体动态添加（添加全部列）
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">No columns were mapped.</exception>
         public virtual string Insert(IClassMapper classMap)
         {
             var columns = classMap.Properties.Where(p => !(p.Ignored || p.IsReadOnly || p.KeyType == KeyType.Identity));
@@ -162,10 +339,16 @@ namespace MDORM.DapperExt.Sql
         /// <summary>
         /// 原始更新方法。不能根据实体动态更新（更新全部列）
         /// </summary>
-        /// <param name="classMap"></param>
-        /// <param name="predicate"></param>
-        /// <param name="parameters"></param>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="parameters">参数</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Predicate
+        /// or
+        /// Parameters
+        /// </exception>
+        /// <exception cref="ArgumentException">No columns were mapped.</exception>
         public virtual string Update(IClassMapper classMap, IPredicate predicate, IDictionary<string, object> parameters)
         {
             if (predicate == null)
@@ -196,6 +379,20 @@ namespace MDORM.DapperExt.Sql
                 predicate.GetSql(this, parameters));
         }
 
+        /// <summary>
+        /// 添加的新方法。支持动态更新实体对象
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="updatedColumns">要更新的列</param>
+        /// <param name="predicate">条件</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Predicate
+        /// or
+        /// Parameters
+        /// </exception>
+        /// <exception cref="ArgumentException">No columns were mapped.</exception>
         public virtual string Update(IClassMapper classMap, IEnumerable<KeyValuePair<string, object>> updatedColumns, IPredicate predicate, Dictionary<string, object> parameters)
         {
             if (predicate == null)
@@ -225,6 +422,18 @@ namespace MDORM.DapperExt.Sql
                 predicate.GetSql(this, parameters));
         }
 
+        /// <summary>
+        /// Deletes the specified class map.
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Predicate
+        /// or
+        /// Parameters
+        /// </exception>
         public virtual string Delete(IClassMapper classMap, IPredicate predicate, IDictionary<string, object> parameters)
         {
             if (predicate == null)
@@ -241,17 +450,34 @@ namespace MDORM.DapperExt.Sql
             sql.Append(" WHERE ").Append(predicate.GetSql(this, parameters));
             return sql.ToString();
         }
-        
+
+        /// <summary>
+        /// Identities the SQL.
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <returns></returns>
         public virtual string IdentitySql(IClassMapper classMap)
         {
             return Configuration.Dialect.GetIdentitySql(GetTableName(classMap));
         }
 
+        /// <summary>
+        /// 获得表名称
+        /// </summary>
+        /// <param name="map">类映射</param>
+        /// <returns></returns>
         public virtual string GetTableName(IClassMapper map)
         {
             return Configuration.Dialect.GetTableName(map.SchemaName, map.TableName, null);
         }
 
+        /// <summary>
+        /// 获取列的名称
+        /// </summary>
+        /// <param name="map">类映射</param>
+        /// <param name="property">属性.</param>
+        /// <param name="includeAlias">if set to <c>true</c> [include alias].</param>
+        /// <returns></returns>
         public virtual string GetColumnName(IClassMapper map, IPropertyMap property, bool includeAlias)
         {
             string alias = null;
@@ -263,6 +489,14 @@ namespace MDORM.DapperExt.Sql
             return Configuration.Dialect.GetColumnName(GetTableName(map), property.ColumnName, alias);
         }
 
+        /// <summary>
+        /// 获取列的名称
+        /// </summary>
+        /// <param name="map">类映射</param>
+        /// <param name="propertyName">属性的名称</param>
+        /// <param name="includeAlias">if set to <c>true</c> [include alias].</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public virtual string GetColumnName(IClassMapper map, string propertyName, bool includeAlias)
         {
             IPropertyMap propertyMap = map.Properties.SingleOrDefault(p => p.Name.Equals(propertyName, StringComparison.InvariantCultureIgnoreCase));
@@ -274,11 +508,22 @@ namespace MDORM.DapperExt.Sql
             return GetColumnName(map, propertyMap, includeAlias);
         }
 
+        /// <summary>
+        /// Supportses the multiple statements.
+        /// </summary>
+        /// <returns>
+        /// </returns>
         public virtual bool SupportsMultipleStatements()
         {
             return Configuration.Dialect.SupportsMultipleStatements;
         }
 
+        /// <summary>
+        /// 创建选择的列
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <returns>
+        /// </returns>
         public virtual string BuildSelectColumns(IClassMapper classMap)
         {
             var columns = classMap.Properties

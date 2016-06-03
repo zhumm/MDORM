@@ -23,101 +23,155 @@
             获取是否记录操作sql
             </summary>
         </member>
+        <member name="T:MDORM.DapperExt.DapperExt">
+            <summary>
+            静态Dapper扩展类
+            </summary>
+        </member>
         <member name="M:MDORM.DapperExt.DapperExt.SetMappingAssemblies(System.Collections.Generic.IList{System.Reflection.Assembly})">
             <summary>
+            添加其他的程序集列表。Dapper扩展将会在这些程序集中查找
             Add other assemblies that Dapper Extensions will search if a mapping is not found in the same assembly of the POCO.
             </summary>
             <param name="assemblies"></param>
         </member>
         <member name="M:MDORM.DapperExt.DapperExt.Configure(MDORM.DapperExt.IDapperExtConfiguration)">
             <summary>
+            配置Dapper扩展方法
             Configure DapperExt extension methods.
             </summary>
-            <param name="defaultMapper"></param>
-            <param name="mappingAssemblies"></param>
-            <param name="sqlDialect"></param>
         </member>
         <member name="M:MDORM.DapperExt.DapperExt.Configure(System.Type,System.Collections.Generic.IList{System.Reflection.Assembly},MDORM.DapperExt.Sql.ISqlDialect)">
             <summary>
+            配置Dapper扩展方法
             Configure DapperExt extension methods.
             </summary>
-            <param name="defaultMapper"></param>
-            <param name="mappingAssemblies"></param>
-            <param name="sqlDialect"></param>
+            <param name="defaultMapper">默认的类型</param>
+            <param name="mappingAssemblies">要映射的程序集</param>
+            <param name="sqlDialect">sql语言实例</param>
         </member>
         <member name="M:MDORM.DapperExt.DapperExt.Get``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
             <summary>
+            按照特定的Id执行查询并返回T类型的对象
             Executes a query for the specified id, returning the data typed as per T
             </summary>
+            <typeparam name="T">返回对象的类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="id">Id</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
         </member>
         <member name="M:MDORM.DapperExt.DapperExt.Insert``1(System.Data.IDbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction,System.Nullable{System.Int32})">
             <summary>
+            为特定的实体对象执行INSERT方法
             Executes an insert query for the specified entity.
             </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="entities">实体对象</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
         </member>
         <member name="M:MDORM.DapperExt.DapperExt.Insert``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
             <summary>
+            为特定的实体对象执行插入操作并放回这条记录的主键
+            如果实体有单个的的主键，仅仅返回主键值
+            如果实体有符合的主键。将会返回一个键值字典
+            当实体的主键类型是Guid或者Identity时，主键内容会自动被改变
             Executes an insert query for the specified entity, returning the primary key.  
             If the entity has a single key, just the value is returned.  
             If the entity has a composite key, an IDictionary&lt;string, object&gt; is returned with the key values.
             The key value for the entity will also be updated if the KeyType is a Guid or Identity.
             </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="entity">实体对象</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
         </member>
         <member name="M:MDORM.DapperExt.DapperExt.Update``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
             <summary>
+            为一个特定的实体对象执行UPDATE操作
             Executes an update query for the specified entity.
             </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="entity">实体对象</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns>是否执行成功</returns>
         </member>
         <member name="M:MDORM.DapperExt.DapperExt.Delete``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
             <summary>
+            对特定的实体执行DELETE操作
             Executes a delete query for the specified entity.
             </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="entity">实体对象</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
         </member>
         <member name="M:MDORM.DapperExt.DapperExt.Delete``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
             <summary>
+            删除满足通过查询条件的记录
             Executes a delete query using the specified predicate.
             </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns>是否执行成功</returns>
         </member>
-        <member name="M:MDORM.DapperExt.DapperExt.GetList``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
-            <summary>
-            Executes a select query using the specified predicate, returning an IEnumerable data typed as per T.
-            </summary>
-        </member>
-        <member name="M:MDORM.DapperExt.DapperExt.GetPage``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
-            <summary>
-            Executes a select query using the specified predicate, returning an IEnumerable data typed as per T.
-            Data returned is dependent upon the specified page and resultsPerPage.
-            </summary>
-        </member>
-        <member name="M:MDORM.DapperExt.DapperExt.GetSet``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
-            <summary>
-            Executes a select query using the specified predicate, returning an IEnumerable data typed as per T.
-            Data returned is dependent upon the specified firstResult and maxResults.
-            </summary>
-        </member>
+        <!-- 对于成员“M:MDORM.DapperExt.DapperExt.GetList``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:MDORM.DapperExt.DapperExt.GetPage``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:MDORM.DapperExt.DapperExt.GetSet``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)”忽略有格式错误的 XML 注释 -->
         <member name="M:MDORM.DapperExt.DapperExt.Count``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
             <summary>
+            根据查询条件选择满足条件的记录并返回满足添加的记录条数
             Executes a query using the specified predicate, returning an integer that represents the number of rows that match the query.
             </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns>满足条件的记录数</returns>
         </member>
         <member name="M:MDORM.DapperExt.DapperExt.GetMultiple(System.Data.IDbConnection,MDORM.DapperExt.GetMultiplePredicate,System.Data.IDbTransaction,System.Nullable{System.Int32})">
             <summary>
+            执行一个查询符合对象的操作并为每个查询返回IMultipleResultReader对象
             Executes a select query for multiple objects, returning IMultipleResultReader for each predicate.
             </summary>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
         </member>
         <member name="M:MDORM.DapperExt.DapperExt.GetMap``1">
             <summary>
+            获取特定类型的映射。
+            如果这个映射不存在就使用默认的映射生成一个新的映射
             Gets the appropriate mapper for the specified type T. 
             If the mapper for the type is not yet created, a new mapper is generated from the mapper type specifed by DefaultMapper.
             </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <returns></returns>
         </member>
         <member name="M:MDORM.DapperExt.DapperExt.ClearCache">
             <summary>
+            清除sql缓存
             Clears the ClassMappers for each type.
             </summary>
         </member>
         <member name="M:MDORM.DapperExt.DapperExt.GetNextGuid">
             <summary>
+            生成一个COMB Guid,解决了分散指数的问题
             Generates a COMB Guid which solves the fragmented index issue.
             See: http://davybrion.com/blog/2009/05/using-the-guidcomb-identifier-strategy
             </summary>
@@ -126,152 +180,1486 @@
         <!-- 对于成员“P:MDORM.DapperExt.DapperExt.SqlDialect”忽略有格式错误的 XML 注释 -->
         <member name="P:MDORM.DapperExt.DapperExt.InstanceFactory">
             <summary>
+            获取或设置Dapper 扩展实现工厂
             Get or sets the Dapper Extensions Implementation Factory.
             </summary>
         </member>
         <member name="P:MDORM.DapperExt.DapperExt.Instance">
             <summary>
+            获取Dapper 扩展实现（使用单例模式）
             Gets the Dapper Extensions Implementation
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.IDapperExtConfiguration">
+            <summary>
+            Dapper扩展配置接口
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperExtConfiguration.GetMap(System.Type)">
+            <summary>
+            获取映射
+            </summary>
+            <param name="entityType">实体类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperExtConfiguration.GetMap``1">
+            <summary>
+            获取映射
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperExtConfiguration.ClearCache">
+            <summary>
+            清除缓存
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperExtConfiguration.GetNextGuid">
+            <summary>
+            获得下一个Guid
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:MDORM.DapperExt.IDapperExtConfiguration.DefaultMapper">
+            <summary>
+            默认映射
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.IDapperExtConfiguration.MappingAssemblies">
+            <summary>
+            映射程序集
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.IDapperExtConfiguration.Dialect">
+            <summary>
+            SQL语言
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.DapperExtConfiguration">
+            <summary>
+            Dapper 扩展配置
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExtConfiguration.GetMap(System.Type)">
+            <summary>
+            获取映射
+            </summary>
+            <param name="entityType">实体类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExtConfiguration.GetMap``1">
+            <summary>
+            获取映射
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExtConfiguration.ClearCache">
+            <summary>
+            清除缓存
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExtConfiguration.GetNextGuid">
+            <summary>
+            获取下一个Guid
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperExtConfiguration.GetMapType(System.Type)">
+            <summary>
+            获取映射类型
+            </summary>
+            <param name="entityType">实体类型</param>
+            <returns>类型</returns>
+        </member>
+        <member name="P:MDORM.DapperExt.DapperExtConfiguration.DefaultMapper">
+            <summary>
+            默认映射
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.DapperExtConfiguration.MappingAssemblies">
+            <summary>
+            映射程序集
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.DapperExtConfiguration.Dialect">
+            <summary>
+            SQL语言
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.IDapperImplementor">
+            <summary>
+            Dapper 实现接口
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperImplementor.Get``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            获取指定Id的一条记录
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="id">id</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns>T类型的实体对象</returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperImplementor.Insert``1(System.Data.IDbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            批量插入特定类型的实体对象集合
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="entities">实体对象列表</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperImplementor.Insert``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            插入特定类型的实体对象并返回实体ID
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="entity">实体对象</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns>实体对象id</returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperImplementor.Update``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            更新特定类型的对象并返回执行结果
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="entitiy">实体对象列表</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperImplementor.Delete``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            删除特定类型的对象并返回执行结果
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="entitiy">实体对象列表</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperImplementor.Delete``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            删除满足特定查询条件的对象并返回执行结果
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperImplementor.GetList``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            获取满足特定查询条件的对象列表并返回
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">是否缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperImplementor.GetPage``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            分页获取满足特定查询条件的对象列表并返回当前页
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">是否缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperImplementor.GetSet``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            获取满足特定查询条件的对象列表并返回区间记录
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="firstResult">第一条数据索引</param>
+            <param name="maxResults">最大记录的索引</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">是否缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperImplementor.Count``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            获取满足特定查询条件的记录条数
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDapperImplementor.GetMultiple(System.Data.IDbConnection,MDORM.DapperExt.GetMultiplePredicate,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            获取复合查询结果
+            </summary>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="P:MDORM.DapperExt.IDapperImplementor.SqlGenerator">
+            <summary>
+            SQL生成接口
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.DapperImplementor">
+            <summary>
+            Dapper 实现具体类
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.#ctor(MDORM.DapperExt.Sql.ISqlGenerator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MDORM.DapperExt.DapperImplementor"/> class.
+            </summary>
+            <param name="sqlGenerator">The SQL generator.</param>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.Get``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            获取指定Id的一条记录
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="id">id</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns>
+            T类型的实体对象
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.Insert``1(System.Data.IDbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            批量插入特定类型的实体对象集合
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="entities">实体对象列表</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.Insert``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            插入法。不能根据实体动态插入（插入全部列）
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="entity">实体对象</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns>
+            实体对象id
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.Update``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            扩展的更新方法，按需更新
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="entity"></param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.Delete``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            删除特定类型的对象并返回执行结果
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="entity"></param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.Delete``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            删除满足特定查询条件的对象并返回执行结果
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.GetList``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            获取满足特定查询条件的对象列表并返回
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">是否缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.GetPage``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            分页获取满足特定查询条件的对象列表并返回当前页
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">是否缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.GetSet``1(System.Data.IDbConnection,System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            获取满足特定查询条件的对象列表并返回区间记录
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="firstResult">第一条数据索引</param>
+            <param name="maxResults">最大记录的索引</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">是否缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.Count``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            获取满足特定查询条件的记录条数
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.GetMultiple(System.Data.IDbConnection,MDORM.DapperExt.GetMultiplePredicate,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            获取复合查询结果
+            </summary>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.GetList``1(System.Data.IDbConnection,MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            根据查询条件获取数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">if set to <c>true</c> [buffered].</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.GetPage``1(System.Data.IDbConnection,MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            分页获取特定条件的查询记录
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="page">当前页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">if set to <c>true</c> [buffered].</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.GetSet``1(System.Data.IDbConnection,MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            获取满足特定查询条件的对象列表并返回区间记录
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>、
+            <param name="classMap">实体映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="firstResult">第一条数据索引</param>
+            <param name="maxResults">最大记录的索引</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">是否缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.Delete``1(System.Data.IDbConnection,MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            删除特定类型的对象并返回执行结果
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="connection">数据库连接</param>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.GetPredicate(MDORM.DapperExt.Mapper.IClassMapper,System.Object)">
+            <summary>
+            获得查询条件谓词
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询谓词</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.GetIdPredicate(MDORM.DapperExt.Mapper.IClassMapper,System.Object)">
+            <summary>
+            获得Id谓词
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="id">id</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.GetKeyPredicate``1(MDORM.DapperExt.Mapper.IClassMapper,``0)">
+            <summary>
+            获取键谓词
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="classMap">类映射</param>
+            <param name="entity">实体对象</param>
+            <returns>
+            </returns>
+            <exception cref="T:System.ArgumentException">At least one Key column must be defined.</exception>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.GetEntityPredicate(MDORM.DapperExt.Mapper.IClassMapper,System.Object)">
+            <summary>
+            获取实体属性谓词
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="entity">实体对象</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.GetMultipleByBatch(System.Data.IDbConnection,MDORM.DapperExt.GetMultiplePredicate,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            批量获取复合谓词
+            </summary>
+            <param name="connection">数据库连接</param>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.DapperImplementor.GetMultipleBySequence(System.Data.IDbConnection,MDORM.DapperExt.GetMultiplePredicate,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            Gets the multiple by sequence.
+            </summary>
+            <param name="connection">The connection.</param>
+            <param name="predicate">The predicate.</param>
+            <param name="transaction">The transaction.</param>
+            <param name="commandTimeout">The command timeout.</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="P:MDORM.DapperExt.DapperImplementor.SqlGenerator">
+            <summary>
+            SQL生成接口
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.IDatabase">
+            <summary>
+            数据库接口
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.BeginTransaction(System.Data.IsolationLevel)">
+            <summary>
+            开始事务
+            </summary>
+            <param name="isolationLevel">隔离水平（默认ReadCommitted）</param>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Commit">
+            <summary>
+            提交
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Rollback">
+            <summary>
+            回滚
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.RunInTransaction(System.Action)">
+            <summary>
+            执行事务
+            </summary>
+            <param name="action">The action.</param>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.RunInTransaction``1(System.Func{``0})">
+            <summary>
+            执行事务
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="func">The function.</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Get``1(System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            获取指定Id的实体内容
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="id">指定的Id</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Get``1(System.Object,System.Nullable{System.Int32})">
+            <summary>
+            获取指定Id的实体内容
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="id">指定的Id</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Insert``1(System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            批量插入特定的实体对象
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entities">实体对象列表</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Insert``1(System.Collections.Generic.IEnumerable{``0},System.Nullable{System.Int32})">
+            <summary>
+            批量插入实体列表
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entities">实体对象列表</param>
+            <param name="commandTimeout">超时时间</param>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Insert``1(``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            插入特定的实体对象并返回对象主键
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entity">实体对象</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Insert``1(``0,System.Nullable{System.Int32})">
+            <summary>
+            插入特定的实体对象并返回对象主键
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entity">实体对象</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Update``1(``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            更新特定的实体对象
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entity">实体对象</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Update``1(``0,System.Nullable{System.Int32})">
+            <summary>
+            更新特定的实体对象
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entity">实体对象</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Delete``1(``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            删除特定的实体对象
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entity">实体对象</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns>是否操作成功</returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Delete``1(``0,System.Nullable{System.Int32})">
+            <summary>
+            删除特定的实体对象
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entity">实体对象</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Delete``1(System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            删除满足条件的对象
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Delete``1(System.Object,System.Nullable{System.Int32})">
+            <summary>
+            删除满足条件的对象
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.GetList``1(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            根据查询条件获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">if set to <c>true</c> [buffered].</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.GetList``1(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            根据查询条件获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">if set to <c>true</c> [buffered].</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.GetPage``1(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            根据查询条件分页获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">if set to <c>true</c> [buffered].</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.GetPage``1(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            根据查询条件分页获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">if set to <c>true</c> [buffered].</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.GetSet``1(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            根据查询条件获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="firstResult">第一条结果索引</param>
+            <param name="maxResults">最大结果所以</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">if set to <c>true</c> [buffered].</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.GetSet``1(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            根据查询条件获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="firstResult">第一条结果索引</param>
+            <param name="maxResults">最大结果所以</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">if set to <c>true</c> [buffered].</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Count``1(System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            根据查询条件获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.Count``1(System.Object,System.Nullable{System.Int32})">
+            <summary>
+            根据查询条件获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.GetMultiple(MDORM.DapperExt.GetMultiplePredicate,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            根据查询条件获取复合结果
+            </summary>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.GetMultiple(MDORM.DapperExt.GetMultiplePredicate,System.Nullable{System.Int32})">
+            <summary>
+            根据查询条件获取复合结果
+            </summary>
+            <param name="predicate">查询条件</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.ClearCache">
+            <summary>
+            清除缓存
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.GetNextGuid">
+            <summary>
+            获取下一个Guid
+            </summary>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.IDatabase.GetMap``1">
+            <summary>
+            获取类映射
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <returns>
+            </returns>
+        </member>
+        <member name="P:MDORM.DapperExt.IDatabase.HasActiveTransaction">
+            <summary>
+            是否有活动的事务
+            </summary>
+            <value>
+            <c>true</c> if this instance has active transaction; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.IDatabase.Connection">
+            <summary>
+            获取数据库连接
+            </summary>
+            <value>
+            The connection.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.Database">
+            <summary>
+            数据库
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.#ctor(System.Data.IDbConnection,MDORM.DapperExt.Sql.ISqlGenerator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MDORM.DapperExt.Database"/> class.
+            </summary>
+            <param name="connection">The connection.</param>
+            <param name="sqlGenerator">The SQL generator.</param>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Dispose">
+            <summary>
+            执行与释放或重置非托管资源相关的应用程序定义的任务。
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.BeginTransaction(System.Data.IsolationLevel)">
+            <summary>
+            开始事务
+            </summary>
+            <param name="isolationLevel">隔离水平（默认ReadCommitted）</param>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Commit">
+            <summary>
+            提交
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Rollback">
+            <summary>
+            回滚
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.RunInTransaction(System.Action)">
+            <summary>
+            执行事务
+            </summary>
+            <param name="action">The action.</param>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.RunInTransaction``1(System.Func{``0})">
+            <summary>
+            执行事务
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="func">The function.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Get``1(System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            获取指定Id的实体内容
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="id">指定的Id</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Get``1(System.Object,System.Nullable{System.Int32})">
+            <summary>
+            获取指定Id的实体内容
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="id">指定的Id</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Insert``1(System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            批量插入特定的实体对象
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entities">实体对象列表</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Insert``1(System.Collections.Generic.IEnumerable{``0},System.Nullable{System.Int32})">
+            <summary>
+            批量插入实体列表
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entities">实体对象列表</param>
+            <param name="commandTimeout">超时时间</param>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Insert``1(``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            插入特定的实体对象并返回对象主键
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entity">实体对象</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Insert``1(``0,System.Nullable{System.Int32})">
+            <summary>
+            插入特定的实体对象并返回对象主键
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entity">实体对象</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Update``1(``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            更新特定的实体对象
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entity">实体对象</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Update``1(``0,System.Nullable{System.Int32})">
+            <summary>
+            更新特定的实体对象
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entity">实体对象</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Delete``1(``0,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            删除特定的实体对象
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entity">实体对象</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns>
+            是否操作成功
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Delete``1(``0,System.Nullable{System.Int32})">
+            <summary>
+            删除特定的实体对象
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entity">实体对象</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Delete``1(System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            删除满足条件的对象
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Delete``1(System.Object,System.Nullable{System.Int32})">
+            <summary>
+            删除满足条件的对象
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.GetList``1(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            根据查询条件获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">if set to <c>true</c> [buffered].</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.GetList``1(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            根据查询条件获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">if set to <c>true</c> [buffered].</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.GetPage``1(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            根据查询条件分页获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">if set to <c>true</c> [buffered].</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.GetPage``1(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            根据查询条件分页获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">if set to <c>true</c> [buffered].</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.GetSet``1(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            根据查询条件获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="firstResult">第一条结果索引</param>
+            <param name="maxResults">最大结果所以</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">if set to <c>true</c> [buffered].</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.GetSet``1(System.Object,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            根据查询条件获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="firstResult">第一条结果索引</param>
+            <param name="maxResults">最大结果所以</param>
+            <param name="commandTimeout">超时时间</param>
+            <param name="buffered">if set to <c>true</c> [buffered].</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Count``1(System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            根据查询条件获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.Count``1(System.Object,System.Nullable{System.Int32})">
+            <summary>
+            根据查询条件获取结果数据集
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">查询条件</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.GetMultiple(MDORM.DapperExt.GetMultiplePredicate,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>
+            根据查询条件获取复合结果
+            </summary>
+            <param name="predicate">查询条件</param>
+            <param name="transaction">事务</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.GetMultiple(MDORM.DapperExt.GetMultiplePredicate,System.Nullable{System.Int32})">
+            <summary>
+            根据查询条件获取复合结果
+            </summary>
+            <param name="predicate">查询条件</param>
+            <param name="commandTimeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.ClearCache">
+            <summary>
+            清除缓存
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.GetNextGuid">
+            <summary>
+            获取下一个Guid
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Database.GetMap``1">
+            <summary>
+            获取类映射
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <returns></returns>
+        </member>
+        <member name="P:MDORM.DapperExt.Database.HasActiveTransaction">
+            <summary>
+            是否有活动的事务
+            </summary>
+            <value>
+            <c>true</c> if this instance has active transaction; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Database.Connection">
+            <summary>
+            获取数据库连接
+            </summary>
+            <value>
+            The connection.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.GetMultiplePredicate">
+            <summary>
+            获取复合结果谓词
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.GetMultiplePredicate.GetMultiplePredicateItem">
+            <summary>
+            获取复合谓词项
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.GetMultiplePredicate.GetMultiplePredicateItem.Value">
+            <summary>
+            获取或设置值
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.GetMultiplePredicate.GetMultiplePredicateItem.Type">
+            <summary>
+            获取或设置类型
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.GetMultiplePredicate.GetMultiplePredicateItem.Sort">
+            <summary>
+            获取或设置排序列表
+            </summary>
+            <value>
+            The sort.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.IMultipleResultReader">
+            <summary>
+            复合结果读取器接口
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.IMultipleResultReader.Read``1">
+            <summary>
+            读取
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:MDORM.DapperExt.GridReaderResultReader">
+            <summary>
+            表格结果读取器
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.SequenceReaderResultReader">
+            <summary>
+            循环读取结果读取器
             </summary>
         </member>
         <member name="T:MDORM.DapperExt.Mapper.AutoClassMapper`1">
             <summary>
+            自动将一个实体映射到一个表，使用反射和命名约定的组合键
             Automatically maps an entity to a table using a combination of reflection and naming conventions for keys.
             </summary>
         </member>
         <member name="T:MDORM.DapperExt.Mapper.ClassMapper`1">
             <summary>
+            通过属性映射的集合将一个实体映射到一个表
             Maps an entity to a table through a collection of property maps.
             </summary>
         </member>
+        <member name="T:MDORM.DapperExt.Mapper.IClassMapper`1">
+            <summary>
+            IClassMapper接口
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:MDORM.DapperExt.Mapper.IClassMapper">
+            <summary>
+            IClassMapper接口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.IClassMapper.SchemaName">
+            <summary>
+            模式名称
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.IClassMapper.TableName">
+            <summary>
+            表名称
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.IClassMapper.Properties">
+            <summary>
+            属性列表
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.IClassMapper.EntityType">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Mapper.ClassMapper`1.Schema(System.String)">
+            <summary>
+            模式名称
+            </summary>
+            <param name="schemaName"></param>
+        </member>
+        <member name="M:MDORM.DapperExt.Mapper.ClassMapper`1.Table(System.String)">
+            <summary>
+            表名称
+            </summary>
+            <param name="tableName"></param>
+        </member>
+        <member name="M:MDORM.DapperExt.Mapper.ClassMapper`1.AutoMap">
+            <summary>
+            自动映射方法
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Mapper.ClassMapper`1.AutoMap(System.Func{System.Type,System.Reflection.PropertyInfo,System.Boolean})">
+            <summary>
+            自动映射
+            </summary>
+            <param name="canMap"></param>
+        </member>
         <member name="M:MDORM.DapperExt.Mapper.ClassMapper`1.Map(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
             <summary>
+            映实体属性射到一数据库表中的某一列
             Fluently, maps an entity property to a column
             </summary>
         </member>
         <member name="M:MDORM.DapperExt.Mapper.ClassMapper`1.Map(System.Reflection.PropertyInfo)">
             <summary>
+            映实体属性射到一数据库表中的某一列
             Fluently, maps an entity property to a column
             </summary>
         </member>
+        <member name="M:MDORM.DapperExt.Mapper.ClassMapper`1.GuardForDuplicatePropertyMap(MDORM.DapperExt.Mapper.PropertyMap)">
+            <summary>
+            判断是否是重复的属性,是就抛出异常
+            </summary>
+            <exception cref="T:System.ArgumentException">重复的映射属性异常</exception>
+            <param name="result"></param>
+        </member>
         <member name="P:MDORM.DapperExt.Mapper.ClassMapper`1.SchemaName">
             <summary>
+            获取或设置数据库模式
             Gets or sets the schema to use when referring to the corresponding table name in the database.
             </summary>
         </member>
         <member name="P:MDORM.DapperExt.Mapper.ClassMapper`1.TableName">
             <summary>
+            获取或设置表名称
             Gets or sets the table to use in the database.
             </summary>
         </member>
         <member name="P:MDORM.DapperExt.Mapper.ClassMapper`1.Properties">
             <summary>
+            映射到数据库表的属性集合
             A collection of properties that will map to columns in the database table.
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.ClassMapper`1.EntityType">
+            <summary>
+            实体类型
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.ClassMapper`1.PropertyTypeKeyTypeMapping">
+            <summary>
+            属性类型和键类型的映射
             </summary>
         </member>
         <member name="T:MDORM.DapperExt.Mapper.PluralizedAutoClassMapper`1">
             <summary>
+            使用反射和命名约定的组合键自动将一个实体映射到一个表
+            和AutoClassMapper相同，但会自动尝试兼职表名
+            例如: Peson 的实体将会到映射到 Person 表
             Automatically maps an entity to a table using a combination of reflection and naming conventions for keys. 
             Identical to AutoClassMapper, but attempts to pluralize table names automatically.
             Example: Person entity maps to People table
             </summary>
         </member>
+        <member name="M:MDORM.DapperExt.Mapper.PluralizedAutoClassMapper`1.Table(System.String)">
+            <summary>
+            设置表名称
+            </summary>
+            <param name="tableName"></param>
+        </member>
+        <member name="T:MDORM.DapperExt.Mapper.PluralizedAutoClassMapper`1.Formatting">
+            <summary>
+            Adapted from: http://mattgrande.wordpress.com/2009/10/28/pluralization-helper-for-c/
+            </summary>
+        </member>
         <member name="T:MDORM.DapperExt.Mapper.IPropertyMap">
             <summary>
+            实体属性映射到数据库中相应的列
             Maps an entity property to its corresponding column in the database.
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.IPropertyMap.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.IPropertyMap.ColumnName">
+            <summary>
+            列名称
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.IPropertyMap.Ignored">
+            <summary>
+            是否忽略
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.IPropertyMap.IsReadOnly">
+            <summary>
+            是否是只读的
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.IPropertyMap.KeyType">
+            <summary>
+            键类型
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Mapper.IPropertyMap.PropertyInfo">
+            <summary>
+            属性
             </summary>
         </member>
         <member name="T:MDORM.DapperExt.Mapper.PropertyMap">
             <summary>
+            实体属性映射到数据库中相应的列。
             Maps an entity property to its corresponding column in the database.
             </summary>
         </member>
+        <member name="M:MDORM.DapperExt.Mapper.PropertyMap.#ctor(System.Reflection.PropertyInfo)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="propertyInfo">属性</param>
+        </member>
         <member name="M:MDORM.DapperExt.Mapper.PropertyMap.Column(System.String)">
             <summary>
-            Fluently sets the column name for the property.
+            设置当前属性的列名称
             </summary>
-            <param name="columnName">The column name as it exists in the database.</param>
+            <param name="columnName">数据库中存在的列，The column name as it exists in the database.</param>
         </member>
         <member name="M:MDORM.DapperExt.Mapper.PropertyMap.Key(MDORM.DapperExt.Mapper.KeyType)">
             <summary>
-            Fluently sets the key type of the property.
+            设置当前属性的键类型（当前字段不能设置成忽略的或是只读的）
             </summary>
-            <param name="columnName">The column name as it exists in the database.</param>
+            <param name="keyType">键类型枚举</param>
+            <exception cref="T:System.ArgumentException">当前属性不能是忽略的</exception>
+            /// <exception cref="T:System.ArgumentException">当前属性不能是只读的</exception>
+            <returns></returns>
         </member>
         <member name="M:MDORM.DapperExt.Mapper.PropertyMap.Ignore">
             <summary>
+            设置当前属性为忽略
             Fluently sets the ignore status of the property.
             </summary>
+            <exception cref="T:System.ArgumentException">当前属性的键类型不能为：NotAKey</exception>
         </member>
         <member name="M:MDORM.DapperExt.Mapper.PropertyMap.ReadOnly">
             <summary>
+            设置当前属性为只读
             Fluently sets the read-only status of the property.
             </summary>
+            <exception cref="T:System.ArgumentException">当前属性的键类型不能为：NotAKey</exception>
         </member>
         <member name="P:MDORM.DapperExt.Mapper.PropertyMap.Name">
             <summary>
+            获取当前属性的特定（中文）名称
             Gets the name of the property by using the specified propertyInfo.
             </summary>
         </member>
         <member name="P:MDORM.DapperExt.Mapper.PropertyMap.ColumnName">
             <summary>
+            获取当前属性的列名称
             Gets the column name for the current property.
             </summary>
         </member>
         <member name="P:MDORM.DapperExt.Mapper.PropertyMap.KeyType">
             <summary>
+            获取当前属性的KeyType
             Gets the key type for the current property.
             </summary>
         </member>
         <member name="P:MDORM.DapperExt.Mapper.PropertyMap.Ignored">
             <summary>
+            获取是否忽视当前的属性。如果忽视,当前的属性将不会被包括在查询中。
             Gets the ignore status of the current property. If ignored, the current property will not be included in queries.
             </summary>
         </member>
         <member name="P:MDORM.DapperExt.Mapper.PropertyMap.IsReadOnly">
             <summary>
+            获取当前的属性是否是只读的，如果是，当前的属性将不会被包括在INSERT和UPDATE查询中。
             Gets the read-only status of the current property. If read-only, the current property will not be included in INSERT and UPDATE queries.
             </summary>
         </member>
         <member name="P:MDORM.DapperExt.Mapper.PropertyMap.PropertyInfo">
             <summary>
+            获取当前属性的属性信息
             Gets the property info for the current property.
             </summary>
         </member>
         <member name="T:MDORM.DapperExt.Mapper.KeyType">
             <summary>
+            键类型枚举
+            ClassMapper用来确定实体哪个属性表示什么类型的键
             Used by ClassMapper to determine which entity property represents the key.
             </summary>
         </member>
         <member name="F:MDORM.DapperExt.Mapper.KeyType.NotAKey">
             <summary>
+            属性不是主键,不会自动管理
             The property is not a key and is not automatically managed.
             </summary>
         </member>
         <member name="F:MDORM.DapperExt.Mapper.KeyType.Identity">
             <summary>
+            属性是一个基于数据库Int自增长的
             The property is an integery-based identity generated from the database.
             </summary>
         </member>
         <member name="F:MDORM.DapperExt.Mapper.KeyType.Guid">
             <summary>
+            属性是由框架自动管理的Guid主键
             The property is a Guid identity which is automatically managed.
             </summary>
         </member>
         <member name="F:MDORM.DapperExt.Mapper.KeyType.Assigned">
             <summary>
+            属性不是自动管理的键
             The property is a key that is not automatically managed.
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.Predicates">
+            <summary>
+            条件谓词
             </summary>
         </member>
         <member name="M:MDORM.DapperExt.Predicates.Field``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},MDORM.DapperExt.Operator,System.Object,System.Boolean)">
             <summary>
+            创建一个新的IFieldPrediate的工厂方法
+            比如WHERE FistName = 'Foo'
             Factory method that creates a new IFieldPredicate predicate: [FieldName] [Operator] [Value]. 
             Example: WHERE FirstName = 'Foo'
             </summary>
-            <typeparam name="T">The type of the entity.</typeparam>
+            <typeparam name="T">实体类型</typeparam>
             <param name="expression">An expression that returns the left operand [FieldName].</param>
-            <param name="op">The comparison operator.</param>
-            <param name="value">The value for the predicate.</param>
+            <param name="op">比较操作</param>
+            <param name="value">查询谓词内容</param>
             <param name="not">Effectively inverts the comparison operator. Example: WHERE FirstName &lt;&gt; 'Foo'.</param>
             <returns>An instance of IFieldPredicate.</returns>
         </member>
@@ -290,6 +1678,8 @@
         </member>
         <member name="M:MDORM.DapperExt.Predicates.Group(MDORM.DapperExt.GroupOperator,MDORM.DapperExt.IPredicate[])">
             <summary>
+            创建IPredicateGroup 谓词的工厂方法
+            谓词组可以和其他的谓词组连接
             Factory method that creates a new IPredicateGroup predicate.
             Predicate groups can be joined together with other predicate groups.
             </summary>
@@ -299,79 +1689,1467 @@
         </member>
         <member name="M:MDORM.DapperExt.Predicates.Exists``1(MDORM.DapperExt.IPredicate,System.Boolean)">
             <summary>
+            创建IExistsPredicate谓词的工厂方法
             Factory method that creates a new IExistsPredicate predicate.
             </summary>
+            <typeparam name="TSub">类型</typeparam>
+            <param name="predicate">添加谓语</param>
+            <param name="not">if set to <c>true</c> [not].</param>
+            <returns></returns>
         </member>
         <member name="M:MDORM.DapperExt.Predicates.Between``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},MDORM.DapperExt.BetweenValues,System.Boolean)">
             <summary>
+            创建IBetweenPredicate的工厂方法
             Factory method that creates a new IBetweenPredicate predicate. 
             </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="expression">表达式</param>
+            <param name="values">值</param>
+            <param name="not">if set to <c>true</c> [not].</param>
+            <returns></returns>
         </member>
         <member name="M:MDORM.DapperExt.Predicates.Sort``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean)">
             <summary>
+            创建排序的工厂方法
             Factory method that creates a new Sort which controls how the results will be sorted.
             </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="expression">表达式</param>
+            <param name="ascending">if set to <c>true</c> [ascending].</param>
+            <returns></returns>
+        </member>
+        <member name="T:MDORM.DapperExt.IPredicate">
+            <summary>
+            谓词接口
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.IPredicate.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取SQL语句
+            </summary>
+            <param name="sqlGenerator">SQL生成接口</param>
+            <param name="parameters">参数</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="T:MDORM.DapperExt.IBasePredicate">
+            <summary>
+            基础谓词接口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.IBasePredicate.PropertyName">
+            <summary>
+            获取或设置属性名称
+            </summary>
+            <value>
+            属性名称
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.BasePredicate">
+            <summary>
+            具体的基本谓词类
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.BasePredicate.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取SQL语句
+            </summary>
+            <param name="sqlGenerator">SQL生成接口</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.BasePredicate.GetColumnName(System.Type,MDORM.DapperExt.Sql.ISqlGenerator,System.String)">
+            <summary>
+            获取列的名称
+            </summary>
+            <param name="entityType">实体类型</param>
+            <param name="sqlGenerator">SQL语句生成</param>
+            <param name="propertyName">属性的名称</param>
+            <returns></returns>
+            <exception cref="T:System.NullReferenceException">
+            </exception>
+        </member>
+        <member name="P:MDORM.DapperExt.BasePredicate.PropertyName">
+            <summary>
+            获取或设置属性名称
+            </summary>
+            <value>
+            属性名称
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.IComparePredicate">
+            <summary>
+            比较谓词接口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.IComparePredicate.Operator">
+            <summary>
+            获取或设置操作类型
+            </summary>
+            <value>
+            The operator.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.IComparePredicate.Not">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IComparePredicate"/> is not.
+            </summary>
+            <value>
+              <c>true</c> if not; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.ComparePredicate">
+            <summary>
+            比较谓词具体实现
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.ComparePredicate.GetOperatorString">
+            <summary>
+            获得操作字符串
+            </summary>
+            <returns>
+            </returns>
+        </member>
+        <member name="P:MDORM.DapperExt.ComparePredicate.Operator">
+            <summary>
+            获取或设置操作类型
+            </summary>
+            <value>
+            The operator.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.ComparePredicate.Not">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.ComparePredicate"/> is not.
+            </summary>
+            <value>
+              <c>true</c> if not; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.IFieldPredicate">
+            <summary>
+            字段谓词接口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.IFieldPredicate.Value">
+            <summary>
+            获取或设置值
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.FieldPredicate`1">
+            <summary>
+            字段谓词的具体实现
+            </summary>
+            <typeparam name="T">类型名称</typeparam>
+        </member>
+        <member name="M:MDORM.DapperExt.FieldPredicate`1.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取SQL语句
+            </summary>
+            <param name="sqlGenerator">SQL生成接口</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException">Operator must be set to Eq for Enumerable types</exception>
+        </member>
+        <member name="P:MDORM.DapperExt.FieldPredicate`1.Value">
+            <summary>
+            获取或设置值
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.IPropertyPredicate">
+            <summary>
+            属性谓词几口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.IPropertyPredicate.PropertyName2">
+            <summary>
+            获取或设置属性2
+            </summary>
+            <value>
+            The property name2.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.PropertyPredicate`2">
+            <summary>
+            具体属性谓词类
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="T2">The type of the 2.</typeparam>
+        </member>
+        <member name="M:MDORM.DapperExt.PropertyPredicate`2.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取SQL语句
+            </summary>
+            <param name="sqlGenerator">SQL生成接口</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="P:MDORM.DapperExt.PropertyPredicate`2.PropertyName2">
+            <summary>
+            获取或设置属性2
+            </summary>
+            <value>
+            The property name2.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.BetweenValues">
+            <summary>
+            区间内容
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.BetweenValues.Value1">
+            <summary>
+            获取或设置内容1
+            </summary>
+            <value>
+            The value1.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.BetweenValues.Value2">
+            <summary>
+            获取或设置内容2
+            </summary>
+            <value>
+            The value2.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.IBetweenPredicate">
+            <summary>
+            区间谓词接口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.IBetweenPredicate.PropertyName">
+            <summary>
+            获取或设置属性名称
+            </summary>
+            <value>
+            The name of the property.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.IBetweenPredicate.Value">
+            <summary>
+            获取或设置区间值
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.IBetweenPredicate.Not">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IBetweenPredicate"/> is not.
+            </summary>
+            <value>
+              <c>true</c> if not; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.BetweenPredicate`1">
+            <summary>
+            具体区间谓词类
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:MDORM.DapperExt.BetweenPredicate`1.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取SQL语句
+            </summary>
+            <param name="sqlGenerator">SQL生成接口</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="P:MDORM.DapperExt.BetweenPredicate`1.Value">
+            <summary>
+            获取或设置区间值
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.BetweenPredicate`1.Not">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IBetweenPredicate"/> is not.
+            </summary>
+            <value>
+              <c>true</c> if not; otherwise, <c>false</c>.
+            </value>
         </member>
         <member name="T:MDORM.DapperExt.Operator">
             <summary>
+            比较操作枚举
             Comparison operator for predicates.
             </summary>
         </member>
         <member name="F:MDORM.DapperExt.Operator.Eq">
             <summary>
+            等于
             Equal to
             </summary>
         </member>
         <member name="F:MDORM.DapperExt.Operator.Gt">
             <summary>
+            大于
             Greater than
             </summary>
         </member>
         <member name="F:MDORM.DapperExt.Operator.Ge">
             <summary>
+            大于或者等于
             Greater than or equal to
             </summary>
         </member>
         <member name="F:MDORM.DapperExt.Operator.Lt">
             <summary>
+            小于
             Less than
             </summary>
         </member>
         <member name="F:MDORM.DapperExt.Operator.Le">
             <summary>
+            大于或者等于
             Less than or equal to
             </summary>
         </member>
         <member name="F:MDORM.DapperExt.Operator.Like">
             <summary>
+            模糊（你可以使用 %）
             Like (You can use % in the value to do wilcard searching)
             </summary>
         </member>
+        <member name="T:MDORM.DapperExt.IPredicateGroup">
+            <summary>
+            谓词组接口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.IPredicateGroup.Operator">
+            <summary>
+            获取或设置操作类型
+            </summary>
+            <value>
+            The operator.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.IPredicateGroup.Predicates">
+            <summary>
+            获取或者设置谓语
+            </summary>
+            <value>
+            The predicates.
+            </value>
+        </member>
         <member name="T:MDORM.DapperExt.PredicateGroup">
             <summary>
+            合指定的组操作符一起使用的谓词组
             Groups IPredicates together using the specified group operator.
             </summary>
         </member>
+        <member name="M:MDORM.DapperExt.PredicateGroup.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取SQL语句
+            </summary>
+            <param name="sqlGenerator">SQL生成接口</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="P:MDORM.DapperExt.PredicateGroup.Operator">
+            <summary>
+            获取或设置操作类型
+            </summary>
+            <value>
+            The operator.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.PredicateGroup.Predicates">
+            <summary>
+            获取或者设置谓语
+            </summary>
+            <value>
+            The predicates.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.IExistsPredicate">
+            <summary>
+            存在谓词接口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.IExistsPredicate.Predicate">
+            <summary>
+            获取或设置条件谓语
+            </summary>
+            <value>
+            The predicate.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.IExistsPredicate.Not">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IExistsPredicate"/> is not.
+            </summary>
+            <value>
+              <c>true</c> if not; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.ExistsPredicate`1">
+            <summary>
+            具体的存在谓语
+            </summary>
+            <typeparam name="TSub">The type of the sub.</typeparam>
+        </member>
+        <member name="M:MDORM.DapperExt.ExistsPredicate`1.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取SQL语句
+            </summary>
+            <param name="sqlGenerator">SQL生成接口</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.ExistsPredicate`1.GetClassMapper(System.Type,MDORM.DapperExt.IDapperExtConfiguration)">
+            <summary>
+            获取类映射
+            </summary>
+            <param name="type">类型</param>
+            <param name="configuration">配置</param>
+            <returns>
+            </returns>
+            <exception cref="T:System.NullReferenceException"></exception>
+        </member>
+        <member name="P:MDORM.DapperExt.ExistsPredicate`1.Predicate">
+            <summary>
+            获取或设置条件谓语
+            </summary>
+            <value>
+            The predicate.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.ExistsPredicate`1.Not">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IExistsPredicate"/> is not.
+            </summary>
+            <value>
+              <c>true</c> if not; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.ISort">
+            <summary>
+            排序接口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.ISort.PropertyName">
+            <summary>
+            获取或设置属性名称
+            </summary>
+            <value>
+            The name of the property.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.ISort.Ascending">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.ISort"/> is ascending.
+            </summary>
+            <value>
+              <c>true</c> if ascending; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.Sort">
+            <summary>
+            具体排序类
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.Sort.PropertyName">
+            <summary>
+            获取或设置属性名称
+            </summary>
+            <value>
+            The name of the property.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sort.Ascending">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.ISort"/> is ascending.
+            </summary>
+            <value>
+              <c>true</c> if ascending; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="T:MDORM.DapperExt.GroupOperator">
             <summary>
+            用来和其他谓词组连接的操作枚举
             Operator to use when joining predicates in a PredicateGroup.
             </summary>
         </member>
+        <member name="F:MDORM.DapperExt.GroupOperator.And">
+            <summary>
+            并且
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.GroupOperator.Or">
+            <summary>
+            或者
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.ReflectionHelper">
+            <summary>
+            反射帮助类
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.ReflectionHelper.GetProperty(System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            获得属性
+            </summary>
+            <param name="lambda">lambda表达式</param>
+            <returns>
+            </returns>
+        </member>
         <member name="M:MDORM.DapperExt.ReflectionHelper.GetObjectValues(System.Object)">
             <summary>
-            修改的方法。自动去除掉那些值为空的属性
+            修改的方法。自动去除掉对象中那些值为空的属性并返回一个键值字典
             </summary>
-            <param name="obj"></param>
+            <param name="obj">具体的实体对象</param>
             <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.ReflectionHelper.AppendStrings(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            把List中的元素按照分割父拼接起来
+            </summary>
+            <param name="list">包含元素的List</param>
+            <param name="seperator">分隔符，默认为，</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.ReflectionHelper.IsSimpleType(System.Type)">
+            <summary>
+            是否是简单类型（值类型）
+            </summary>
+            <param name="type">类型</param>
+            <returns>是否</returns>
+        </member>
+        <member name="M:MDORM.DapperExt.ReflectionHelper.GetParameterName(System.Collections.Generic.IDictionary{System.String,System.Object},System.String,System.Char)">
+            <summary>
+            获取参数名称
+            </summary>
+            <param name="parameters">参数列表</param>
+            <param name="parameterName">参数名称</param>
+            <param name="parameterPrefix">参数前缀</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.ReflectionHelper.SetParameterName(System.Collections.Generic.IDictionary{System.String,System.Object},System.String,System.Object,System.Char)">
+            <summary>
+            设置参数
+            </summary>
+            <param name="parameters">参数列表</param>
+            <param name="parameterName">参数名称</param>
+            <param name="value">值</param>
+            <param name="parameterPrefix">参数前缀</param>
+            <returns></returns>
+        </member>
+        <member name="T:MDORM.DapperExt.Sql.MySqlDialect">
+            <summary>
+            MySql
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.Sql.SqlDialectBase">
+            <summary>
+            基础SQL语言
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.Sql.ISqlDialect">
+            <summary>
+            SQL语言接口
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlDialect.GetTableName(System.String,System.String,System.String)">
+            <summary>
+            获取表名称
+            </summary>
+            <param name="schemaName">架构名称</param>
+            <param name="tableName">表名称</param>
+            <param name="alias">别名</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlDialect.GetColumnName(System.String,System.String,System.String)">
+            <summary>
+            获取列名称
+            </summary>
+            <param name="prefix">前缀</param>
+            <param name="columnName">列的名称</param>
+            <param name="alias">别名</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlDialect.GetIdentitySql(System.String)">
+            <summary>
+            获取主键SQL
+            </summary>
+            <param name="tableName">表名称</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlDialect.GetPagingSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取分页SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="parameters">参数</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlDialect.GetSetSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取Set SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="firstResult">第一个结果索引</param>
+            <param name="maxResults">最大结果索引</param>
+            <param name="parameters">参数</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlDialect.IsQuoted(System.String)">
+            <summary>
+            是否是应用
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlDialect.QuoteString(System.String)">
+            <summary>
+            应用字符串
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.ISqlDialect.OpenQuote">
+            <summary>
+            获取开始引用的字符
+            </summary>
+            <value>
+            The open quote.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.ISqlDialect.CloseQuote">
+            <summary>
+            获取关闭应用的字符
+            </summary>
+            <value>
+            The close quote.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.ISqlDialect.BatchSeperator">
+            <summary>
+            获取批量时的分割字符
+            </summary>
+            <value>
+            The batch seperator.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.ISqlDialect.SupportsMultipleStatements">
+            <summary>
+            获取是否支持复杂声明
+            </summary>
+            <value>
+            <c>true</c> if [supports multiple statements]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.ISqlDialect.ParameterPrefix">
+            <summary>
+            获取参数前缀
+            </summary>
+            <value>
+            The parameter prefix.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.ISqlDialect.EmptyExpression">
+            <summary>
+            获取控的表达式
+            </summary>
+            <value>
+            The empty expression.
+            </value>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlDialectBase.GetTableName(System.String,System.String,System.String)">
+            <summary>
+            获取表名称
+            </summary>
+            <param name="schemaName">架构名称</param>
+            <param name="tableName">表名称</param>
+            <param name="alias">别名</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">TableName;tableName cannot be null or empty.</exception>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlDialectBase.GetColumnName(System.String,System.String,System.String)">
+            <summary>
+            获取列名称
+            </summary>
+            <param name="prefix">前缀</param>
+            <param name="columnName">列的名称</param>
+            <param name="alias">别名</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">ColumnName;columnName cannot be null or empty.</exception>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlDialectBase.GetIdentitySql(System.String)">
+            <summary>
+            获取主键SQL
+            </summary>
+            <param name="tableName">表名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlDialectBase.GetPagingSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取分页SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlDialectBase.GetSetSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取Set SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="firstResult">第一个结果索引</param>
+            <param name="maxResults">最大结果索引</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlDialectBase.IsQuoted(System.String)">
+            <summary>
+            是否是应用
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlDialectBase.QuoteString(System.String)">
+            <summary>
+            应用字符串
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlDialectBase.UnQuoteString(System.String)">
+            <summary>
+            Uns the quote string.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.SqlDialectBase.OpenQuote">
+            <summary>
+            获取开始引用的字符
+            </summary>
+            <value>
+            The open quote.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.SqlDialectBase.CloseQuote">
+            <summary>
+            获取关闭应用的字符
+            </summary>
+            <value>
+            The close quote.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.SqlDialectBase.BatchSeperator">
+            <summary>
+            获取批量时的分割字符
+            </summary>
+            <value>
+            The batch seperator.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.SqlDialectBase.SupportsMultipleStatements">
+            <summary>
+            获取是否支持复杂声明
+            </summary>
+            <value>
+            <c>true</c> if [supports multiple statements]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.SqlDialectBase.ParameterPrefix">
+            <summary>
+            获取参数前缀
+            </summary>
+            <value>
+            The parameter prefix.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.SqlDialectBase.EmptyExpression">
+            <summary>
+            获取控的表达式
+            </summary>
+            <value>
+            The empty expression.
+            </value>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.MySqlDialect.GetIdentitySql(System.String)">
+            <summary>
+            获取主键SQL
+            </summary>
+            <param name="tableName">表名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.MySqlDialect.GetPagingSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取分页SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.MySqlDialect.GetSetSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取Set SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="firstResult">第一个结果索引</param>
+            <param name="maxResults">最大结果索引</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.MySqlDialect.OpenQuote">
+            <summary>
+            获取开始引用的字符
+            </summary>
+            <value>
+            The open quote.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.MySqlDialect.CloseQuote">
+            <summary>
+            获取关闭应用的字符
+            </summary>
+            <value>
+            The close quote.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.Sql.OracleDialect">
+            <summary>
+            Oracle
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.OracleDialect.GetIdentitySql(System.String)">
+            <summary>
+            获取主键SQL
+            </summary>
+            <param name="tableName">表名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.OracleDialect.GetPagingSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取分页SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.OracleDialect.GetSetSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取Set SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="firstResult">第一个结果索引</param>
+            <param name="maxResults">最大结果索引</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.OracleDialect.ParameterPrefix">
+            <summary>
+            获取参数前缀
+            </summary>
+            <value>
+            The parameter prefix.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.OracleDialect.OpenQuote">
+            <summary>
+            获取开始引用的字符
+            </summary>
+            <value>
+            The open quote.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.OracleDialect.CloseQuote">
+            <summary>
+            获取关闭应用的字符
+            </summary>
+            <value>
+            The close quote.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.OracleDialect.SupportsMultipleStatements">
+            <summary>
+            获取是否支持复杂声明
+            </summary>
+            <value>
+            <c>true</c> if [supports multiple statements]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.Sql.PostgreSqlDialect">
+            <summary>
+            PostgreSQL
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.PostgreSqlDialect.GetIdentitySql(System.String)">
+            <summary>
+            获取主键SQL
+            </summary>
+            <param name="tableName">表名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.PostgreSqlDialect.GetPagingSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取分页SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.PostgreSqlDialect.GetSetSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取Set SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="firstResult">第一个结果索引</param>
+            <param name="maxResults">最大结果索引</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.PostgreSqlDialect.GetColumnName(System.String,System.String,System.String)">
+            <summary>
+            获取列名称
+            </summary>
+            <param name="prefix">前缀</param>
+            <param name="columnName">列的名称</param>
+            <param name="alias">别名</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.PostgreSqlDialect.GetTableName(System.String,System.String,System.String)">
+            <summary>
+            获取表名称
+            </summary>
+            <param name="schemaName">架构名称</param>
+            <param name="tableName">表名称</param>
+            <param name="alias">别名</param>
+            <returns></returns>
+        </member>
+        <member name="T:MDORM.DapperExt.Sql.SqlCeDialect">
+            <summary>
+            SqlCe
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlCeDialect.GetTableName(System.String,System.String,System.String)">
+            <summary>
+            获取表名称
+            </summary>
+            <param name="schemaName">架构名称</param>
+            <param name="tableName">表名称</param>
+            <param name="alias">别名</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">TableName</exception>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlCeDialect.GetIdentitySql(System.String)">
+            <summary>
+            获取主键SQL
+            </summary>
+            <param name="tableName">表名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlCeDialect.GetPagingSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取分页SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlCeDialect.GetSetSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取Set SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="firstResult">第一个结果索引</param>
+            <param name="maxResults">最大结果索引</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.SqlCeDialect.OpenQuote">
+            <summary>
+            获取开始引用的字符
+            </summary>
+            <value>
+            The open quote.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.SqlCeDialect.CloseQuote">
+            <summary>
+            获取关闭应用的字符
+            </summary>
+            <value>
+            The close quote.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.SqlCeDialect.SupportsMultipleStatements">
+            <summary>
+            获取是否支持复杂声明
+            </summary>
+            <value>
+            <c>true</c> if [supports multiple statements]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.Sql.ISqlGenerator">
+            <summary>
+            SQL生成接口
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Select(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            生成SELECTSQL语句
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.SelectPaged(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            生成SelectPagedSQL语句
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="parameters">参数</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.SelectSet(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            生成SelectSet的SQL
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序条件</param>
+            <param name="firstResult">第一个结果索引</param>
+            <param name="maxResults">最大结果</param>
+            <param name="parameters">参数</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Count(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            生成Count的SQL語句
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Insert(MDORM.DapperExt.Mapper.IClassMapper)">
+            <summary>
+            生成插入语句
+            </summary>
+            <param name="classMap">类映射</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Update(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            原始更新方法。不能根据实体动态更新（更新全部列）
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Delete(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Deletes the specified class map.
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.IdentitySql(MDORM.DapperExt.Mapper.IClassMapper)">
+            <summary>
+            Identities the SQL.
+            </summary>
+            <param name="classMap">类映射</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.GetTableName(MDORM.DapperExt.Mapper.IClassMapper)">
+            <summary>
+            获得表名称
+            </summary>
+            <param name="map">类映射</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.GetColumnName(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.Mapper.IPropertyMap,System.Boolean)">
+            <summary>
+            获取列的名称
+            </summary>
+            <param name="map">类映射</param>
+            <param name="property">属性.</param>
+            <param name="includeAlias">if set to <c>true</c> [include alias].</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.GetColumnName(MDORM.DapperExt.Mapper.IClassMapper,System.String,System.Boolean)">
+            <summary>
+            获取列的名称
+            </summary>
+            <param name="map">类映射</param>
+            <param name="propertyName">属性的名称</param>
+            <param name="includeAlias">if set to <c>true</c> [include alias].</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.SupportsMultipleStatements">
+            <summary>
+            Supportses the multiple statements.
+            </summary>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Update(MDORM.DapperExt.Mapper.IClassMapper,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}},MDORM.DapperExt.IPredicate,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            添加的新方法。支持动态更新实体对象
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="updatedColumns">要更新的列</param>
+            <param name="predicate">条件</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.ISqlGenerator.Configuration">
+            <summary>
+            获取配置
+            </summary>
+            <value>
+            配置
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.Sql.SqlGeneratorImpl">
+            <summary>
+            具体的SQL生成类
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.#ctor(MDORM.DapperExt.IDapperExtConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MDORM.DapperExt.Sql.SqlGeneratorImpl"/> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.Select(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            生成SELECTSQL语句
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Parameters</exception>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.SelectPaged(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            生成SelectPagedSQL语句
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">
+            Sort;Sort cannot be null or empty.
+            or
+            Parameters
+            </exception>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.SelectSet(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            生成SelectSet的SQL
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序条件</param>
+            <param name="firstResult">第一个结果索引</param>
+            <param name="maxResults">最大结果</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">
+            Sort;Sort cannot be null or empty.
+            or
+            Parameters
+            </exception>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.Count(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            生成Count的SQL語句
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Parameters</exception>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.Insert(MDORM.DapperExt.Mapper.IClassMapper)">
+            <summary>
+            Insert方法。不能根据实体动态添加（添加全部列）
+            </summary>
+            <param name="classMap">类映射</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException">No columns were mapped.</exception>
         </member>
         <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.Update(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>
             原始更新方法。不能根据实体动态更新（更新全部列）
             </summary>
-            <param name="classMap"></param>
-            <param name="predicate"></param>
-            <param name="parameters"></param>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="parameters">参数</param>
             <returns></returns>
+            <exception cref="T:System.ArgumentNullException">
+            Predicate
+            or
+            Parameters
+            </exception>
+            <exception cref="T:System.ArgumentException">No columns were mapped.</exception>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.Update(MDORM.DapperExt.Mapper.IClassMapper,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}},MDORM.DapperExt.IPredicate,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            添加的新方法。支持动态更新实体对象
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="updatedColumns">要更新的列</param>
+            <param name="predicate">条件</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">
+            Predicate
+            or
+            Parameters
+            </exception>
+            <exception cref="T:System.ArgumentException">No columns were mapped.</exception>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.Delete(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Deletes the specified class map.
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">
+            Predicate
+            or
+            Parameters
+            </exception>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.IdentitySql(MDORM.DapperExt.Mapper.IClassMapper)">
+            <summary>
+            Identities the SQL.
+            </summary>
+            <param name="classMap">类映射</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.GetTableName(MDORM.DapperExt.Mapper.IClassMapper)">
+            <summary>
+            获得表名称
+            </summary>
+            <param name="map">类映射</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.GetColumnName(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.Mapper.IPropertyMap,System.Boolean)">
+            <summary>
+            获取列的名称
+            </summary>
+            <param name="map">类映射</param>
+            <param name="property">属性.</param>
+            <param name="includeAlias">if set to <c>true</c> [include alias].</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.GetColumnName(MDORM.DapperExt.Mapper.IClassMapper,System.String,System.Boolean)">
+            <summary>
+            获取列的名称
+            </summary>
+            <param name="map">类映射</param>
+            <param name="propertyName">属性的名称</param>
+            <param name="includeAlias">if set to <c>true</c> [include alias].</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.SupportsMultipleStatements">
+            <summary>
+            Supportses the multiple statements.
+            </summary>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlGeneratorImpl.BuildSelectColumns(MDORM.DapperExt.Mapper.IClassMapper)">
+            <summary>
+            创建选择的列
+            </summary>
+            <param name="classMap">类映射</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.SqlGeneratorImpl.Configuration">
+            <summary>
+            获取配置
+            </summary>
+            <value>
+            配置
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.Sql.SqliteDialect">
+            <summary>
+            Sqlite语言
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqliteDialect.GetIdentitySql(System.String)">
+            <summary>
+            获取主键SQL
+            </summary>
+            <param name="tableName">表名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqliteDialect.GetPagingSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取分页SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqliteDialect.GetSetSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取Set SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="firstResult">第一个结果索引</param>
+            <param name="maxResults">最大结果索引</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">
+            SQL
+            or
+            Parameters
+            </exception>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqliteDialect.GetColumnName(System.String,System.String,System.String)">
+            <summary>
+            获取列名称
+            </summary>
+            <param name="prefix">前缀</param>
+            <param name="columnName">列的名称</param>
+            <param name="alias">别名</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">columnName cannot be null or empty.</exception>
+        </member>
+        <member name="T:MDORM.DapperExt.Sql.SqlServerDialect">
+            <summary>
+            SqlServer
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlServerDialect.GetIdentitySql(System.String)">
+            <summary>
+            获取主键SQL
+            </summary>
+            <param name="tableName">表名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlServerDialect.GetPagingSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取分页SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlServerDialect.GetSetSql(System.String,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取Set SQL
+            </summary>
+            <param name="sql">SQL</param>
+            <param name="firstResult">第一个结果索引</param>
+            <param name="maxResults">最大结果索引</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">
+            SQL
+            or
+            Parameters
+            </exception>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlServerDialect.GetOrderByClause(System.String)">
+            <summary>
+            Gets the order by clause.
+            </summary>
+            <param name="sql">The SQL.</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlServerDialect.GetFromStart(System.String)">
+            <summary>
+            Gets from start.
+            </summary>
+            <param name="sql">The SQL.</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlServerDialect.GetSelectEnd(System.String)">
+            <summary>
+            Gets the select end.
+            </summary>
+            <param name="sql">The SQL.</param>
+            <returns>
+            </returns>
+            <exception cref="T:System.ArgumentException">SQL must be a SELECT statement.;sql</exception>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.SqlServerDialect.GetColumnNames(System.String)">
+            <summary>
+            Gets the column names.
+            </summary>
+            <param name="sql">The SQL.</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.SqlServerDialect.OpenQuote">
+            <summary>
+            获取开始引用的字符
+            </summary>
+            <value>
+            The open quote.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.SqlServerDialect.CloseQuote">
+            <summary>
+            获取关闭应用的字符
+            </summary>
+            <value>
+            The close quote.
+            </value>
         </member>
     </members>
 </doc>

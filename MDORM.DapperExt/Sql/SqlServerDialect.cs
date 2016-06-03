@@ -5,29 +5,70 @@ using System.Text;
 
 namespace MDORM.DapperExt.Sql
 {
+    /// <summary>
+    /// SqlServer
+    /// </summary>
     public class SqlServerDialect : SqlDialectBase
     {
+        /// <summary>
+        /// 获取开始引用的字符
+        /// </summary>
+        /// <value>
+        /// The open quote.
+        /// </value>
         public override char OpenQuote
         {
             get { return '['; }
         }
 
+        /// <summary>
+        /// 获取关闭应用的字符
+        /// </summary>
+        /// <value>
+        /// The close quote.
+        /// </value>
         public override char CloseQuote
         {
             get { return ']'; }
         }
 
+        /// <summary>
+        /// 获取主键SQL
+        /// </summary>
+        /// <param name="tableName">表名称</param>
+        /// <returns></returns>
         public override string GetIdentitySql(string tableName)
         {
             return string.Format("SELECT CAST(SCOPE_IDENTITY()  AS BIGINT) AS [Id]");
         }
 
+        /// <summary>
+        /// 获取分页SQL
+        /// </summary>
+        /// <param name="sql">SQL</param>
+        /// <param name="page">页索引</param>
+        /// <param name="resultsPerPage">页大小</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
         public override string GetPagingSql(string sql, int page, int resultsPerPage, IDictionary<string, object> parameters)
         {
             int startValue = (page * resultsPerPage) + 1;
             return GetSetSql(sql, startValue, resultsPerPage, parameters);
         }
 
+        /// <summary>
+        /// 获取Set SQL
+        /// </summary>
+        /// <param name="sql">SQL</param>
+        /// <param name="firstResult">第一个结果索引</param>
+        /// <param name="maxResults">最大结果索引</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// SQL
+        /// or
+        /// Parameters
+        /// </exception>
         public override string GetSetSql(string sql, int firstResult, int maxResults, IDictionary<string, object> parameters)
         {
             if (string.IsNullOrEmpty(sql))
@@ -60,6 +101,12 @@ namespace MDORM.DapperExt.Sql
             return result;
         }
 
+        /// <summary>
+        /// Gets the order by clause.
+        /// </summary>
+        /// <param name="sql">The SQL.</param>
+        /// <returns>
+        /// </returns>
         protected string GetOrderByClause(string sql)
         {
             int orderByIndex = sql.LastIndexOf(" ORDER BY ", StringComparison.InvariantCultureIgnoreCase);
@@ -79,6 +126,12 @@ namespace MDORM.DapperExt.Sql
             return result.Substring(0, whereIndex).Trim();
         }
 
+        /// <summary>
+        /// Gets from start.
+        /// </summary>
+        /// <param name="sql">The SQL.</param>
+        /// <returns>
+        /// </returns>
         protected int GetFromStart(string sql)
         {
             int selectCount = 0;
@@ -106,6 +159,13 @@ namespace MDORM.DapperExt.Sql
             return fromIndex;
         }
 
+        /// <summary>
+        /// Gets the select end.
+        /// </summary>
+        /// <param name="sql">The SQL.</param>
+        /// <returns>
+        /// </returns>
+        /// <exception cref="ArgumentException">SQL must be a SELECT statement.;sql</exception>
         protected virtual int GetSelectEnd(string sql)
         {
             if (sql.StartsWith("SELECT DISTINCT", StringComparison.InvariantCultureIgnoreCase))
@@ -121,6 +181,12 @@ namespace MDORM.DapperExt.Sql
             throw new ArgumentException("SQL must be a SELECT statement.", "sql");
         }
 
+        /// <summary>
+        /// Gets the column names.
+        /// </summary>
+        /// <param name="sql">The SQL.</param>
+        /// <returns>
+        /// </returns>
         protected virtual IList<string> GetColumnNames(string sql)
         {
             int start = GetSelectEnd(sql);

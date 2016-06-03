@@ -9,26 +9,61 @@ using MDORM.DapperExt.Sql;
 
 namespace MDORM.DapperExt
 {
+    /// <summary>
+    /// Dapper扩展配置接口
+    /// </summary>
     public interface IDapperExtConfiguration
     {
+        /// <summary>
+        /// 默认映射
+        /// </summary>
         Type DefaultMapper { get; }
+
+        /// <summary>
+        /// 映射程序集
+        /// </summary>
         IList<Assembly> MappingAssemblies { get; }
+
+        /// <summary>
+        /// SQL语言
+        /// </summary>
         ISqlDialect Dialect { get; }
+
+        /// <summary>
+        /// 获取映射
+        /// </summary>
+        /// <param name="entityType">实体类型</param>
+        /// <returns></returns>
         IClassMapper GetMap(Type entityType);
+
+        /// <summary>
+        /// 获取映射
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        /// <returns></returns>
         IClassMapper GetMap<T>() where T : class;
+
+        /// <summary>
+        /// 清除缓存
+        /// </summary>
         void ClearCache();
+
+        /// <summary>
+        /// 获得下一个Guid
+        /// </summary>
+        /// <returns></returns>
         Guid GetNextGuid();
     }
 
+    /// <summary>
+    /// Dapper 扩展配置
+    /// </summary>
     public class DapperExtConfiguration : IDapperExtConfiguration
     {
         private readonly ConcurrentDictionary<Type, IClassMapper> _classMaps = new ConcurrentDictionary<Type, IClassMapper>();
 
         public DapperExtConfiguration()
-            : this(typeof(AutoClassMapper<>), new List<Assembly>(), new SqlServerDialect())
-        {
-        }
-
+            : this(typeof(AutoClassMapper<>), new List<Assembly>(), new SqlServerDialect()) { }
 
         public DapperExtConfiguration(Type defaultMapper, IList<Assembly> mappingAssemblies, ISqlDialect sqlDialect)
         {
@@ -37,10 +72,26 @@ namespace MDORM.DapperExt
             Dialect = sqlDialect;
         }
 
+        /// <summary>
+        /// 默认映射
+        /// </summary>
         public Type DefaultMapper { get; private set; }
+
+        /// <summary>
+        /// 映射程序集
+        /// </summary>
         public IList<Assembly> MappingAssemblies { get; private set; }
+
+        /// <summary>
+        /// SQL语言
+        /// </summary>
         public ISqlDialect Dialect { get; private set; }
 
+        /// <summary>
+        /// 获取映射
+        /// </summary>
+        /// <param name="entityType">实体类型</param>
+        /// <returns></returns>
         public IClassMapper GetMap(Type entityType)
         {
             IClassMapper map;
@@ -59,16 +110,28 @@ namespace MDORM.DapperExt
             return map;
         }
 
+        /// <summary>
+        /// 获取映射
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        /// <returns></returns>
         public IClassMapper GetMap<T>() where T : class
         {
-            return GetMap(typeof (T));
+            return GetMap(typeof(T));
         }
 
+        /// <summary>
+        /// 清除缓存
+        /// </summary>
         public void ClearCache()
         {
             _classMaps.Clear();
         }
 
+        /// <summary>
+        /// 获取下一个Guid
+        /// </summary>
+        /// <returns></returns>
         public Guid GetNextGuid()
         {
             byte[] b = Guid.NewGuid().ToByteArray();
@@ -85,6 +148,11 @@ namespace MDORM.DapperExt
             return new Guid(b);
         }
 
+        /// <summary>
+        /// 获取映射类型
+        /// </summary>
+        /// <param name="entityType">实体类型</param>
+        /// <returns>类型</returns>
         protected virtual Type GetMapType(Type entityType)
         {
             Func<Assembly, Type> getType = a =>

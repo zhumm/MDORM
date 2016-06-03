@@ -10,31 +10,176 @@ using MDORM.DapperExt.Sql;
 
 namespace MDORM.DapperExt
 {
+    /// <summary>
+    /// Dapper 实现接口
+    /// </summary>
     public interface IDapperImplementor
     {
+        /// <summary>
+        /// SQL生成接口
+        /// </summary>
         ISqlGenerator SqlGenerator { get; }
+
+        /// <summary>
+        /// 获取指定Id的一条记录
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="id">id</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns>T类型的实体对象</returns>
         T Get<T>(IDbConnection connection, dynamic id, IDbTransaction transaction, int? commandTimeout) where T : class;
+
+        /// <summary>
+        /// 批量插入特定类型的实体对象集合
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="entities">实体对象列表</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
         void Insert<T>(IDbConnection connection, IEnumerable<T> entities, IDbTransaction transaction, int? commandTimeout) where T : class;
+
+        /// <summary>
+        /// 插入特定类型的实体对象并返回实体ID
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="entity">实体对象</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns>实体对象id</returns>
         dynamic Insert<T>(IDbConnection connection, T entity, IDbTransaction transaction, int? commandTimeout) where T : class;
+
+        /// <summary>
+        /// 更新特定类型的对象并返回执行结果
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="entitiy">实体对象列表</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns></returns>
         bool Update<T>(IDbConnection connection, T entity, IDbTransaction transaction, int? commandTimeout) where T : class;
+
+        /// <summary>
+        /// 删除特定类型的对象并返回执行结果
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="entitiy">实体对象列表</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns></returns>
         bool Delete<T>(IDbConnection connection, T entity, IDbTransaction transaction, int? commandTimeout) where T : class;
+
+        /// <summary>
+        /// 删除满足特定查询条件的对象并返回执行结果
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns></returns>
         bool Delete<T>(IDbConnection connection, object predicate, IDbTransaction transaction, int? commandTimeout) where T : class;
+
+        /// <summary>
+        /// 获取满足特定查询条件的对象列表并返回
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序列表</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <param name="buffered">是否缓存</param>
+        /// <returns></returns>
         IEnumerable<T> GetList<T>(IDbConnection connection, object predicate, IList<ISort> sort, IDbTransaction transaction, int? commandTimeout, bool buffered) where T : class;
+        
+        /// <summary>
+        /// 分页获取满足特定查询条件的对象列表并返回当前页
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序列表</param>
+        /// <param name="page">页索引</param>
+        /// <param name="resultsPerPage">页大小</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <param name="buffered">是否缓存</param>
+        /// <returns></returns>
         IEnumerable<T> GetPage<T>(IDbConnection connection, object predicate, IList<ISort> sort, int page, int resultsPerPage, IDbTransaction transaction, int? commandTimeout, bool buffered) where T : class;
+        
+        /// <summary>
+        /// 获取满足特定查询条件的对象列表并返回区间记录
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序列表</param>
+        /// <param name="firstResult">第一条数据索引</param>
+        /// <param name="maxResults">最大记录的索引</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <param name="buffered">是否缓存</param>
+        /// <returns></returns>
         IEnumerable<T> GetSet<T>(IDbConnection connection, object predicate, IList<ISort> sort, int firstResult, int maxResults, IDbTransaction transaction, int? commandTimeout, bool buffered) where T : class;
+        
+        /// <summary>
+        /// 获取满足特定查询条件的记录条数
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns></returns>
         int Count<T>(IDbConnection connection, object predicate, IDbTransaction transaction, int? commandTimeout) where T : class;
+        
+        /// <summary>
+        /// 获取复合查询结果
+        /// </summary>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns></returns>
         IMultipleResultReader GetMultiple(IDbConnection connection, GetMultiplePredicate predicate, IDbTransaction transaction, int? commandTimeout);
     }
 
+    /// <summary>
+    /// Dapper 实现具体类
+    /// </summary>
     public class DapperImplementor : IDapperImplementor
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DapperImplementor"/> class.
+        /// </summary>
+        /// <param name="sqlGenerator">The SQL generator.</param>
         public DapperImplementor(ISqlGenerator sqlGenerator)
         {
             SqlGenerator = sqlGenerator;
         }
 
+        /// <summary>
+        /// SQL生成接口
+        /// </summary>
         public ISqlGenerator SqlGenerator { get; private set; }
 
+        /// <summary>
+        /// 获取指定Id的一条记录
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="id">id</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns>
+        /// T类型的实体对象
+        /// </returns>
         public T Get<T>(IDbConnection connection, dynamic id, IDbTransaction transaction, int? commandTimeout) where T : class
         {
             IClassMapper classMap = SqlGenerator.Configuration.GetMap<T>();
@@ -43,6 +188,14 @@ namespace MDORM.DapperExt
             return result;
         }
 
+        /// <summary>
+        /// 批量插入特定类型的实体对象集合
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="entities">实体对象列表</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
         public void Insert<T>(IDbConnection connection, IEnumerable<T> entities, IDbTransaction transaction, int? commandTimeout) where T : class
         {
             IClassMapper classMap = SqlGenerator.Configuration.GetMap<T>();
@@ -65,6 +218,17 @@ namespace MDORM.DapperExt
             connection.Execute(sql, entities, transaction, commandTimeout, CommandType.Text);
         }
 
+        /// <summary>
+        /// 插入法。不能根据实体动态插入（插入全部列）
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="entity">实体对象</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns>
+        /// 实体对象id
+        /// </returns>
         public dynamic Insert<T>(IDbConnection connection, T entity, IDbTransaction transaction, int? commandTimeout) where T : class
         {
             IClassMapper classMap = SqlGenerator.Configuration.GetMap<T>();
@@ -142,6 +306,15 @@ namespace MDORM.DapperExt
         //    return connection.Execute(sql, dynamicParameters, transaction, commandTimeout, CommandType.Text) > 0;
         //}
 
+        /// <summary>
+        /// 扩展的更新方法，按需更新
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="entity"></param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns></returns>
         public bool Update<T>(IDbConnection connection, T entity, IDbTransaction transaction, int? commandTimeout) where T : class
         {
             IClassMapper classMap = SqlGenerator.Configuration.GetMap<T>();
@@ -167,6 +340,15 @@ namespace MDORM.DapperExt
             return connection.Execute(sql, dynamicParameters, transaction, commandTimeout, CommandType.Text) > 0;
         }
 
+        /// <summary>
+        /// 删除特定类型的对象并返回执行结果
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="entity"></param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns></returns>
         public bool Delete<T>(IDbConnection connection, T entity, IDbTransaction transaction, int? commandTimeout) where T : class
         {
             IClassMapper classMap = SqlGenerator.Configuration.GetMap<T>();
@@ -174,6 +356,15 @@ namespace MDORM.DapperExt
             return Delete<T>(connection, classMap, predicate, transaction, commandTimeout);
         }
 
+        /// <summary>
+        /// 删除满足特定查询条件的对象并返回执行结果
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns></returns>
         public bool Delete<T>(IDbConnection connection, object predicate, IDbTransaction transaction, int? commandTimeout) where T : class
         {
             IClassMapper classMap = SqlGenerator.Configuration.GetMap<T>();
@@ -181,6 +372,17 @@ namespace MDORM.DapperExt
             return Delete<T>(connection, classMap, wherePredicate, transaction, commandTimeout);
         }
 
+        /// <summary>
+        /// 获取满足特定查询条件的对象列表并返回
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序列表</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <param name="buffered">是否缓存</param>
+        /// <returns></returns>
         public IEnumerable<T> GetList<T>(IDbConnection connection, object predicate, IList<ISort> sort, IDbTransaction transaction, int? commandTimeout, bool buffered) where T : class
         {
             IClassMapper classMap = SqlGenerator.Configuration.GetMap<T>();
@@ -188,6 +390,19 @@ namespace MDORM.DapperExt
             return GetList<T>(connection, classMap, wherePredicate, sort, transaction, commandTimeout, true);
         }
 
+        /// <summary>
+        /// 分页获取满足特定查询条件的对象列表并返回当前页
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序列表</param>
+        /// <param name="page">页索引</param>
+        /// <param name="resultsPerPage">页大小</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <param name="buffered">是否缓存</param>
+        /// <returns></returns>
         public IEnumerable<T> GetPage<T>(IDbConnection connection, object predicate, IList<ISort> sort, int page, int resultsPerPage, IDbTransaction transaction, int? commandTimeout, bool buffered) where T : class
         {
             IClassMapper classMap = SqlGenerator.Configuration.GetMap<T>();
@@ -195,6 +410,19 @@ namespace MDORM.DapperExt
             return GetPage<T>(connection, classMap, wherePredicate, sort, page, resultsPerPage, transaction, commandTimeout, buffered);
         }
 
+        /// <summary>
+        /// 获取满足特定查询条件的对象列表并返回区间记录
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序列表</param>
+        /// <param name="firstResult">第一条数据索引</param>
+        /// <param name="maxResults">最大记录的索引</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <param name="buffered">是否缓存</param>
+        /// <returns></returns>
         public IEnumerable<T> GetSet<T>(IDbConnection connection, object predicate, IList<ISort> sort, int firstResult, int maxResults, IDbTransaction transaction, int? commandTimeout, bool buffered) where T : class
         {
             IClassMapper classMap = SqlGenerator.Configuration.GetMap<T>();
@@ -202,6 +430,15 @@ namespace MDORM.DapperExt
             return GetSet<T>(connection, classMap, wherePredicate, sort, firstResult, maxResults, transaction, commandTimeout, buffered);
         }
 
+        /// <summary>
+        /// 获取满足特定查询条件的记录条数
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns></returns>
         public int Count<T>(IDbConnection connection, object predicate, IDbTransaction transaction, int? commandTimeout) where T : class
         {
             IClassMapper classMap = SqlGenerator.Configuration.GetMap<T>();
@@ -217,6 +454,14 @@ namespace MDORM.DapperExt
             return (int)connection.Query(sql, dynamicParameters, transaction, false, commandTimeout, CommandType.Text).Single().Total;
         }
 
+        /// <summary>
+        /// 获取复合查询结果
+        /// </summary>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns></returns>
         public IMultipleResultReader GetMultiple(IDbConnection connection, GetMultiplePredicate predicate, IDbTransaction transaction, int? commandTimeout)
         {
             if (SqlGenerator.SupportsMultipleStatements())
@@ -227,6 +472,19 @@ namespace MDORM.DapperExt
             return GetMultipleBySequence(connection, predicate, transaction, commandTimeout);
         }
 
+        /// <summary>
+        /// 根据查询条件获取数据集
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序列表</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <param name="buffered">if set to <c>true</c> [buffered].</param>
+        /// <returns>
+        /// </returns>
         protected IEnumerable<T> GetList<T>(IDbConnection connection, IClassMapper classMap, IPredicate predicate, IList<ISort> sort, IDbTransaction transaction, int? commandTimeout, bool buffered) where T : class
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>();
@@ -240,6 +498,21 @@ namespace MDORM.DapperExt
             return connection.Query<T>(sql, dynamicParameters, transaction, buffered, commandTimeout, CommandType.Text);
         }
 
+        /// <summary>
+        /// 分页获取特定条件的查询记录
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序列表</param>
+        /// <param name="page">当前页索引</param>
+        /// <param name="resultsPerPage">页大小</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <param name="buffered">if set to <c>true</c> [buffered].</param>
+        /// <returns>
+        /// </returns>
         protected IEnumerable<T> GetPage<T>(IDbConnection connection, IClassMapper classMap, IPredicate predicate, IList<ISort> sort, int page, int resultsPerPage, IDbTransaction transaction, int? commandTimeout, bool buffered) where T : class
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>();
@@ -253,6 +526,20 @@ namespace MDORM.DapperExt
             return connection.Query<T>(sql, dynamicParameters, transaction, buffered, commandTimeout, CommandType.Text);
         }
 
+        /// <summary>
+        /// 获取满足特定查询条件的对象列表并返回区间记录
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>、
+        /// <param name="classMap">实体映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序列表</param>
+        /// <param name="firstResult">第一条数据索引</param>
+        /// <param name="maxResults">最大记录的索引</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <param name="buffered">是否缓存</param>
+        /// <returns></returns>
         protected IEnumerable<T> GetSet<T>(IDbConnection connection, IClassMapper classMap, IPredicate predicate, IList<ISort> sort, int firstResult, int maxResults, IDbTransaction transaction, int? commandTimeout, bool buffered) where T : class
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>();
@@ -266,6 +553,16 @@ namespace MDORM.DapperExt
             return connection.Query<T>(sql, dynamicParameters, transaction, buffered, commandTimeout, CommandType.Text);
         }
 
+        /// <summary>
+        /// 删除特定类型的对象并返回执行结果
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns></returns>
         protected bool Delete<T>(IDbConnection connection, IClassMapper classMap, IPredicate predicate, IDbTransaction transaction, int? commandTimeout) where T : class
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>();
@@ -279,6 +576,13 @@ namespace MDORM.DapperExt
             return connection.Execute(sql, dynamicParameters, transaction, commandTimeout, CommandType.Text) > 0;
         }
 
+        /// <summary>
+        /// 获得查询条件谓词
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="predicate">查询谓词</param>
+        /// <returns>
+        /// </returns>
         protected IPredicate GetPredicate(IClassMapper classMap, object predicate)
         {
             IPredicate wherePredicate = predicate as IPredicate;
@@ -290,6 +594,13 @@ namespace MDORM.DapperExt
             return wherePredicate;
         }
 
+        /// <summary>
+        /// 获得Id谓词
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="id">id</param>
+        /// <returns>
+        /// </returns>
         protected IPredicate GetIdPredicate(IClassMapper classMap, object id)
         {
             bool isSimpleType = ReflectionHelper.IsSimpleType(id.GetType());
@@ -328,6 +639,15 @@ namespace MDORM.DapperExt
                              };
         }
 
+        /// <summary>
+        /// 获取键谓词
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="classMap">类映射</param>
+        /// <param name="entity">实体对象</param>
+        /// <returns>
+        /// </returns>
+        /// <exception cref="ArgumentException">At least one Key column must be defined.</exception>
         protected IPredicate GetKeyPredicate<T>(IClassMapper classMap, T entity) where T : class
         {
             var whereFields = classMap.Properties.Where(p => p.KeyType != KeyType.NotAKey);
@@ -354,6 +674,13 @@ namespace MDORM.DapperExt
                              };
         }
 
+        /// <summary>
+        /// 获取实体属性谓词
+        /// </summary>
+        /// <param name="classMap">类映射</param>
+        /// <param name="entity">实体对象</param>
+        /// <returns>
+        /// </returns>
         protected IPredicate GetEntityPredicate(IClassMapper classMap, object entity)
         {
             Type predicateType = typeof(FieldPredicate<>).MakeGenericType(classMap.EntityType);
@@ -377,6 +704,15 @@ namespace MDORM.DapperExt
                        };
         }
 
+        /// <summary>
+        /// 批量获取复合谓词
+        /// </summary>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="transaction">事务</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <returns>
+        /// </returns>
         protected GridReaderResultReader GetMultipleByBatch(IDbConnection connection, GetMultiplePredicate predicate, IDbTransaction transaction, int? commandTimeout)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>();
@@ -403,6 +739,15 @@ namespace MDORM.DapperExt
             return new GridReaderResultReader(grid);
         }
 
+        /// <summary>
+        /// Gets the multiple by sequence.
+        /// </summary>
+        /// <param name="connection">The connection.</param>
+        /// <param name="predicate">The predicate.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="commandTimeout">The command timeout.</param>
+        /// <returns>
+        /// </returns>
         protected SequenceReaderResultReader GetMultipleBySequence(IDbConnection connection, GetMultiplePredicate predicate, IDbTransaction transaction, int? commandTimeout)
         {
             IList<SqlMapper.GridReader> items = new List<SqlMapper.GridReader>();

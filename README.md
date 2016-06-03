@@ -6,7 +6,7 @@ Dapper是一个轻型的ORM类。代码就一个SqlMapper.cs文件。编译后�
 
 Dapper通过Emit反射IDataReader的序列队列来快速的得到和产生对象。性能很牛逼,速度很快。Dapper的速度接近与IDataReader，取列表的数据超过了DataTable。
 
-Dapper支持Mysql,SqlLite,Mssql等一系列的数据库，当然如果你知道原理也可以让它支持Mongo db.
+Dapper支持MySql，SqLite，MsSql，Oracle 等一系列的数据库，当然如果你知道原理也可以让它支持Mongo db.
 
 Dapper没侵入性，想用就用，不想用就不用。无XML无属性。代码以前怎么写现在还怎么写。
 

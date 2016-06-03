@@ -7,18 +7,27 @@ using System.Text.RegularExpressions;
 namespace MDORM.DapperExt.Mapper
 {
     /// <summary>
+    /// 使用反射和命名约定的组合键自动将一个实体映射到一个表
+    /// 和AutoClassMapper相同，但会自动尝试兼职表名
+    /// 例如: Peson 的实体将会到映射到 Person 表
     /// Automatically maps an entity to a table using a combination of reflection and naming conventions for keys. 
     /// Identical to AutoClassMapper, but attempts to pluralize table names automatically.
     /// Example: Person entity maps to People table
     /// </summary>
     public class PluralizedAutoClassMapper<T> : AutoClassMapper<T> where T : class
     {
+        /// <summary>
+        /// 设置表名称
+        /// </summary>
+        /// <param name="tableName"></param>
         public override void Table(string tableName)
         {
             base.Table(Formatting.Pluralize(tableName));
         }
         
-        // Adapted from: http://mattgrande.wordpress.com/2009/10/28/pluralization-helper-for-c/
+        /// <summary>
+        /// Adapted from: http://mattgrande.wordpress.com/2009/10/28/pluralization-helper-for-c/
+        /// </summary>
         public static class Formatting
         {
             private static readonly IList<string> Unpluralizables = new List<string> { "equipment", "information", "rice", "money", "species", "series", "fish", "sheep", "deer" };
