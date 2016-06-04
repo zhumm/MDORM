@@ -4,25 +4,6 @@
         <name>MDORM.DapperExt</name>
     </assembly>
     <members>
-        <member name="T:MDORM.DapperExt.Helper.LogHelper">
-            <summary>
-            配置文件操作类
-            </summary>
-        </member>
-        <member name="M:MDORM.DapperExt.Helper.LogHelper.GetConfig(System.String)">
-            <summary>
-            获取Config配置的值
-            </summary>
-            <param name="key">The key.</param>
-            <returns></returns>
-            创建人：朱明明
-            创建时间：2014-6-16 9:37
-        </member>
-        <member name="P:MDORM.DapperExt.Helper.LogHelper.SqlLog">
-            <summary>
-            获取是否记录操作sql
-            </summary>
-        </member>
         <member name="T:MDORM.DapperExt.DapperExt">
             <summary>
             静态Dapper扩展类
@@ -190,6 +171,11 @@
             Gets the Dapper Extensions Implementation
             </summary>
         </member>
+        <member name="T:MDORM.DapperExt.DapperExtConfiguration">
+            <summary>
+            Dapper 扩展配置
+            </summary>
+        </member>
         <member name="T:MDORM.DapperExt.IDapperExtConfiguration">
             <summary>
             Dapper扩展配置接口
@@ -233,11 +219,6 @@
         <member name="P:MDORM.DapperExt.IDapperExtConfiguration.Dialect">
             <summary>
             SQL语言
-            </summary>
-        </member>
-        <member name="T:MDORM.DapperExt.DapperExtConfiguration">
-            <summary>
-            Dapper 扩展配置
             </summary>
         </member>
         <member name="M:MDORM.DapperExt.DapperExtConfiguration.GetMap(System.Type)">
@@ -285,6 +266,30 @@
         <member name="P:MDORM.DapperExt.DapperExtConfiguration.Dialect">
             <summary>
             SQL语言
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.Helper.LogHelper">
+            <summary>
+            配置文件操作类
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Helper.LogHelper.GetConfig(System.String)">
+            <summary>
+            获取Config配置的值
+            </summary>
+            <param name="key">The key.</param>
+            <returns></returns>
+            创建人：朱明明
+            创建时间：2014-6-16 9:37
+        </member>
+        <member name="P:MDORM.DapperExt.Helper.LogHelper.SqlLog">
+            <summary>
+            获取是否记录操作sql
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.DapperImplementor">
+            <summary>
+            Dapper 实现具体类
             </summary>
         </member>
         <member name="T:MDORM.DapperExt.IDapperImplementor">
@@ -424,11 +429,6 @@
         <member name="P:MDORM.DapperExt.IDapperImplementor.SqlGenerator">
             <summary>
             SQL生成接口
-            </summary>
-        </member>
-        <member name="T:MDORM.DapperExt.DapperImplementor">
-            <summary>
-            Dapper 实现具体类
             </summary>
         </member>
         <member name="M:MDORM.DapperExt.DapperImplementor.#ctor(MDORM.DapperExt.Sql.ISqlGenerator)">
@@ -693,6 +693,11 @@
         <member name="P:MDORM.DapperExt.DapperImplementor.SqlGenerator">
             <summary>
             SQL生成接口
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.Database">
+            <summary>
+            数据库
             </summary>
         </member>
         <member name="T:MDORM.DapperExt.IDatabase">
@@ -1001,11 +1006,6 @@
             <value>
             The connection.
             </value>
-        </member>
-        <member name="T:MDORM.DapperExt.Database">
-            <summary>
-            数据库
-            </summary>
         </member>
         <member name="M:MDORM.DapperExt.Database.#ctor(System.Data.IDbConnection,MDORM.DapperExt.Sql.ISqlGenerator)">
             <summary>
@@ -1409,6 +1409,11 @@
             类型
             </summary>
         </member>
+        <member name="M:MDORM.DapperExt.Mapper.ClassMapper`1.#ctor">
+            <summary>
+            构造函数，初始化默认的类型
+            </summary>
+        </member>
         <member name="M:MDORM.DapperExt.Mapper.ClassMapper`1.Schema(System.String)">
             <summary>
             模式名称
@@ -1479,25 +1484,9 @@
             属性类型和键类型的映射
             </summary>
         </member>
-        <member name="T:MDORM.DapperExt.Mapper.PluralizedAutoClassMapper`1">
+        <member name="M:MDORM.DapperExt.Mapper.AutoClassMapper`1.#ctor">
             <summary>
-            使用反射和命名约定的组合键自动将一个实体映射到一个表
-            和AutoClassMapper相同，但会自动尝试兼职表名
-            例如: Peson 的实体将会到映射到 Person 表
-            Automatically maps an entity to a table using a combination of reflection and naming conventions for keys. 
-            Identical to AutoClassMapper, but attempts to pluralize table names automatically.
-            Example: Person entity maps to People table
-            </summary>
-        </member>
-        <member name="M:MDORM.DapperExt.Mapper.PluralizedAutoClassMapper`1.Table(System.String)">
-            <summary>
-            设置表名称
-            </summary>
-            <param name="tableName"></param>
-        </member>
-        <member name="T:MDORM.DapperExt.Mapper.PluralizedAutoClassMapper`1.Formatting">
-            <summary>
-            Adapted from: http://mattgrande.wordpress.com/2009/10/28/pluralization-helper-for-c/
+            自动生成类映射
             </summary>
         </member>
         <member name="T:MDORM.DapperExt.Mapper.IPropertyMap">
@@ -1534,6 +1523,27 @@
         <member name="P:MDORM.DapperExt.Mapper.IPropertyMap.PropertyInfo">
             <summary>
             属性
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.Mapper.PluralizedAutoClassMapper`1">
+            <summary>
+            使用反射和命名约定的组合键自动将一个实体映射到一个表
+            和AutoClassMapper相同，但会自动尝试兼职表名
+            例如: Peson 的实体将会到映射到 Person 表
+            Automatically maps an entity to a table using a combination of reflection and naming conventions for keys. 
+            Identical to AutoClassMapper, but attempts to pluralize table names automatically.
+            Example: Person entity maps to People table
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Mapper.PluralizedAutoClassMapper`1.Table(System.String)">
+            <summary>
+            设置表名称
+            </summary>
+            <param name="tableName"></param>
+        </member>
+        <member name="T:MDORM.DapperExt.Mapper.PluralizedAutoClassMapper`1.Formatting">
+            <summary>
+            Adapted from: http://mattgrande.wordpress.com/2009/10/28/pluralization-helper-for-c/
             </summary>
         </member>
         <member name="T:MDORM.DapperExt.Mapper.PropertyMap">
@@ -1644,6 +1654,434 @@
             The property is a key that is not automatically managed.
             </summary>
         </member>
+        <member name="T:MDORM.DapperExt.BasePredicate">
+            <summary>
+            具体的基本谓词类
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.IBasePredicate">
+            <summary>
+            基础谓词接口
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.IPredicate">
+            <summary>
+            谓词接口
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.IPredicate.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取SQL语句
+            </summary>
+            <param name="sqlGenerator">SQL生成接口</param>
+            <param name="parameters">参数</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="P:MDORM.DapperExt.IBasePredicate.PropertyName">
+            <summary>
+            获取或设置属性名称
+            </summary>
+            <value>
+            属性名称
+            </value>
+        </member>
+        <member name="M:MDORM.DapperExt.BasePredicate.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取SQL语句
+            </summary>
+            <param name="sqlGenerator">SQL生成接口</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.BasePredicate.GetColumnName(System.Type,MDORM.DapperExt.Sql.ISqlGenerator,System.String)">
+            <summary>
+            获取列的名称
+            </summary>
+            <param name="entityType">实体类型</param>
+            <param name="sqlGenerator">SQL语句生成</param>
+            <param name="propertyName">属性的名称</param>
+            <returns></returns>
+            <exception cref="T:System.NullReferenceException">
+            </exception>
+        </member>
+        <member name="P:MDORM.DapperExt.BasePredicate.PropertyName">
+            <summary>
+            获取或设置属性名称
+            </summary>
+            <value>
+            属性名称
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.BetweenPredicate`1">
+            <summary>
+            具体区间谓词类
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:MDORM.DapperExt.IBetweenPredicate">
+            <summary>
+            区间谓词接口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.IBetweenPredicate.PropertyName">
+            <summary>
+            获取或设置属性名称
+            </summary>
+            <value>
+            The name of the property.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.IBetweenPredicate.Value">
+            <summary>
+            获取或设置区间值
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.IBetweenPredicate.Not">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IBetweenPredicate"/> is not.
+            </summary>
+            <value>
+              <c>true</c> if not; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:MDORM.DapperExt.BetweenPredicate`1.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取SQL语句
+            </summary>
+            <param name="sqlGenerator">SQL生成接口</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="P:MDORM.DapperExt.BetweenPredicate`1.Value">
+            <summary>
+            获取或设置区间值
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.BetweenPredicate`1.Not">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IBetweenPredicate"/> is not.
+            </summary>
+            <value>
+              <c>true</c> if not; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.BetweenValues">
+            <summary>
+            区间内容
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.BetweenValues.Value1">
+            <summary>
+            获取或设置内容1
+            </summary>
+            <value>
+            The value1.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.BetweenValues.Value2">
+            <summary>
+            获取或设置内容2
+            </summary>
+            <value>
+            The value2.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.ComparePredicate">
+            <summary>
+            比较谓词具体实现
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.ComparePredicate.GetOperatorString">
+            <summary>
+            获得操作字符串
+            </summary>
+            <returns>
+            </returns>
+        </member>
+        <member name="P:MDORM.DapperExt.ComparePredicate.Operator">
+            <summary>
+            获取或设置操作类型
+            </summary>
+            <value>
+            The operator.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.ComparePredicate.Not">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.ComparePredicate"/> is not.
+            </summary>
+            <value>
+              <c>true</c> if not; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.ExistsPredicate`1">
+            <summary>
+            具体的存在谓语
+            </summary>
+            <typeparam name="TSub">The type of the sub.</typeparam>
+        </member>
+        <member name="T:MDORM.DapperExt.IExistsPredicate">
+            <summary>
+            存在谓词接口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.IExistsPredicate.Predicate">
+            <summary>
+            获取或设置条件谓语
+            </summary>
+            <value>
+            The predicate.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.IExistsPredicate.Not">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IExistsPredicate"/> is not.
+            </summary>
+            <value>
+              <c>true</c> if not; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:MDORM.DapperExt.ExistsPredicate`1.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取SQL语句
+            </summary>
+            <param name="sqlGenerator">SQL生成接口</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.ExistsPredicate`1.GetClassMapper(System.Type,MDORM.DapperExt.IDapperExtConfiguration)">
+            <summary>
+            获取类映射
+            </summary>
+            <param name="type">类型</param>
+            <param name="configuration">配置</param>
+            <returns>
+            </returns>
+            <exception cref="T:System.NullReferenceException"></exception>
+        </member>
+        <member name="P:MDORM.DapperExt.ExistsPredicate`1.Predicate">
+            <summary>
+            获取或设置条件谓语
+            </summary>
+            <value>
+            The predicate.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.ExistsPredicate`1.Not">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IExistsPredicate"/> is not.
+            </summary>
+            <value>
+              <c>true</c> if not; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.FieldPredicate`1">
+            <summary>
+            字段谓词的具体实现
+            </summary>
+            <typeparam name="T">类型名称</typeparam>
+        </member>
+        <member name="T:MDORM.DapperExt.IFieldPredicate">
+            <summary>
+            字段谓词接口
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.IComparePredicate">
+            <summary>
+            比较谓词接口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.IComparePredicate.Operator">
+            <summary>
+            获取或设置操作类型
+            </summary>
+            <value>
+            The operator.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.IComparePredicate.Not">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IComparePredicate"/> is not.
+            </summary>
+            <value>
+              <c>true</c> if not; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.IFieldPredicate.Value">
+            <summary>
+            获取或设置值
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="M:MDORM.DapperExt.FieldPredicate`1.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取SQL语句
+            </summary>
+            <param name="sqlGenerator">SQL生成接口</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException">Operator must be set to Eq for Enumerable types</exception>
+        </member>
+        <member name="P:MDORM.DapperExt.FieldPredicate`1.Value">
+            <summary>
+            获取或设置值
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.GroupOperator">
+            <summary>
+            用来和其他谓词组连接的操作枚举
+            Operator to use when joining predicates in a PredicateGroup.
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.GroupOperator.And">
+            <summary>
+            并且
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.GroupOperator.Or">
+            <summary>
+            或者
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.IPredicateGroup">
+            <summary>
+            谓词组接口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.IPredicateGroup.Operator">
+            <summary>
+            获取或设置操作类型
+            </summary>
+            <value>
+            The operator.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.IPredicateGroup.Predicates">
+            <summary>
+            获取或者设置谓语
+            </summary>
+            <value>
+            The predicates.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.IPropertyPredicate">
+            <summary>
+            属性谓词接口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.IPropertyPredicate.PropertyName2">
+            <summary>
+            获取或设置属性2
+            </summary>
+            <value>
+            The property name2.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.ISort">
+            <summary>
+            排序接口
+            </summary>
+        </member>
+        <member name="P:MDORM.DapperExt.ISort.PropertyName">
+            <summary>
+            获取或设置属性名称
+            </summary>
+            <value>
+            The name of the property.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.ISort.Ascending">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.ISort"/> is ascending.
+            </summary>
+            <value>
+              <c>true</c> if ascending; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.Operator">
+            <summary>
+            比较操作枚举
+            Comparison operator for predicates.
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Operator.Eq">
+            <summary>
+            等于
+            Equal to
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Operator.Gt">
+            <summary>
+            大于
+            Greater than
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Operator.Ge">
+            <summary>
+            大于或者等于
+            Greater than or equal to
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Operator.Lt">
+            <summary>
+            小于
+            Less than
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Operator.Le">
+            <summary>
+            大于或者等于
+            Less than or equal to
+            </summary>
+        </member>
+        <member name="F:MDORM.DapperExt.Operator.Like">
+            <summary>
+            模糊（你可以使用 %）
+            Like (You can use % in the value to do wilcard searching)
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.PredicateGroup">
+            <summary>
+            合指定的组操作符一起使用的谓词组
+            Groups IPredicates together using the specified group operator.
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.PredicateGroup.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            获取SQL语句
+            </summary>
+            <param name="sqlGenerator">SQL生成接口</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="P:MDORM.DapperExt.PredicateGroup.Operator">
+            <summary>
+            获取或设置操作类型
+            </summary>
+            <value>
+            The operator.
+            </value>
+        </member>
+        <member name="P:MDORM.DapperExt.PredicateGroup.Predicates">
+            <summary>
+            获取或者设置谓语
+            </summary>
+            <value>
+            The predicates.
+            </value>
+        </member>
         <member name="T:MDORM.DapperExt.Predicates">
             <summary>
             条件谓词
@@ -1718,163 +2156,6 @@
             <param name="ascending">if set to <c>true</c> [ascending].</param>
             <returns></returns>
         </member>
-        <member name="T:MDORM.DapperExt.IPredicate">
-            <summary>
-            谓词接口
-            </summary>
-        </member>
-        <member name="M:MDORM.DapperExt.IPredicate.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            获取SQL语句
-            </summary>
-            <param name="sqlGenerator">SQL生成接口</param>
-            <param name="parameters">参数</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="T:MDORM.DapperExt.IBasePredicate">
-            <summary>
-            基础谓词接口
-            </summary>
-        </member>
-        <member name="P:MDORM.DapperExt.IBasePredicate.PropertyName">
-            <summary>
-            获取或设置属性名称
-            </summary>
-            <value>
-            属性名称
-            </value>
-        </member>
-        <member name="T:MDORM.DapperExt.BasePredicate">
-            <summary>
-            具体的基本谓词类
-            </summary>
-        </member>
-        <member name="M:MDORM.DapperExt.BasePredicate.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            获取SQL语句
-            </summary>
-            <param name="sqlGenerator">SQL生成接口</param>
-            <param name="parameters">参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:MDORM.DapperExt.BasePredicate.GetColumnName(System.Type,MDORM.DapperExt.Sql.ISqlGenerator,System.String)">
-            <summary>
-            获取列的名称
-            </summary>
-            <param name="entityType">实体类型</param>
-            <param name="sqlGenerator">SQL语句生成</param>
-            <param name="propertyName">属性的名称</param>
-            <returns></returns>
-            <exception cref="T:System.NullReferenceException">
-            </exception>
-        </member>
-        <member name="P:MDORM.DapperExt.BasePredicate.PropertyName">
-            <summary>
-            获取或设置属性名称
-            </summary>
-            <value>
-            属性名称
-            </value>
-        </member>
-        <member name="T:MDORM.DapperExt.IComparePredicate">
-            <summary>
-            比较谓词接口
-            </summary>
-        </member>
-        <member name="P:MDORM.DapperExt.IComparePredicate.Operator">
-            <summary>
-            获取或设置操作类型
-            </summary>
-            <value>
-            The operator.
-            </value>
-        </member>
-        <member name="P:MDORM.DapperExt.IComparePredicate.Not">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IComparePredicate"/> is not.
-            </summary>
-            <value>
-              <c>true</c> if not; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="T:MDORM.DapperExt.ComparePredicate">
-            <summary>
-            比较谓词具体实现
-            </summary>
-        </member>
-        <member name="M:MDORM.DapperExt.ComparePredicate.GetOperatorString">
-            <summary>
-            获得操作字符串
-            </summary>
-            <returns>
-            </returns>
-        </member>
-        <member name="P:MDORM.DapperExt.ComparePredicate.Operator">
-            <summary>
-            获取或设置操作类型
-            </summary>
-            <value>
-            The operator.
-            </value>
-        </member>
-        <member name="P:MDORM.DapperExt.ComparePredicate.Not">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.ComparePredicate"/> is not.
-            </summary>
-            <value>
-              <c>true</c> if not; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="T:MDORM.DapperExt.IFieldPredicate">
-            <summary>
-            字段谓词接口
-            </summary>
-        </member>
-        <member name="P:MDORM.DapperExt.IFieldPredicate.Value">
-            <summary>
-            获取或设置值
-            </summary>
-            <value>
-            The value.
-            </value>
-        </member>
-        <member name="T:MDORM.DapperExt.FieldPredicate`1">
-            <summary>
-            字段谓词的具体实现
-            </summary>
-            <typeparam name="T">类型名称</typeparam>
-        </member>
-        <member name="M:MDORM.DapperExt.FieldPredicate`1.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            获取SQL语句
-            </summary>
-            <param name="sqlGenerator">SQL生成接口</param>
-            <param name="parameters">参数</param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentException">Operator must be set to Eq for Enumerable types</exception>
-        </member>
-        <member name="P:MDORM.DapperExt.FieldPredicate`1.Value">
-            <summary>
-            获取或设置值
-            </summary>
-            <value>
-            The value.
-            </value>
-        </member>
-        <member name="T:MDORM.DapperExt.IPropertyPredicate">
-            <summary>
-            属性谓词几口
-            </summary>
-        </member>
-        <member name="P:MDORM.DapperExt.IPropertyPredicate.PropertyName2">
-            <summary>
-            获取或设置属性2
-            </summary>
-            <value>
-            The property name2.
-            </value>
-        </member>
         <member name="T:MDORM.DapperExt.PropertyPredicate`2">
             <summary>
             具体属性谓词类
@@ -1898,261 +2179,6 @@
             The property name2.
             </value>
         </member>
-        <member name="T:MDORM.DapperExt.BetweenValues">
-            <summary>
-            区间内容
-            </summary>
-        </member>
-        <member name="P:MDORM.DapperExt.BetweenValues.Value1">
-            <summary>
-            获取或设置内容1
-            </summary>
-            <value>
-            The value1.
-            </value>
-        </member>
-        <member name="P:MDORM.DapperExt.BetweenValues.Value2">
-            <summary>
-            获取或设置内容2
-            </summary>
-            <value>
-            The value2.
-            </value>
-        </member>
-        <member name="T:MDORM.DapperExt.IBetweenPredicate">
-            <summary>
-            区间谓词接口
-            </summary>
-        </member>
-        <member name="P:MDORM.DapperExt.IBetweenPredicate.PropertyName">
-            <summary>
-            获取或设置属性名称
-            </summary>
-            <value>
-            The name of the property.
-            </value>
-        </member>
-        <member name="P:MDORM.DapperExt.IBetweenPredicate.Value">
-            <summary>
-            获取或设置区间值
-            </summary>
-            <value>
-            The value.
-            </value>
-        </member>
-        <member name="P:MDORM.DapperExt.IBetweenPredicate.Not">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IBetweenPredicate"/> is not.
-            </summary>
-            <value>
-              <c>true</c> if not; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="T:MDORM.DapperExt.BetweenPredicate`1">
-            <summary>
-            具体区间谓词类
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:MDORM.DapperExt.BetweenPredicate`1.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            获取SQL语句
-            </summary>
-            <param name="sqlGenerator">SQL生成接口</param>
-            <param name="parameters">参数</param>
-            <returns></returns>
-        </member>
-        <member name="P:MDORM.DapperExt.BetweenPredicate`1.Value">
-            <summary>
-            获取或设置区间值
-            </summary>
-            <value>
-            The value.
-            </value>
-        </member>
-        <member name="P:MDORM.DapperExt.BetweenPredicate`1.Not">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IBetweenPredicate"/> is not.
-            </summary>
-            <value>
-              <c>true</c> if not; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="T:MDORM.DapperExt.Operator">
-            <summary>
-            比较操作枚举
-            Comparison operator for predicates.
-            </summary>
-        </member>
-        <member name="F:MDORM.DapperExt.Operator.Eq">
-            <summary>
-            等于
-            Equal to
-            </summary>
-        </member>
-        <member name="F:MDORM.DapperExt.Operator.Gt">
-            <summary>
-            大于
-            Greater than
-            </summary>
-        </member>
-        <member name="F:MDORM.DapperExt.Operator.Ge">
-            <summary>
-            大于或者等于
-            Greater than or equal to
-            </summary>
-        </member>
-        <member name="F:MDORM.DapperExt.Operator.Lt">
-            <summary>
-            小于
-            Less than
-            </summary>
-        </member>
-        <member name="F:MDORM.DapperExt.Operator.Le">
-            <summary>
-            大于或者等于
-            Less than or equal to
-            </summary>
-        </member>
-        <member name="F:MDORM.DapperExt.Operator.Like">
-            <summary>
-            模糊（你可以使用 %）
-            Like (You can use % in the value to do wilcard searching)
-            </summary>
-        </member>
-        <member name="T:MDORM.DapperExt.IPredicateGroup">
-            <summary>
-            谓词组接口
-            </summary>
-        </member>
-        <member name="P:MDORM.DapperExt.IPredicateGroup.Operator">
-            <summary>
-            获取或设置操作类型
-            </summary>
-            <value>
-            The operator.
-            </value>
-        </member>
-        <member name="P:MDORM.DapperExt.IPredicateGroup.Predicates">
-            <summary>
-            获取或者设置谓语
-            </summary>
-            <value>
-            The predicates.
-            </value>
-        </member>
-        <member name="T:MDORM.DapperExt.PredicateGroup">
-            <summary>
-            合指定的组操作符一起使用的谓词组
-            Groups IPredicates together using the specified group operator.
-            </summary>
-        </member>
-        <member name="M:MDORM.DapperExt.PredicateGroup.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            获取SQL语句
-            </summary>
-            <param name="sqlGenerator">SQL生成接口</param>
-            <param name="parameters">参数</param>
-            <returns></returns>
-        </member>
-        <member name="P:MDORM.DapperExt.PredicateGroup.Operator">
-            <summary>
-            获取或设置操作类型
-            </summary>
-            <value>
-            The operator.
-            </value>
-        </member>
-        <member name="P:MDORM.DapperExt.PredicateGroup.Predicates">
-            <summary>
-            获取或者设置谓语
-            </summary>
-            <value>
-            The predicates.
-            </value>
-        </member>
-        <member name="T:MDORM.DapperExt.IExistsPredicate">
-            <summary>
-            存在谓词接口
-            </summary>
-        </member>
-        <member name="P:MDORM.DapperExt.IExistsPredicate.Predicate">
-            <summary>
-            获取或设置条件谓语
-            </summary>
-            <value>
-            The predicate.
-            </value>
-        </member>
-        <member name="P:MDORM.DapperExt.IExistsPredicate.Not">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IExistsPredicate"/> is not.
-            </summary>
-            <value>
-              <c>true</c> if not; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="T:MDORM.DapperExt.ExistsPredicate`1">
-            <summary>
-            具体的存在谓语
-            </summary>
-            <typeparam name="TSub">The type of the sub.</typeparam>
-        </member>
-        <member name="M:MDORM.DapperExt.ExistsPredicate`1.GetSql(MDORM.DapperExt.Sql.ISqlGenerator,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            获取SQL语句
-            </summary>
-            <param name="sqlGenerator">SQL生成接口</param>
-            <param name="parameters">参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:MDORM.DapperExt.ExistsPredicate`1.GetClassMapper(System.Type,MDORM.DapperExt.IDapperExtConfiguration)">
-            <summary>
-            获取类映射
-            </summary>
-            <param name="type">类型</param>
-            <param name="configuration">配置</param>
-            <returns>
-            </returns>
-            <exception cref="T:System.NullReferenceException"></exception>
-        </member>
-        <member name="P:MDORM.DapperExt.ExistsPredicate`1.Predicate">
-            <summary>
-            获取或设置条件谓语
-            </summary>
-            <value>
-            The predicate.
-            </value>
-        </member>
-        <member name="P:MDORM.DapperExt.ExistsPredicate`1.Not">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.IExistsPredicate"/> is not.
-            </summary>
-            <value>
-              <c>true</c> if not; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="T:MDORM.DapperExt.ISort">
-            <summary>
-            排序接口
-            </summary>
-        </member>
-        <member name="P:MDORM.DapperExt.ISort.PropertyName">
-            <summary>
-            获取或设置属性名称
-            </summary>
-            <value>
-            The name of the property.
-            </value>
-        </member>
-        <member name="P:MDORM.DapperExt.ISort.Ascending">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:MDORM.DapperExt.ISort"/> is ascending.
-            </summary>
-            <value>
-              <c>true</c> if ascending; otherwise, <c>false</c>.
-            </value>
-        </member>
         <member name="T:MDORM.DapperExt.Sort">
             <summary>
             具体排序类
@@ -2173,22 +2199,6 @@
             <value>
               <c>true</c> if ascending; otherwise, <c>false</c>.
             </value>
-        </member>
-        <member name="T:MDORM.DapperExt.GroupOperator">
-            <summary>
-            用来和其他谓词组连接的操作枚举
-            Operator to use when joining predicates in a PredicateGroup.
-            </summary>
-        </member>
-        <member name="F:MDORM.DapperExt.GroupOperator.And">
-            <summary>
-            并且
-            </summary>
-        </member>
-        <member name="F:MDORM.DapperExt.GroupOperator.Or">
-            <summary>
-            或者
-            </summary>
         </member>
         <member name="T:MDORM.DapperExt.ReflectionHelper">
             <summary>
@@ -2243,16 +2253,6 @@
             <param name="value">值</param>
             <param name="parameterPrefix">参数前缀</param>
             <returns></returns>
-        </member>
-        <member name="T:MDORM.DapperExt.Sql.MySqlDialect">
-            <summary>
-            MySql
-            </summary>
-        </member>
-        <member name="T:MDORM.DapperExt.Sql.SqlDialectBase">
-            <summary>
-            基础SQL语言
-            </summary>
         </member>
         <member name="T:MDORM.DapperExt.Sql.ISqlDialect">
             <summary>
@@ -2369,6 +2369,149 @@
             <value>
             The empty expression.
             </value>
+        </member>
+        <member name="T:MDORM.DapperExt.Sql.ISqlGenerator">
+            <summary>
+            SQL生成接口
+            </summary>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Select(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            生成SELECTSQL语句
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序列表</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.SelectPaged(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            生成SelectPagedSQL语句
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序</param>
+            <param name="page">页索引</param>
+            <param name="resultsPerPage">页大小</param>
+            <param name="parameters">参数</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.SelectSet(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            生成SelectSet的SQL
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="sort">排序条件</param>
+            <param name="firstResult">第一个结果索引</param>
+            <param name="maxResults">最大结果</param>
+            <param name="parameters">参数</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Count(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            生成Count的SQL語句
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Insert(MDORM.DapperExt.Mapper.IClassMapper)">
+            <summary>
+            生成插入语句
+            </summary>
+            <param name="classMap">类映射</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Update(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            原始更新方法。不能根据实体动态更新（更新全部列）
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Delete(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Deletes the specified class map.
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="predicate">查询条件</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.IdentitySql(MDORM.DapperExt.Mapper.IClassMapper)">
+            <summary>
+            Identities the SQL.
+            </summary>
+            <param name="classMap">类映射</param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.GetTableName(MDORM.DapperExt.Mapper.IClassMapper)">
+            <summary>
+            获得表名称
+            </summary>
+            <param name="map">类映射</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.GetColumnName(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.Mapper.IPropertyMap,System.Boolean)">
+            <summary>
+            获取列的名称
+            </summary>
+            <param name="map">类映射</param>
+            <param name="property">属性.</param>
+            <param name="includeAlias">if set to <c>true</c> [include alias].</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.GetColumnName(MDORM.DapperExt.Mapper.IClassMapper,System.String,System.Boolean)">
+            <summary>
+            获取列的名称
+            </summary>
+            <param name="map">类映射</param>
+            <param name="propertyName">属性的名称</param>
+            <param name="includeAlias">if set to <c>true</c> [include alias].</param>
+            <returns></returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.SupportsMultipleStatements">
+            <summary>
+            Supportses the multiple statements.
+            </summary>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Update(MDORM.DapperExt.Mapper.IClassMapper,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}},MDORM.DapperExt.IPredicate,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            添加的新方法。支持动态更新实体对象
+            </summary>
+            <param name="classMap">类映射</param>
+            <param name="updatedColumns">要更新的列</param>
+            <param name="predicate">条件</param>
+            <param name="parameters">参数</param>
+            <returns></returns>
+        </member>
+        <member name="P:MDORM.DapperExt.Sql.ISqlGenerator.Configuration">
+            <summary>
+            获取配置
+            </summary>
+            <value>
+            配置
+            </value>
+        </member>
+        <member name="T:MDORM.DapperExt.Sql.MySqlDialect">
+            <summary>
+            MySql
+            </summary>
+        </member>
+        <member name="T:MDORM.DapperExt.Sql.SqlDialectBase">
+            <summary>
+            基础SQL语言
+            </summary>
         </member>
         <member name="M:MDORM.DapperExt.Sql.SqlDialectBase.GetTableName(System.String,System.String,System.String)">
             <summary>
@@ -2708,139 +2851,6 @@
             </summary>
             <value>
             <c>true</c> if [supports multiple statements]; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="T:MDORM.DapperExt.Sql.ISqlGenerator">
-            <summary>
-            SQL生成接口
-            </summary>
-        </member>
-        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Select(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            生成SELECTSQL语句
-            </summary>
-            <param name="classMap">类映射</param>
-            <param name="predicate">查询条件</param>
-            <param name="sort">排序列表</param>
-            <param name="parameters">参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.SelectPaged(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            生成SelectPagedSQL语句
-            </summary>
-            <param name="classMap">类映射</param>
-            <param name="predicate">查询条件</param>
-            <param name="sort">排序</param>
-            <param name="page">页索引</param>
-            <param name="resultsPerPage">页大小</param>
-            <param name="parameters">参数</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.SelectSet(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IList{MDORM.DapperExt.ISort},System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            生成SelectSet的SQL
-            </summary>
-            <param name="classMap">类映射</param>
-            <param name="predicate">查询条件</param>
-            <param name="sort">排序条件</param>
-            <param name="firstResult">第一个结果索引</param>
-            <param name="maxResults">最大结果</param>
-            <param name="parameters">参数</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Count(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            生成Count的SQL語句
-            </summary>
-            <param name="classMap">类映射</param>
-            <param name="predicate">查询条件</param>
-            <param name="parameters">参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Insert(MDORM.DapperExt.Mapper.IClassMapper)">
-            <summary>
-            生成插入语句
-            </summary>
-            <param name="classMap">类映射</param>
-            <returns></returns>
-        </member>
-        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Update(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            原始更新方法。不能根据实体动态更新（更新全部列）
-            </summary>
-            <param name="classMap">类映射</param>
-            <param name="predicate">查询条件</param>
-            <param name="parameters">参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Delete(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.IPredicate,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            Deletes the specified class map.
-            </summary>
-            <param name="classMap">类映射</param>
-            <param name="predicate">查询条件</param>
-            <param name="parameters">参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.IdentitySql(MDORM.DapperExt.Mapper.IClassMapper)">
-            <summary>
-            Identities the SQL.
-            </summary>
-            <param name="classMap">类映射</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.GetTableName(MDORM.DapperExt.Mapper.IClassMapper)">
-            <summary>
-            获得表名称
-            </summary>
-            <param name="map">类映射</param>
-            <returns></returns>
-        </member>
-        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.GetColumnName(MDORM.DapperExt.Mapper.IClassMapper,MDORM.DapperExt.Mapper.IPropertyMap,System.Boolean)">
-            <summary>
-            获取列的名称
-            </summary>
-            <param name="map">类映射</param>
-            <param name="property">属性.</param>
-            <param name="includeAlias">if set to <c>true</c> [include alias].</param>
-            <returns></returns>
-        </member>
-        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.GetColumnName(MDORM.DapperExt.Mapper.IClassMapper,System.String,System.Boolean)">
-            <summary>
-            获取列的名称
-            </summary>
-            <param name="map">类映射</param>
-            <param name="propertyName">属性的名称</param>
-            <param name="includeAlias">if set to <c>true</c> [include alias].</param>
-            <returns></returns>
-        </member>
-        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.SupportsMultipleStatements">
-            <summary>
-            Supportses the multiple statements.
-            </summary>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:MDORM.DapperExt.Sql.ISqlGenerator.Update(MDORM.DapperExt.Mapper.IClassMapper,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}},MDORM.DapperExt.IPredicate,System.Collections.Generic.Dictionary{System.String,System.Object})">
-            <summary>
-            添加的新方法。支持动态更新实体对象
-            </summary>
-            <param name="classMap">类映射</param>
-            <param name="updatedColumns">要更新的列</param>
-            <param name="predicate">条件</param>
-            <param name="parameters">参数</param>
-            <returns></returns>
-        </member>
-        <member name="P:MDORM.DapperExt.Sql.ISqlGenerator.Configuration">
-            <summary>
-            获取配置
-            </summary>
-            <value>
-            配置
             </value>
         </member>
         <member name="T:MDORM.DapperExt.Sql.SqlGeneratorImpl">

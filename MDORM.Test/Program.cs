@@ -14,19 +14,19 @@ namespace MDORM.Test
             var readLine = string.Empty;
             do
             {
-                //for (int i = 1; i <= 10; i++)
-                //{
-                //    Console.Write("获取数据：");
-                //    Console.WriteLine("第{0}次{1}", i, GetAll());
-                //    Console.Write("按条件获取数据：");
-                //    Console.WriteLine("第{0}次{1}", i, GetList());
-                //    Console.Write("分页获取数据：");
-                //    Console.WriteLine("第{0}次{1}", i, GetPage());
-                //    Console.Write("按条件分页获取数据：");
-                //    Console.WriteLine("第{0}次{1}", i, GetPageBy());
-                //}
+                for (int i = 1; i <= 10; i++)
+                {
+                    //Console.Write("获取数据：");
+                    //Console.WriteLine("第{0}次{1}", i, GetAll());
+                    Console.Write("按条件获取数据：");
+                    Console.WriteLine("第{0}次{1}", i, GetList());
+                    //Console.Write("分页获取数据：");
+                    //Console.WriteLine("第{0}次{1}", i, GetPage());
+                    //Console.Write("按条件分页获取数据：");
+                    //Console.WriteLine("第{0}次{1}", i, GetPageBy());
+                }
                 //Console.Write(GetById());
-                Console.Write(Insert());
+                //Console.Write(Insert());
                 //Console.Write(InsertBatch());
                 //Console.Write(Delete());
                 //Console.Write(DeleteList());
@@ -60,8 +60,12 @@ namespace MDORM.Test
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            IPredicate pga = Predicates.Field<Person>(f => f.CrteatDate, Operator.Ge, DateTime.Now.AddMonths(-5));
-            IList<Person> result = PersonRepository.Value.GetList(pga);
+            IPredicateGroup group = new PredicateGroup() { Operator = GroupOperator.Or, Predicates = new List<IPredicate>() };
+            IBetweenPredicate bet = Predicates.Between<Person>(f => f.Sex, new BetweenValues { Value1 = 0, Value2 = 2 });
+            group.Predicates.Add(bet);
+            IPredicate pre = Predicates.Field<Person>(f => f.FirstName, Operator.Like, "First");
+            group.Predicates.Add(pre);
+            IList<Person> result = PersonRepository.Value.GetList(group);
             sw.Stop();
             return string.Format("共获取{0}条记录，耗时：{1}毫秒", result.Count, sw.ElapsedMilliseconds);
         }
@@ -88,19 +92,19 @@ namespace MDORM.Test
             sw.Start();
             List<Person> pList = new List<Person>();
             Person model;
-            for (int i = 1; i <= 50; i++)
+            for (int i = 1; i <= 500; i++)
             {
                 model = new Person();
-                model.Active = true;
+                model.Active = i % 2 == 0 ? true : false;
                 model.CrteatDate = DateTime.Now;
                 model.FirstName = string.Format("First_{0}", i);
                 model.LastName = string.Format("Last_{0}", i);
-                model.Sex = 1;
+                model.Sex = i % 2;
                 pList.Add(model);
             }
             PersonRepository.Value.InsertBatch(pList);
             sw.Stop();
-            return string.Format("共插入50条记录，耗时：{0}毫秒", sw.ElapsedMilliseconds);
+            return string.Format("共插入500条记录，耗时：{0}毫秒", sw.ElapsedMilliseconds);
         }
 
         private static string Delete()
