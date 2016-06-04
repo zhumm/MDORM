@@ -1,6 +1,3 @@
-using System.Text;
-using System.Linq;
-using System.Collections.Generic;
 using System;
 
 namespace MDORM.DapperExt.Mapper
@@ -11,6 +8,9 @@ namespace MDORM.DapperExt.Mapper
     /// </summary>
     public class AutoClassMapper<T> : ClassMapper<T> where T : class
     {
+        /// <summary>
+        /// 自动生成类映射
+        /// </summary>
         public AutoClassMapper()
         {
             Type type = typeof(T);

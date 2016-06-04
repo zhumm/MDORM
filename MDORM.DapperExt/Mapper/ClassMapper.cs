@@ -1,47 +1,13 @@
-﻿using System.Numerics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Numerics;
 using System.Reflection;
 
 namespace MDORM.DapperExt.Mapper
 {
-    /// <summary>
-    /// IClassMapper接口
-    /// </summary>
-    public interface IClassMapper
-    {
-        /// <summary>
-        /// 模式名称
-        /// </summary>
-        string SchemaName { get; }
-
-        /// <summary>
-        /// 表名称
-        /// </summary>
-        string TableName { get; }
-        
-        /// <summary>
-        /// 属性列表
-        /// </summary>
-        IList<IPropertyMap> Properties { get; }
-
-        /// <summary>
-        /// 类型
-        /// </summary>
-        Type EntityType { get; }
-    }
-
-    /// <summary>
-    /// IClassMapper接口
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface IClassMapper<T> : IClassMapper where T : class
-    {
-    }
-
     /// <summary>
     /// 通过属性映射的集合将一个实体映射到一个表
     /// Maps an entity to a table through a collection of property maps.
@@ -74,6 +40,9 @@ namespace MDORM.DapperExt.Mapper
             get { return typeof(T); }
         }
 
+        /// <summary>
+        /// 构造函数，初始化默认的类型
+        /// </summary>
         public ClassMapper()
         {
             PropertyTypeKeyTypeMapping = new Dictionary<Type, KeyType>
