@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{80828BE8-AF7C-4D39-814A-4FA07627761F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MDORM.Template</RootNamespace>
+    <AssemblyName>MDORM.Template</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CodeHelper\CodeTemplateTool.cs" />
+    <Compile Include="CodeHelper\Main.cst.cs" />
+    <Compile Include="Common\Assistant.cs" />
+    <Compile Include="Common\ConfigHelper.cs" />
+    <Compile Include="Common\DataCache.cs" />
+    <Compile Include="Common\DataConvert.cs" />
+    <Compile Include="Common\DataToExcel.cs" />
+    <Compile Include="Common\DEncrypt\DEncrypt.cs" />
+    <Compile Include="Common\DEncrypt\DESEncrypt.cs" />
+    <Compile Include="Common\DEncrypt\HashEncode.cs" />
+    <Compile Include="Common\DEncrypt\RSACryption.cs" />
+    <Compile Include="Common\DESEncrypt.cs" />
+    <Compile Include="Common\HttpProc.cs" />
+    <Compile Include="Common\INIFile.cs" />
+    <Compile Include="Common\LogHelper.cs" />
+    <Compile Include="Common\MailSender.cs" />
+    <Compile Include="Common\MessageBox.cs" />
+    <Compile Include="Common\PageValidate.cs" />
+    <Compile Include="Common\Properties\AssemblyInfo.cs" />
+    <Compile Include="Common\RMB.cs" />
+    <Compile Include="Common\StringPlus.cs" />
+    <Compile Include="Common\TimeParser.cs" />
+    <Compile Include="Common\UrlOper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BusinessRepository.cst" />
+    <None Include="Common\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="Common\obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="Entity.cst" />
+    <None Include="Main.cst" />
+    <None Include="ViewBusinessRepository.cst" />
+    <None Include="ViewEntity.cst" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\bin\Debug\log4net.dll" />
+    <Content Include="Common\bin\Debug\log4net.xml" />
+    <Content Include="Common\bin\Debug\MDORM.Common.dll" />
+    <Content Include="Common\bin\Debug\MDORM.Common.pdb" />
+    <Content Include="Common\bin\Debug\MDORM.Common.xml" />
+    <Content Include="Common\Common.csproj" />
+    <Content Include="Common\Common.csproj.user" />
+    <Content Include="Common\dll\COM.Excel.dll" />
+    <Content Include="Common\dll\Microsoft.Office.Interop.Excel.dll" />
+    <Content Include="Common\dll\OpenSmtp.dll" />
+    <Content Include="Common\lib\log4net.dll" />
+    <Content Include="Common\lib\log4net.xml" />
+    <Content Include="Common\MDORM.Common.csproj" />
+    <Content Include="Common\obj\Debug\IGOO.CommonLayer.csproj.FileListAbsolute.txt" />
+    <Content Include="Common\obj\Debug\IGOO.CommonLayer.dll" />
+    <Content Include="Common\obj\Debug\IGOO.CommonLayer.pdb" />
+    <Content Include="Common\obj\Debug\MDORM.Common.csproj.FileListAbsolute.txt" />
+    <Content Include="Common\obj\Debug\MDORM.Common.dll" />
+    <Content Include="Common\obj\Debug\MDORM.Common.pdb" />
+    <Content Include="Common\obj\Debug\Refactor\IGOO.CommonLayer.dll" />
+    <Content Include="Common\obj\Release\IGOO.CommonLayer.csproj.FileListAbsolute.txt" />
+    <Content Include="Common\obj\Release\IGOO.CommonLayer.dll" />
+    <Content Include="Common\obj\Release\IGOO.CommonLayer.pdb" />
+    <Content Include="Common\obj\Release\MDORM.Common.csproj.FileListAbsolute.txt" />
+    <Content Include="Common\obj\Release\MDORM.Common.dll" />
+    <Content Include="Common\obj\Release\MDORM.Common.pdb" />
+    <Content Include="Common\obj\Release\Refactor\IGOO.CommonLayer.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\bin\Release\" />
+    <Folder Include="Common\obj\Debug\TempPE\" />
+    <Folder Include="Common\obj\Release\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,115 @@
+﻿<%-- 
+Name:  Entity.cst
+Author:zhumingming
+Description:生成实体和映射代码
+--%>
+<%@ CodeTemplate Language="C#" TargetLanguage="C#" ResponseEncoding="UTF-8" Src="CodeHelper/CodeTemplateTool.cs" Inherits="CodeTemplatTool" Debug="false" Description="生成数据库Model层代码" %>
+
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.IO" %>
+<%@ Assembly Name="CodeSmith.BaseTemplates" %>
+<%@ Import Namespace="CodeSmith.BaseTemplates" %>
+<%@ Assembly Name="CodeSmith.CustomProperties" %>
+<%@ Import Namespace="CodeSmith.CustomProperties" %>
+
+<%@ Property Name="TargetView" Type="SchemaExplorer.ViewSchema" Category="1.Choose Target View" Description="选择目标【视图】" %>
+
+<%@ Property Name="EntityNamespace" Default="Entity" Type="System.String" Optional="false" Category="3.Input Entity Namespace" Description="Model 层命名空间(默认为Model)" %>
+
+<%@ Property Name="CommonNamespace" Default="Common" Type="System.String" Optional="false" Category="2.Input Common Layer Namespace" Description="Common 层命名空间(默认为Common)" %>
+<% PrintHeader(); %>
+using System;
+using System.Text;
+using MDORM.DapperExt.Mapper;
+
+namespace <%= EntityNamespace %>
+{
+    /// <summary>
+ 	/// <%= GetEntityClassName() %> 实体类,包括:属性，重写的ToString方法
+ 	/// </summary>
+    /// 创建人：<%=CreatePerson%>
+    /// 创建时间：<%= DateTime.Now%>
+	[Serializable]
+	public class <%= GetEntityClassName() %>
+	{
+        #region 成员变量
+        <%foreach (ViewColumnSchema column in TargetView.Columns){%>
+        private <%= GetMemberKeyType(column) %> <%= GetMKVarName(column) %>;
+        <% } %>	
+        #endregion
+		
+        #region 属性
+		<% foreach (ViewColumnSchema column in TargetView.Columns)  %>
+ 		<% { %>	
+        /// <summary>
+        /// <%= GetColumnDesc(column) %>
+        /// </summary>
+		public <%= GetMemberKeyType(column) %> <%= GetMemberKeyName(column,string.Empty) %>
+		{
+			get { return this.<%= GetMKVarName(column) %>; }
+			set { this.<%= GetMKVarName(column) %> = value; }
+		}
+        
+		<% } %>	
+        #endregion
+        
+        #region 扩展的变量、属性、方法
+        /// <summary>
+        /// 返回这个对象的JSON格式字符串，方便记录日志
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String"/> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            StringBuilder temp = new StringBuilder();
+            temp.Append("[{ ");
+            <% foreach(ViewColumnSchema column in TargetView.Columns) 
+			{%>
+		    temp.AppendFormat("\"<% =GetMemberKeyName(column,string.Empty)%>\":\"{0}\", ",this.<% =GetMemberKeyName(column,string.Empty)%>);
+            <%}%>
+            int lastPos = temp.ToString().LastIndexOf(',');
+            if (lastPos != -1)
+                temp = temp.Remove(lastPos, 1);
+            temp.Append("}]");
+            return temp.ToString();
+        }
+        #endregion
+	}
+    
+    /// <summary>
+    /// <%= GetEntityClassName() %> 映射类
+    /// </summary>
+    /// 创建人：朱明明
+    /// 创建时间：2016/5/23 15:03:02
+
+    [Serializable]
+    public class <%= GetEntityClassName() %>Mapper : ClassMapper<<%= GetEntityClassName() %>>
+    {
+        /// <summary>
+ 	    /// <%= GetEntityClassName() %> Mapper构造函数（可自定义Mapper）
+ 	    /// </summary>
+        public <%= GetEntityClassName() %>Mapper()
+        {
+            base.Table("<%= GetEntityClassName() %>");   
+            AutoMap();
+        }
+    }
+}
+<script runat="template">
+
+public string GetEntityClassName()
+{
+	 return GetTableName(this.TargetView);
+}
+
+//获得文件名称
+public override string GetFileName()
+{
+	return GetEntityClassName() + ".cs";
+}
+
+</script>

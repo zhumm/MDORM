@@ -1,0 +1,30 @@
+﻿<%@ CodeTemplate Language="C#" TargetLanguage="Text" ResponseEncoding="UTF-8" Src="CodeHelper/Main.cst.cs" Inherits="Main" Debug="True" Description="Template description here." Output="None"%>
+
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.IO" %>
+
+<% 
+int tempSourceTableCounts = SourceDataBase.Tables.Count;
+int tempSourceViewCounts=SourceDataBase.Views.Count;
+TableSchemaCollection tables = SourceDataBase.Tables;
+ViewSchemaCollection views=SourceDataBase.Views;
+int EntityClassCount = GenerateEntityClasses(tables) + GenerateEntityClasses(views);
+int BusinessRepositoryClassCount = GenerateBusinessRepositoryClasses(tables) + GenerateBusinessRepositoryClasses(views);
+string tempAimCommonFolderPath=string.Format("{0}{1}",this.OutputDirectory,CommonNamespace);
+string tempSrcCommonFolderPath=string.Format("{0}Common",this.CodeTemplateInfo.DirectoryName);
+//string tempAimDBUtilityFolderPath=string.Format("{0}{1}",this.OutputDirectory,DBUtilityNamespace);
+//string tempSrcDBUtilityFolderPath=string.Format("{0}DBUtility",this.CodeTemplateInfo.DirectoryName);
+//WriteInfo(CopyDir(tempSrcDBUtilityFolderPath,tempAimDBUtilityFolderPath));
+WriteInfo(CopyDir(tempSrcCommonFolderPath,tempAimCommonFolderPath));
+if((EntityClassCount + BusinessRepositoryClassCount ) == ((tempSourceTableCounts+tempSourceViewCounts) * 2))
+{
+    WriteInfo("-----恭喜！全部代码生成成功-----");
+}
+else
+{
+    WriteInfo("-----代码已经生成。但过程中出现了错误。-----");
+}
+ %>

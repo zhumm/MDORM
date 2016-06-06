@@ -1,0 +1,112 @@
+﻿<%@ CodeTemplate Language="C#" TargetLanguage="C#" ResponseEncoding="UTF-8" Src="CodeHelper/CodeTemplateTool.cs" Inherits="CodeTemplatTool" Debug="false" Description="生成数据库DAL层代码" %>
+
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Text" %>
+<%@ Import Namespace="System.IO" %>
+<%@ Assembly Name="CodeSmith.BaseTemplates" %>
+<%@ Import Namespace="CodeSmith.BaseTemplates" %>
+<%@ Assembly Name="CodeSmith.CustomProperties" %>
+<%@ Import Namespace="CodeSmith.CustomProperties" %>
+
+
+<%@ Property Name="TargetView" Type="SchemaExplorer.ViewSchema" Category="1.Choose Target View" Description="选择目标【视图】" %>
+
+<%@ Property Name="CommonNamespace" Default="Common" Type="System.String" Optional="false" Category="2.Input Common Layer Namespace" Description="Common 层命名空间(默认为Common)" %>
+
+<%@ Property Name="EntityNamespace" Default="Entity" Type="System.String" Optional="false" Category="3.Input Entity Namespace" Description="Model 层命名空间(默认为Model)" %>
+
+<%@ Property Name="BusinessRepositoryNamespace" Default="BusinessRepository" Type="System.String" Optional="false" Category="4.Input Entity Namespace" Description="Model 层命名空间(默认为Model)" %>
+
+<%@ Property Name="DBUtilityNamespace" Default="DBUtility" Type="System.String" Category="5.Input DBUtility Namespace" Description="输入 DBUtility 名称空间（默认为DBUtility）" %>
+<% PrintHeader(); %>
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using System.Collections;
+using <%=EntityNamespace%>;
+using <%= DBUtilityNamespace %>;
+using MDORM.DapperExt;
+
+namespace <%= BusinessRepositoryNamespace %>
+{
+    /// <summary>
+    /// 视图[<%=TargetView.Name %>] 数据仓库代码
+    /// </summary>
+    /// 创建人：<%=CreatePerson%>
+    /// 创建时间：<%= DateTime.Now%>
+	public partial class <%= GetRepositoryClassName() %> : ViewRepositoryBase<<%= GetEntityeName()%>>
+	{
+        #region 静态<%= GetRepositoryClassName() %>对象,单例模式。 
+		private static <%= GetRepositoryClassName() %> _value;
+        
+        /// <summary>
+        /// 静态<%= GetRepositoryClassName() %>对象,单例模式。
+        /// </summary>
+        public static <%= GetRepositoryClassName() %> Value
+        {
+            get
+            {
+                if (<%= GetRepositoryClassName() %>._value == null)
+                    <%= GetRepositoryClassName() %>._value = new <%= GetRepositoryClassName()%>();
+                return <%= GetRepositoryClassName()%>._value;
+            }
+        }
+        #endregion 
+        
+        #region 构造函数
+        /// <summary>
+        /// Initializes a new instance of the <see cref="<%= GetRepositoryClassName() %>"/> class.
+        /// </summary>
+        public <%= GetRepositoryClassName()%>()
+        {
+            <%= GetRepositoryClassName()%>._value = this;
+        }
+        #endregion
+        
+        #region 成员方法
+        /// <summary>
+        /// 分页获取,默认按照时间降序排序
+        /// </summary>
+        /// <param name="pageIndex">页索引页索引（从0开始）</param>
+        /// <param name="pageSize">页大小</param>
+        /// <param name="allRowsCount">全部记录数</param>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="sort">排序</param>
+        /// <returns></returns>
+        public List<<%=GetEntityeName()%>> GetPage(int pageIndex, int pageSize, out int allRowsCount, object predicate = null, IList<ISort> sort = null)
+        {
+            if (sort == null || sort.Count <= 0)
+            {
+                sort = new List<ISort>();
+                sort.Add(Predicates.Sort<<%=GetEntityeName()%>>(p => p.<%=GetSortedKeyName(TargetView)%>, true));
+            }
+            return base.GetPage(pageIndex, pageSize, out allRowsCount, predicate, sort);
+        }
+        #endregion
+        
+        #region 扩展的方法
+        #endregion
+	}
+}
+<script runat="template">
+public string GetEntityeName()
+{
+	 return GetTableName(this.TargetView);
+}
+
+public string GetRepositoryClassName()
+{
+	return GetRepositoryClassName(this.TargetView);
+}
+
+//重写获得文件名称
+public override string GetFileName()
+{
+	return GetRepositoryClassName() + ".cs";
+}
+</script>

@@ -1,0 +1,132 @@
+﻿<%-- 
+Name:  Entity.cst
+Author:zhumingming(Berton)
+Description:生成实体和数据库映射代码
+--%>
+<%@ CodeTemplate Language="C#" TargetLanguage="C#" ResponseEncoding="UTF-8" Src="CodeHelper/CodeTemplateTool.cs" Inherits="CodeTemplatTool" Debug="false" Description="生成数据库Model层代码" %>
+
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.IO" %>
+<%@ Assembly Name="CodeSmith.BaseTemplates" %>
+<%@ Import Namespace="CodeSmith.BaseTemplates" %>
+<%@ Assembly Name="CodeSmith.CustomProperties" %>
+<%@ Import Namespace="CodeSmith.CustomProperties" %>
+
+<%@ Property Name="TargetTable" Type="SchemaExplorer.TableSchema" Category="1.Choose Target Table" Description="选择目标【表】" %>
+
+<%@ Property Name="EntityNamespace" Default="Entity" Type="System.String" Optional="false" Category="3.Input Entity Namespace" Description="Entity 层命名空间(默认为Entity)" %>
+
+<% PrintHeader(); %>
+using System;
+using System.Text;
+using MDORM.DapperExt.Mapper;
+
+namespace <%= EntityNamespace %>
+{
+    /// <summary>
+ 	/// <%= GetEntityClassName() %> 实体类,包括:属性，重写的ToString方法
+ 	/// </summary>
+    /// 创建人：<%=CreatePerson%>
+    /// 创建时间：<%= DateTime.Now%>
+	[Serializable]
+	public class <%= GetEntityClassName() %>
+	{
+        #region 成员变量
+        <%foreach (ColumnSchema column in TargetTable.Columns){%>
+        private <%= GetMemberKeyType(column) %> <%= GetMKVarName(column) %>;
+        <% } %>	
+        #endregion
+		
+        #region 属性
+		<% foreach (ColumnSchema column in TargetTable.Columns)  %>
+ 		<% { %>	
+        /// <summary>
+        /// <%= GetColumnDesc(column) %>
+        /// </summary>
+		public <%= GetMemberKeyType(column) %> <%= GetMemberKeyName(column,string.Empty) %>
+		{
+			get { return this.<%= GetMKVarName(column) %>; }
+			set { this.<%= GetMKVarName(column) %> = value; }
+		}
+        
+		<% } %>	
+        #endregion
+        
+        #region 扩展的变量、属性、方法
+        /// <summary>
+        /// 返回这个对象的JSON格式字符串，方便记录日志
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String"/> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            StringBuilder temp = new StringBuilder();
+            temp.Append("[{ ");
+            <% foreach(ColumnSchema column in TargetTable.Columns) 
+			{%>
+		    temp.AppendFormat("\"<% =GetMemberKeyName(column,string.Empty)%>\":\"{0}\", ",this.<% =GetMemberKeyName(column,string.Empty)%>);
+            <%}%>
+            int lastPos = temp.ToString().LastIndexOf(',');
+            if (lastPos != -1)
+                temp = temp.Remove(lastPos, 1);
+            temp.Append("}]");
+            return temp.ToString();
+        }
+        #endregion
+	}
+    
+    /// <summary>
+    /// <%= GetEntityClassName() %> 映射类
+    /// </summary>
+    /// 创建人：朱明明
+    /// 创建时间：2016/5/23 15:03:02
+
+    [Serializable]
+    public class <%= GetEntityClassName() %>Mapper : ClassMapper<<%= GetEntityClassName() %>>
+    {
+        /// <summary>
+ 	    /// <%= GetEntityClassName() %> Mapper构造函数（可自定义Mapper）
+ 	    /// </summary>
+        public <%= GetEntityClassName() %>Mapper()
+        {
+            base.Table("<%= GetEntityClassName() %>");
+            Map(f => f.<%= GetPrimaryKeyName(TargetTable,string.Empty) %>).Key(KeyType.<%= GetPrimaryKeyType()%>);           
+            AutoMap();
+        }
+    }
+}
+<script runat="template">
+
+public string GetEntityClassName()
+{
+	 return GetTableName(this.TargetTable);
+}
+
+//获得文件名称
+public override string GetFileName()
+{
+	return GetEntityClassName() + ".cs";
+}
+/// <summary>
+/// 获取主键类型
+/// </summary>
+/// <returns></returns>
+public string GetPrimaryKeyType()
+{
+    string tempPrimaryKeyType=GetPrimaryKeyType(this.TargetTable); 
+    switch(tempPrimaryKeyType)
+    {
+        case "int?":
+            return "Identity";
+        case "Guid?":
+            return "Guid";
+        default:
+            return "Assigned";
+    }
+      
+}
+</script>
