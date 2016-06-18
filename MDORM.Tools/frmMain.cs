@@ -13,9 +13,34 @@ namespace MDORM.Tools
 {
     public partial class frmMain : Form
     {
+        private int DBType = 0;
+
+        private Dictionary<int, string> DBDefaultConStr = new Dictionary<int, string>();
+
         public frmMain()
         {
             InitializeComponent();
+        }
+
+        public frmMain(int DBType)
+        {
+            InitializeComponent();
+            this.DBType = DBType;
+            InitDBType(DBType);
+        }
+
+        private void InitDBType(int DBType)
+        {
+            DBDefaultConStr.Add(0, "Server = ;Database = ;User ID = ;Password = ;Trusted_Connection = False;Pooling=true;Connection Lifetime=0;Min Pool Size = 1;Max Pool Size=40000");
+            DBDefaultConStr.Add(1, "Server = ;Database = ;User ID = ;Password = ;Trusted_Connection = False;");
+            DBDefaultConStr.Add(2, "Server = ;Database = ;User ID = ;Password = ;Trusted_Connection = False;");
+            DBDefaultConStr.Add(3, "Server = ;Database = ;User ID = ;Password = ;Trusted_Connection = False;");
+            DBDefaultConStr.Add(4, "Server = ;Database = ;User ID = ;Password = ;Trusted_Connection = False;");
+            string tempConStr = string.Empty;
+            if (DBDefaultConStr.TryGetValue(DBType, out tempConStr))
+            {
+                txtMingWen.Text = tempConStr;
+            }
         }
 
         private void btnJiami_Click(object sender, EventArgs e)
@@ -51,6 +76,11 @@ namespace MDORM.Tools
                 txtMingWen.Text = tempResult;
                 MessageBox.Show("字符串解密成功", "提示");
             }
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
