@@ -4,6 +4,23 @@
         <name>MDORM.Tools</name>
     </assembly>
     <members>
+        <member name="F:MDORM.Tools.frmGuid.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:MDORM.Tools.frmGuid.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:MDORM.Tools.frmGuid.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="F:MDORM.Tools.frmMain.components">
             <summary>
             必需的设计器变量。

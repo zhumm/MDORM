@@ -16,8 +16,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections;
 using MDORM.Entity;
-using MDORM.DBUtility;
 using MDORM.DapperExt;
+using MDORM.DapperExt.Utility;
 
 namespace MDORM.BusinessRepository
 {

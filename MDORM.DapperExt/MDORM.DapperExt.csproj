@@ -36,9 +36,30 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.5.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.DataAccess, Version=2.112.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Oracle.DataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.SQLite, Version=1.0.82.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.82.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,9 +68,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseEntity.cs" />
+    <Compile Include="Dapper\SqlMapper.cs" />
+    <Compile Include="Lambda2Sql.cs" />
     <Compile Include="DapperExt.cs" />
     <Compile Include="DapperExtConfiguration.cs" />
-    <Compile Include="Helper\LogHelper.cs" />
     <Compile Include="DapperImplementor.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="GetMultiplePredicate.cs" />
@@ -96,16 +119,30 @@
     <Compile Include="Sql\SqlGenerator.cs" />
     <Compile Include="Sql\SqliteDialect.cs" />
     <Compile Include="Sql\SqlServerDialect.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MDORM.Dapper\MDORM.Dapper.csproj">
-      <Project>{1f3930fa-9dca-4df5-9c8d-391f2fc7fe8e}</Project>
-      <Name>MDORM.Dapper</Name>
-    </ProjectReference>
+    <Compile Include="Utility\ConfigHelper.cs" />
+    <Compile Include="Utility\DBHelper.cs" />
+    <Compile Include="Utility\DBType.cs" />
+    <Compile Include="Utility\DESEncrypt.cs" />
+    <Compile Include="Utility\IDataRepository.cs" />
+    <Compile Include="Utility\IDataViewRepository.cs" />
+    <Compile Include="Utility\IDBHelper.cs" />
+    <Compile Include="Utility\LogHelper.cs" />
+    <Compile Include="Utility\PageArgs.cs" />
+    <Compile Include="Utility\PubConstant.cs" />
+    <Compile Include="Utility\RepositoryBase.cs" />
+    <Compile Include="Utility\SqlConnectionFactory.cs" />
+    <Compile Include="Utility\SqlDialectFactory.cs" />
+    <Compile Include="Utility\SqlHelper.cs" />
+    <Compile Include="Utility\ViewRepositoryBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\log4net.dll" />
     <Content Include="lib\log4net.xml" />
+    <Content Include="lib\MySql.Data.dll" />
+    <Content Include="lib\Oracle.DataAccess.dll" />
+    <Content Include="lib\System.Data.SQLite.dll" />
+    <Content Include="lib\System.Data.SQLite.Linq.dll" />
+    <Content Include="lib\System.Data.SqlServerCe.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

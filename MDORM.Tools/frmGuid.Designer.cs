@@ -36,7 +36,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(57, 27);
+            this.label1.Location = new System.Drawing.Point(57, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 12);
             this.label1.TabIndex = 0;
@@ -46,16 +46,16 @@
             // 
             this.cmbDBType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDBType.FormattingEnabled = true;
-            this.cmbDBType.Location = new System.Drawing.Point(59, 57);
+            this.cmbDBType.Location = new System.Drawing.Point(59, 33);
             this.cmbDBType.Name = "cmbDBType";
-            this.cmbDBType.Size = new System.Drawing.Size(211, 20);
+            this.cmbDBType.Size = new System.Drawing.Size(202, 20);
             this.cmbDBType.TabIndex = 1;
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(195, 99);
+            this.btnOK.Location = new System.Drawing.Point(59, 70);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(202, 50);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "确 定";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -66,7 +66,7 @@
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 185);
+            this.ClientSize = new System.Drawing.Size(311, 137);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.cmbDBType);
             this.Controls.Add(this.label1);

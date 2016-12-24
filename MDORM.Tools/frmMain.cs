@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MDORM.Common;
 
 namespace MDORM.Tools
 {
@@ -32,7 +31,7 @@ namespace MDORM.Tools
         private void InitDBType(int DBType)
         {
             DBDefaultConStr.Add(0, "Server = ;Database = ;User ID = ;Password = ;Trusted_Connection = False;Pooling=true;Connection Lifetime=0;Min Pool Size = 1;Max Pool Size=40000");
-            DBDefaultConStr.Add(1, "Server = ;Database = ;User ID = ;Password = ;Trusted_Connection = False;");
+            DBDefaultConStr.Add(1, "Server = ;Database = ;User ID = ;Password = ;Port = ;");
             DBDefaultConStr.Add(2, "Server = ;Database = ;User ID = ;Password = ;Trusted_Connection = False;");
             DBDefaultConStr.Add(3, "Server = ;Database = ;User ID = ;Password = ;Trusted_Connection = False;");
             DBDefaultConStr.Add(4, "Server = ;Database = ;User ID = ;Password = ;Trusted_Connection = False;");
@@ -54,7 +53,7 @@ namespace MDORM.Tools
             else
             {
                 string tempMingWen = txtMingWen.Text.Trim();
-                string tempResult = DESEncrypt.Encrypt(tempMingWen);
+                string tempResult = MDORM.DapperExt.Utility.DESEncrypt.Encrypt(tempMingWen);
                 txtMiWeng.Text = tempResult;
                 Clipboard.SetDataObject(tempResult);
                 MessageBox.Show("字符串加密成功并复制到系统剪切板", "提示");
@@ -72,7 +71,7 @@ namespace MDORM.Tools
             else
             {
                 string tempMiWeng = txtMiWeng.Text.Trim();
-                string tempResult = DESEncrypt.Decrypt(tempMiWeng);
+                string tempResult = MDORM.DapperExt.Utility.DESEncrypt.Decrypt(tempMiWeng);
                 txtMingWen.Text = tempResult;
                 MessageBox.Show("字符串解密成功", "提示");
             }

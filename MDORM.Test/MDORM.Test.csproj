@@ -53,10 +53,6 @@
       <Project>{5f539a86-8f2b-4fe7-93d6-42459d6f6bcd}</Project>
       <Name>MDORM.DapperExt</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MDORM.DBUtility\MDORM.DBUtility.csproj">
-      <Project>{19d8d931-b25c-46e9-89a1-52802fc172ac}</Project>
-      <Name>MDORM.DBUtility</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MDORM.Entity\MDORM.Entity.csproj">
       <Project>{61d371c8-f27a-4fa9-b2b9-0daf658ed6dd}</Project>
       <Name>MDORM.Entity</Name>

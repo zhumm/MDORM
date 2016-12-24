@@ -12,6 +12,7 @@
 using System;
 using System.Text;
 using MDORM.DapperExt.Mapper;
+using MDORM.DapperExt;
 
 namespace MDORM.Entity
 {

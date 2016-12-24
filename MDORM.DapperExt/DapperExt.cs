@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Text;
 using MDORM.DapperExt.Sql;
 using MDORM.DapperExt.Mapper;
+using System.Linq.Expressions;
+using MDORM.DapperExt.Utility;
 
 namespace MDORM.DapperExt
 {
@@ -105,7 +107,7 @@ namespace MDORM.DapperExt
 
         static DapperExt()
         {
-            Configure(typeof(AutoClassMapper<>), new List<Assembly>(), new SqlServerDialect());
+            Configure(typeof(AutoClassMapper<>), new List<Assembly>(),SqlDialectFactory.CreateSqlDialect());
         }
 
         /// <summary>
@@ -261,6 +263,25 @@ namespace MDORM.DapperExt
             return Instance.GetList<T>(connection, predicate, sort, transaction, commandTimeout, buffered);
         }
 
+        #region 兼容lambda
+        ///// <summary>
+        ///// 根据查询条件选择满足条件的记录并返回IEnumerable<T>
+        ///// Executes a select query using the specified predicate, returning an IEnumerable data typed as per T.
+        ///// </summary>
+        ///// <typeparam name="T">实体类型</typeparam>
+        ///// <param name="connection">数据库连接</param>
+        ///// <param name="predicate">查询条件</param>
+        ///// <param name="sort">排序列表</param>
+        ///// <param name="transaction">事务</param>
+        ///// <param name="commandTimeout">超时时间</param>
+        ///// <param name="buffered">是否缓存，默认不缓存</param>
+        ///// <returns>T类型的枚举器</returns>
+        //public static IEnumerable<T> GetList<T>(this IDbConnection connection, Expression func, IDbTransaction transaction = null, int? commandTimeout = null, bool buffered = false) where T : class
+        //{
+        //    return Instance.GetList<T>(connection, func, transaction, commandTimeout, buffered);
+        //}
+        #endregion
+
         /// <summary>
         /// 根据查询条件分页选择满足条件的记录并返回当前页数据IEnumerable<T>
         /// 返回的数据由当前数据页和页大小决定
@@ -362,6 +383,13 @@ namespace MDORM.DapperExt
         public static Guid GetNextGuid()
         {
             return Instance.SqlGenerator.Configuration.GetNextGuid();
+        }
+
+        public static ISqlDialect GetSqlDialect 
+        { 
+            get;
+            
+            set;
         }
     }
 }
